@@ -1,653 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    
+      <link rel="icon" href="https://gabbyyam.github.io/overyam/favicon.png" />
+    
+
+    <title>
+        
+          Overyam
+        
+    </title>
+
+    <!-- Spectre.css framework -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- theme css & js -->
+    
+<link rel="stylesheet" href="https://gabbyyam.github.io/overyam/css/book.css">
+
+    
+<script src="https://gabbyyam.github.io/overyam/js/book.js"></script>
 
 
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 
-<title>
-  
-    OverYam
-  
-</title>
-
-<meta name="description" content="On Your Mark">
-<meta property="og:type" content="website">
-<meta property="og:title" content="OverYam">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
-<meta property="og:site_name" content="OverYam">
-<meta property="og:description" content="On Your Mark">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="GabbyYam">
-<meta name="twitter:card" content="summary">
-
-
-  <link rel="alternative" href="/atom.xml" title="OverYam" type="application/atom+xml">
-
-
-
-  <link rel="icon" href="/favicon.png">
-
-
-
-<link rel="stylesheet" href="https://github.com/GabbyYam/overyam/perfect-scrollbar/css/perfect-scrollbar.min.css">
-
-
-<link rel="stylesheet" href="https://github.com/GabbyYam/overyam/styles/main.css">
-
-
-
-
-
-
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zooming/2.1.1/zooming.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const zooming = new Zooming()
+    zooming.listen('.book-content img')
+})
+</script>
 
 <meta name="generator" content="Hexo 4.2.0"></head>
-<body
-  
-    class="monochrome"
-  
-  >
-  <div class="mobile-header">
-  <button class="sidebar-toggle" type="button">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a class="title" href="https://github.com/GabbyYam/overyam/" target="_blank" rel="noopener">OverYam</a>
+
+<body>
+
+<div class="book-container">
+  <div class="book-sidebar">
+    <div class="book-brand">
+  <a href="https://gabbyyam.github.io/overyam/" target="_blank" rel="noopener">
+    <img src="https://gabbyyam.github.io/overyam/favicon.png">
+    <span>OVERYAM</span>
+  </a>
 </div>
-
-  <div class="main-container">
-    <div class="sidebar">
-  <div class="header">
-    <h1 class="title"><a href="https://github.com/GabbyYam/overyam/" target="_blank" rel="noopener">OverYam</a></h1>
-    
-    <div class="info">
-      <div class="content">
-        
-          <div class="description">On Your Mark</div>
-        
-        
-          <div class="author">GabbyYam</div>
-        
-      </div>
-      
-        <div class="avatar">
-          
-            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
-          
-        </div>
-      
-    </div>
-  </div>
-  <div class="body">
-    
-      
-        <ul class="nav">
-          
-            
-              <li class="category-list-container">
-                <a href="javascript:;">Category</a>
-                
-              </li>
-            
-          
-            
-              <li class="tag-list-container">
-                <a href="javascript:;">Tag</a>
-                
-              </li>
-            
-          
-            
-              <li class="archive-list-container">
-                <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="https://github.com/GabbyYam/overyam/archives/2020/" target="_blank" rel="noopener">2020</a><span class="archive-list-count">44</span></li></ul>
-              </li>
-            
-          
-        </ul>
-      
-        <ul class="nav">
-          
-            
-              <li>
-                <a href="https://github.com/GabbyYam/overyam/" target="_blank" rel="noopener" title="Homepage" external="false">Homepage</a>
-              </li>
-            
-          
-            
-              <li>
-                <a href="https://github.com/GabbyYam/overyam/archives" target="_blank" rel="noopener" title="By Year" external="false">By Year</a>
-              </li>
-            
-          
-        </ul>
-      
-        <ul class="nav">
-          
-            
-              <li>
-                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
-              </li>
-            
-          
-            
-              <li>
-                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
-              </li>
-            
-          
-            
-              <li>
-                <a href="https://github.com/GabbyYam/overyam/atom.xml" target="_blank" rel="noopener" title="RSS" external="false">RSS</a>
-              </li>
-            
-          
-        </ul>
-      
-    
-  </div>
-</div>
-
-    <div class="main-content">
-      
-        <div style="max-width: 1000px">
-      
-          
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/04-%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" target="_blank" rel="noopener" >
-  Operating system/王道/04-调度算法
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/04-%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" target="_blank" rel="noopener"><span class="article-date">
-  2020-02-25
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          <p>[TOC]</p>
-<h1 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h1><h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><ul>
-<li>CPU利用率：实际运行时间/总时间</li>
-<li>系统吞吐量：单位时间内完成作业的数量</li>
-<li>周转时间：完成时间-提交时间</li>
-<li>等待时间：注意进程等待时间和作业等待时间不同</li>
-</ul>
-<h2 id="调度算法有哪些？"><a href="#调度算法有哪些？" class="headerlink" title="调度算法有哪些？"></a>调度算法有哪些？</h2><h3 id="FCFS（先来先服务）"><a href="#FCFS（先来先服务）" class="headerlink" title="FCFS（先来先服务）"></a>FCFS（先来先服务）</h3><ul>
-<li>从公平出发</li>
-<li>非抢占式</li>
-<li>优点：实现简单</li>
-<li>缺点：排在长作业后的短作业的带权周转时间很大，用户体验不好（对长作业有利，对短作业不利）</li>
-<li>不会产生饥饿</li>
-</ul>
-<h3 id="SJF（短作业优先）"><a href="#SJF（短作业优先）" class="headerlink" title="SJF（短作业优先）"></a>SJF（短作业优先）</h3><ul>
-<li><p>追求<strong>最短</strong>的平均等待时间、周转时间和带权周转时间（<strong>==在所有进程几乎同时到达的情况下==</strong>）</p>
-</li>
-<li><p>非抢占式（也有非抢占式的版本，其平均等待时间是最短的）</p>
-</li>
-<li><p>优点：平均效率比较高</p>
-</li>
-<li><p>缺点：不公平，对短的作业有利，长作业不利</p>
-</li>
-<li><p>会产生饥饿</p>
-</li>
-</ul>
-<h3 id="HRRN-高响应比优先"><a href="#HRRN-高响应比优先" class="headerlink" title="HRRN 高响应比优先"></a>HRRN 高响应比优先</h3><ul>
-<li>响应比=（等待时间+要求服务的时间）/要求服务的时间</li>
-<li>非抢占式</li>
-<li>避免长作业饥饿的情况</li>
-</ul>
-<h3 id="RR-时间片轮转调度"><a href="#RR-时间片轮转调度" class="headerlink" title="RR 时间片轮转调度"></a>RR 时间片轮转调度</h3><ul>
-<li><p>按到达就绪队列的顺序，顺序安排时间片，也就是时分的FCFS</p>
-</li>
-<li><p><strong>抢占式</strong>，通过时钟中断来判断</p>
-</li>
-<li><p>如果时间片过大（每个时间片内都可以完成一个进程作业）会导致算法退化为FCFS</p>
-</li>
-<li><p>如果时间片过小，会增大无畏的切换消耗</p>
-</li>
-<li><p>优点：响应快、公平，适合分时操作系统</p>
-</li>
-<li><p>缺点：存在切换开销</p>
-</li>
-<li><p>不会导致饥饿</p>
-</li>
-</ul>
-<h3 id="优先级调度"><a href="#优先级调度" class="headerlink" title="优先级调度"></a>优先级调度</h3><ul>
-<li>永远选择优先级高的进程或作业</li>
-<li>抢占式和非抢占式都可以</li>
-<li>优先级怎么设置呢？<ul>
-<li>系统进程一般先于用户进程</li>
-<li>前后先于后台</li>
-<li>I/O繁忙性优先</li>
-</ul>
-</li>
-<li>可能导致饥饿</li>
-</ul>
-<h3 id="多级反馈队列调度（Ultimate）"><a href="#多级反馈队列调度（Ultimate）" class="headerlink" title="==多级反馈队列调度（Ultimate）=="></a>==多级反馈队列调度（Ultimate）==</h3><ul>
-<li><p><img src="diagram/image-20200201172436161.png" alt="image-20200201172436161"></p>
-</li>
-<li><p>可能导致饥饿</p>
-</li>
-</ul>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/05-%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5&%E4%BA%92%E6%96%A5/" target="_blank" rel="noopener" >
-  Operating system/王道/05-进程同步&amp;互斥
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/05-%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5&%E4%BA%92%E6%96%A5/" target="_blank" rel="noopener"><span class="article-date">
-  2020-02-25
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          <p>[TOC]</p>
-<h1 id="进程同步-amp-互斥"><a href="#进程同步-amp-互斥" class="headerlink" title="进程同步&amp;互斥"></a>进程同步&amp;互斥</h1><h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><p>概念：进程间存在异步性，因此有时需要进程间满足一定的执行次序，同步保证了这种执行次序</p>
-<h2 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>互斥即对资源上锁，某资源不能在同一时间多访问，因此要上锁，同Java中的synchronized</p>
-<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><ul>
-<li><p>单标志法：用一个数来标志允许访问临界资源的进程PID</p>
-<ul>
-<li>违背了<strong>空闲让进</strong>原则</li>
-</ul>
-</li>
-<li><p>双标志检查法：用一个flag[]数组来标记进程访问临界资源的意愿</p>
-<ul>
-<li>辣鸡方法，会导致无限等待</li>
-</ul>
-</li>
-<li><p>Peterson算法：同双标志法，但是主动让出进入机会</p>
-<ul>
-<li>还不错，但是不满足让权等待原则</li>
-</ul>
-</li>
-</ul>
-<h3 id="硬件实现方法"><a href="#硬件实现方法" class="headerlink" title="硬件实现方法"></a>硬件实现方法</h3><ul>
-<li>中断屏蔽：和原语一样，使用关中断和开中断（但是注意不适用于多处理机的情况）</li>
-<li>TestAndSet指令（TS也成TSL）：</li>
-<li>Swap指令（XCHG）：同上，实现方式用XCHG的方式实现</li>
-</ul>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/03-%E8%B0%83%E5%BA%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener" >
-  Operating system/王道/03-调度的基本概念
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/03-%E8%B0%83%E5%BA%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener"><span class="article-date">
-  2020-02-25
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          <p>[TOC]</p>
-<h1 id="处理机调度"><a href="#处理机调度" class="headerlink" title="处理机调度"></a>处理机调度</h1><h2 id="三种层次的调度"><a href="#三种层次的调度" class="headerlink" title="三种层次的调度"></a>三种层次的调度</h2><p><img src="diagram/image-20200131185439946.png" alt="image-20200131185439946"></p>
-<ul>
-<li>高级调度：外存调入内存</li>
-<li>中级调度（内存调度）：通过挂起到外存从而回收内存</li>
-<li>低级调度（进程调度）：简单的进程分配</li>
-</ul>
-<h2 id="什么时候需要进程调度？"><a href="#什么时候需要进程调度？" class="headerlink" title="什么时候需要进程调度？"></a>什么时候需要进程调度？</h2><h3 id="进程主动放弃处理机"><a href="#进程主动放弃处理机" class="headerlink" title="进程主动放弃处理机"></a>进程主动放弃处理机</h3><ol>
-<li>主动请求系统调用产生阻塞</li>
-<li>终止</li>
-<li>异常</li>
-</ol>
-<h3 id="进程被动放弃处理机"><a href="#进程被动放弃处理机" class="headerlink" title="进程被动放弃处理机"></a>进程被动放弃处理机</h3><ol>
-<li>中断</li>
-<li>高优先级进程介入</li>
-<li>时分分片用完</li>
-</ol>
-<h3 id="不能调度的情况"><a href="#不能调度的情况" class="headerlink" title="不能调度的情况"></a>不能调度的情况</h3><ul>
-<li>中断过程进行时</li>
-<li>原语进行时</li>
-<li><strong>==内核==程序临界区</strong>（注意:处于普通临界区时是可以进行调度的，这样有利于提高并发度）</li>
-</ul>
-<h2 id="进程调度方式"><a href="#进程调度方式" class="headerlink" title="进程调度方式"></a>进程调度方式</h2><h3 id="非剥夺调度方式"><a href="#非剥夺调度方式" class="headerlink" title="非剥夺调度方式"></a>非剥夺调度方式</h3><p>等待当前进程主动放弃CPU使用权</p>
-<h3 id="剥夺调度方式"><a href="#剥夺调度方式" class="headerlink" title="剥夺调度方式"></a>剥夺调度方式</h3><p>用于时分、实时操作系统</p>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/02-%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener" >
-  Operating system/王道/02-进程的概念
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/02-%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener"><span class="article-date">
-  2020-02-25
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          <p>[TOC]</p>
-<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="进程的组成"><a href="#进程的组成" class="headerlink" title="进程的组成"></a>进程的组成</h2><ul>
-<li>程序段</li>
-<li>数据段</li>
-<li>PCB：Process Control Block 进程控制模块<ul>
-<li>描述信息：进程PID，用户UID</li>
-<li>控制管理信息：状态，优先级</li>
-<li>资源分配清单：程序段指针、数据段指针</li>
-<li>处理机相关信息：比如寄存器的值</li>
-</ul>
-</li>
-</ul>
-<h2 id="进程的组织"><a href="#进程的组织" class="headerlink" title="进程的组织"></a>进程的组织</h2><h3 id="链接方式"><a href="#链接方式" class="headerlink" title="链接方式"></a>链接方式</h3><p>不同指针指向不同状态的PCB</p>
-<h3 id="索引方式"><a href="#索引方式" class="headerlink" title="索引方式"></a>索引方式</h3><h2 id="进程的特征"><a href="#进程的特征" class="headerlink" title="进程的特征"></a>进程的特征</h2><ul>
-<li><strong>动态性</strong></li>
-<li><strong>并发性</strong></li>
-<li>==<strong>独立性</strong>：独立运行、独立获取资源、独立调度的基本单位==</li>
-<li><strong>异步性</strong>：以不可预知的方式向前，因此过程不确定不可知</li>
-<li><strong>结构性</strong></li>
-</ul>
-<h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><p><strong>三种主要状态：</strong></p>
-<ul>
-<li><strong>运行态</strong></li>
-<li><strong>就绪态</strong></li>
-<li><strong>阻塞态</strong></li>
-<li>创建态</li>
-<li>终止态</li>
-</ul>
-<p><strong>状态转换：</strong></p>
-<p><img src="diagram/image-20200131161412273.png" alt="image-20200131161412273"></p>
-<h2 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h2><p>进程源语：开闭中断包裹的原子性指令</p>
-<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><h3 id="共享存储（带锁）"><a href="#共享存储（带锁）" class="headerlink" title="共享存储（带锁）"></a>共享存储（带锁）</h3><p>同一时间只有一个进程可以访问该资源</p>
-<h3 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h3><p>交换格式化的信息：包含信息头和信息体</p>
-<ul>
-<li>直接传递</li>
-<li>间接传递：通过一个中间实体（信箱）</li>
-</ul>
-<h3 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h3><p>以流的形式传输</p>
-<p>特点：</p>
-<ul>
-<li>没写满不能读</li>
-<li>没读完不能写</li>
-<li>读写进程相互阻塞</li>
-</ul>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>==<strong>程序执行流的最小单位</strong>==</p>
-<p><img src="diagram/image-20200131164032565.png" alt="image-20200131164032565"></p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p><img src="diagram/image-20200131164408913.png" alt="image-20200131164408913"></p>
-<h3 id="两种线程"><a href="#两种线程" class="headerlink" title="两种线程"></a>两种线程</h3><ul>
-<li>用户级线程</li>
-<li>内核级线程</li>
-<li>内核级线程才是供系统调度，用户级线程必须映射到内核级线程</li>
-</ul>
-<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><p>多对一：并发度不高</p>
-<p>一对一：并发度高，线程切换高一些</p>
-<p>多对多：并发度高，切换开销也小，但比较复杂</p>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener" >
-  Operating system/王道/01-操作系统概念
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="https://github.com/GabbyYam/overyam/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" target="_blank" rel="noopener"><span class="article-date">
-  2020-02-25
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          <p>[TOC]</p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="知识结构"><a href="#知识结构" class="headerlink" title="知识结构"></a>知识结构</h2><p><img src="diagram/image-20200131110830222.png" alt="image-20200131110830222"></p>
-<h2 id="操作系统的特征"><a href="#操作系统的特征" class="headerlink" title="操作系统的特征"></a>操作系统的特征</h2><ul>
-<li><p>并发</p>
-</li>
-<li><p>共享：带锁和不带锁</p>
-</li>
-<li><p>虚拟：空分和时分</p>
-</li>
-<li><p>异步</p>
-</li>
-</ul>
-<h2 id="分类与发展"><a href="#分类与发展" class="headerlink" title="分类与发展"></a>分类与发展</h2><p><img src="diagram/image-20200131113341590.png" alt="image-20200131113341590"></p>
-<h2 id="运行机制和体系结构"><a href="#运行机制和体系结构" class="headerlink" title="运行机制和体系结构"></a>运行机制和体系结构</h2><p>处理器的两种状态：</p>
-<ul>
-<li>用户态：可以执行特权指令</li>
-<li>核心态</li>
-</ul>
-<p>内核：</p>
-<ul>
-<li>大内核：<ul>
-<li>缺点：核心代码多，难维护</li>
-<li>优点：高性能</li>
-</ul>
-</li>
-<li>微内核<ul>
-<li>缺点：切换内核有消耗</li>
-<li>优点：核心代码不复杂，结构清晰</li>
-</ul>
-</li>
-</ul>
-<p>中断：进入核心态</p>
-<ul>
-<li>内中断：CPU自行进入核心态<ul>
-<li>自愿中断：自行停止的</li>
-<li>强制中断：故障（比如：缺页），终止（比如：除零）</li>
-</ul>
-</li>
-<li>外中断：应用程序请求操作系统完成特权指令相关操作</li>
-</ul>
-<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>调系统提供的相关服务</p>
-<p><strong>为什么需要系统调用？</strong>：因为有些操作如果让用户直接进行操作将危害到系统的安全，因此只让用户提交请求，让系统代为管理和完成相关操作</p>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
-
-
-
-  <div class="pagination">
-    <a class="extend prev" rel="prev noopener" href="https://github.com/GabbyYam/overyam/page/2/" target="_blank">Prev</a><a class="page-number" href="https://github.com/GabbyYam/overyam/" target="_blank" rel="noopener">1</a><a class="page-number" href="https://github.com/GabbyYam/overyam/page/2/" target="_blank" rel="noopener">2</a><span class="page-number current">3</span><a class="page-number" href="https://github.com/GabbyYam/overyam/page/4/" target="_blank" rel="noopener">4</a><a class="page-number" href="https://github.com/GabbyYam/overyam/page/5/" target="_blank" rel="noopener">5</a><span class="space">&hellip;</span><a class="page-number" href="https://github.com/GabbyYam/overyam/page/9/" target="_blank" rel="noopener">9</a><a class="extend next" rel="next noopener" href="https://github.com/GabbyYam/overyam/page/4/" target="_blank">Next</a>
-  </div>
-
-
-
-
-          <div class="main-footer">
-  
-    © 2020 OverYam - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+    <div class="book-menu">
   
 </div>
 
-      
+
+<script src="https://gabbyyam.github.io/overyam/js/book-menu.js"></script>
+
+  </div>
+
+  <div class="off-canvas-content">
+    <div class="columns">
+      <div class="column col-10 col-lg-12">
+        <div class="book-navbar">
+          <!-- For Responsive Layout -->
+
+<header class="navbar">
+  <section class="navbar-section">
+    <a onclick="open_sidebar()">
+      <i class="icon icon-menu"></i>
+    </a>
+  </section>
+</header>
+
         </div>
+        <div class="book-content">
+          <div class="book-post">
+  
+</div>
+
+
+  <div class="book-comments">
+    
+
+
+
+
+  </div>
+
+
+
+<script src="https://gabbyyam.github.io/overyam/js/book-post.js"></script>
+
+        </div>
+      </div>
+      <div class="column col-2 hide-lg">
+        <div class="book-post-info">
+  
+    <div class="book-post-meta">
+
+  <div class="author">
+
+    <!-- Author image -->
+    <div class="author-img">
+      
+        <figure
+          class="avatar avatar-lg"
+          data-initial="G"
+          style="background-color: #3b4351;">
+        </figure>
       
     </div>
-  </div>
-  
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
-
-  
-<link rel="stylesheet" href="https://github.com/GabbyYam/overyam/PhotoSwipe/photoswipe.css">
-
-  
-<link rel="stylesheet" href="https://github.com/GabbyYam/overyam/PhotoSwipe/default-skin/default-skin.css">
-
-
-  <!-- Root element of PhotoSwipe. Must have class pswp. -->
-  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe.
-             It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-      <!-- Container that holds slides.
-                PhotoSwipe keeps only 3 of them in the DOM to save memory.
-                Don't modify these 3 pswp__item elements, data is added later on. -->
-      <div class="pswp__container">
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-      </div>
-
-      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-      <div class="pswp__ui pswp__ui--hidden">
-
-        <div class="pswp__top-bar">
-
-          <!--  Controls are self-explanatory. Order can be changed. -->
-
-          <div class="pswp__counter"></div>
-
-          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-          <button class="pswp__button pswp__button--share" title="Share"></button>
-
-          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-          <!-- element will get class pswp__preloader--active when preloader is running -->
-          <div class="pswp__preloader">
-            <div class="pswp__preloader__icn">
-              <div class="pswp__preloader__cut">
-                <div class="pswp__preloader__donut"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-          <div class="pswp__share-tooltip"></div>
-        </div>
-
-        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-
-        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-
-        <div class="pswp__caption">
-          <div class="pswp__caption__center"></div>
-        </div>
-      </div>
+    <!-- Author title -->
+    <div class="author-title">
+      <div>GabbyYam</div>
+      <div></div>
     </div>
   </div>
 
   
-<script src="https://github.com/GabbyYam/overyam/PhotoSwipe/photoswipe.js"></script>
 
+  <div class="divider"></div>
+</div>
   
-<script src="https://github.com/GabbyYam/overyam/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+  <div class="book-tocbot">
+</div>
+<div class="book-tocbot-menu">
+  <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+  <a onclick="go_top()">Back to top</a>
+  <a onclick="go_bottom()">Go to bottom</a>
+</div>
 
 
+<script src="https://gabbyyam.github.io/overyam/js/book-toc.js"></script>
 
-
-<script src="https://github.com/GabbyYam/overyam/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
-
-
-<script src="https://github.com/GabbyYam/overyam/scripts/main.js"></script>
-
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+</div>
 
 </body>
 </html>
+
+
+<script src="https://gabbyyam.github.io/overyam/js/book.js"></script>
