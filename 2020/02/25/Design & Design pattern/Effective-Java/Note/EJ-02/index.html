@@ -84,7 +84,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="对象的通用方法（讨论如何覆写非final方法）"><a href="#对象的通用方法（讨论如何覆写非final方法）" class="headerlink" title="对象的通用方法（讨论如何覆写非final方法）"></a>对象的通用方法（讨论如何覆写非final方法）</h1><h2 id="重写-equals"><a href="#重写-equals" class="headerlink" title="重写 equals"></a>重写 equals</h2><p><strong>不需要重写equals的情况：</strong></p>
+<h1 id="对象的通用方法（讨论如何覆写非final方法）">对象的通用方法（讨论如何覆写非final方法）</h1>
+<h2 id="重写-equals">重写 equals</h2>
+<p><strong>不需要重写equals的情况：</strong></p>
 <ul>
 <li>对于每一个对象实例应该是unique的时</li>
 <li>根据API设计的需要，没必要提供逻辑上的相等时</li>
@@ -99,33 +101,43 @@ document.addEventListener('DOMContentLoaded', function () {
 <li>不变性：每次调用应该返回相同的结果</li>
 <li>非空性：对于所有非空的对象equals null 必须返回false</li>
 </ul>
-<p><strong>==如果不满足以上性质会怎么样？有空的时候思考一下，待补全。==</strong></p>
+<p><strong><mark>如果不满足以上性质会怎么样？有空的时候思考一下，待补全。</mark></strong></p>
 <p><strong>高质量的equals实现代码的一些tips：</strong></p>
 <ul>
-<li><p>用 == 来判定参数是否是一个对象的引用，如果是则返回true（自反性），此为一种效率上的优化，因为做全面的对比代价可能较大</p>
+<li>
+<p>用 == 来判定参数是否是一个对象的引用，如果是则返回true（自反性），此为一种效率上的优化，因为做全面的对比代价可能较大</p>
 </li>
-<li><p>用 instanceof 去判断参数的类型，如果类型不对那么直接返回false</p>
+<li>
+<p>用 instanceof 去判断参数的类型，如果类型不对那么直接返回false</p>
 </li>
-<li><p>如果通过的instanceof的测试，将参数强转为对应类的对象以保证下面的检测正确的进行</p>
+<li>
+<p>如果通过的instanceof的测试，将参数强转为对应类的对象以保证下面的检测正确的进行</p>
 </li>
-<li><p>对于所有有意义的字段field进行比对，如果matches则通过返回true，否则返回false</p>
+<li>
+<p>对于所有有意义的字段field进行比对，如果matches则通过返回true，否则返回false</p>
 <ul>
-<li><p>其中对于<strong>非float/double类型的基本数据类型</strong>，直接用==判断，对象则递归地用equals判断</p>
+<li>
+<p>其中对于<strong>非float/double类型的基本数据类型</strong>，直接用==判断，对象则递归地用equals判断</p>
 <p>而float和double则用以下方法来判断</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Float.compare();</span><br><span class="line">Double.compare();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p>某些部分可能存在非法的null，用Objects.equals（）来检查避免报空指针异常</p>
+<li>
+<p>某些部分可能存在非法的null，用Objects.equals（）来检查避免报空指针异常</p>
 </li>
-<li><p>优先比对最可能不同的部分，至于一些派生而来的字段不需要比对（因为没有意义，比如c=a+b;如果a，b相同则c必定相同）</p>
+<li>
+<p>优先比对最可能不同的部分，至于一些派生而来的字段不需要比对（因为没有意义，比如c=a+b;如果a，b相同则c必定相同）</p>
 </li>
-<li><p><strong>写完equals方法后，检查是否满足重写的五大性质</strong></p>
+<li>
+<p><strong>写完equals方法后，检查是否满足重写的五大性质</strong></p>
 </li>
-<li><p>当然最好的方法其实是用IDE或AutoValue自动生成（？</p>
+<li>
+<p>当然最好的方法其实是用IDE或AutoValue自动生成（？</p>
 </li>
 </ul>
-<h2 id="如果重写了equals那么就必须重写hashCode"><a href="#如果重写了equals那么就必须重写hashCode" class="headerlink" title="如果重写了equals那么就必须重写hashCode"></a>如果重写了equals那么就必须重写hashCode</h2><p><strong>重写得到hashCode方法产生的hash值必须满足以下性质：</strong></p>
+<h2 id="如果重写了equals那么就必须重写hashCode">如果重写了equals那么就必须重写hashCode</h2>
+<p><strong>重写得到hashCode方法产生的hash值必须满足以下性质：</strong></p>
 <ul>
 <li>在同一程序内反复调用应该返回相同的hash值，而在不同的程序中则不需要</li>
 <li>如果两个object是equals（Object）的，那么hashCode也应该相同</li>
@@ -133,48 +145,59 @@ document.addEventListener('DOMContentLoaded', function () {
 </ul>
 <p><strong>以下是一个简单易用的hashCode生成策略：</strong></p>
 <ul>
-<li><p>对于每个有意义的字段都要分别递归地取得他们的hash值</p>
+<li>
+<p>对于每个有意义的字段都要分别递归地取得他们的hash值</p>
 </li>
-<li><p>对于基本数据类型，用包装类的hashCode方法</p>
+<li>
+<p>对于基本数据类型，用包装类的hashCode方法</p>
 </li>
-<li><p>对于引用类型，同样递归的调取hashCode</p>
+<li>
+<p>对于引用类型，同样递归的调取hashCode</p>
 </li>
-<li><p>对于组合派生而来的字段直接跳过即可</p>
+<li>
+<p>对于组合派生而来的字段直接跳过即可</p>
 </li>
-<li><p>空值默认为hash值为0</p>
+<li>
+<p>空值默认为hash值为0</p>
 </li>
-<li><p>如果某字段是个数组，分几种情况</p>
+<li>
+<p>如果某字段是个数组，分几种情况</p>
 <ul>
 <li>有意义字段：同上述</li>
 <li>无意义字段：非0常数</li>
 <li>如果所有都有意义，可以采用Arrays.hashCode</li>
 </ul>
 </li>
-<li><p>对每一步得到的hash值，作以下计算</p>
+<li>
+<p>对每一步得到的hash值，作以下计算</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//31*x可以被JVM优化，计算效率比较高</span></span><br><span class="line">result=result*<span class="number">31</span>+c;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ul>
-<h2 id="记得一定要重写toString方法"><a href="#记得一定要重写toString方法" class="headerlink" title="记得一定要重写toString方法"></a>记得一定要重写toString方法</h2><p>debug、调试用，好处多多</p>
-<h2 id="重写clone方法"><a href="#重写clone方法" class="headerlink" title="重写clone方法"></a>重写clone方法</h2><p><strong>重写的clone方法必须满足以下基本要求：</strong></p>
+<h2 id="记得一定要重写toString方法">记得一定要重写toString方法</h2>
+<p>debug、调试用，好处多多</p>
+<h2 id="重写clone方法">重写clone方法</h2>
+<p><strong>重写的clone方法必须满足以下基本要求：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x.clone()!=x;</span><br><span class="line">x.clone().getClass()==x.getClass();</span><br><span class="line">x.clone().euqals(x)==<span class="keyword">true</span>;<span class="comment">//这条并不强制要求</span></span><br></pre></td></tr></table></figure>
-
-<p>….明日再战….太痛苦了…==待补全==</p>
-<h2 id="实现Comparable-接口"><a href="#实现Comparable-接口" class="headerlink" title="实现Comparable 接口"></a>实现Comparable 接口</h2><ul>
-<li><p>并非定义在Object内</p>
+<p>…明日再战…太痛苦了…<mark>待补全</mark></p>
+<h2 id="实现Comparable-接口">实现Comparable 接口</h2>
+<ul>
+<li>
+<p>并非定义在Object内</p>
 </li>
-<li><p>实现该接口能带来种种便利，比如自然排序</p>
+<li>
+<p>实现该接口能带来种种便利，比如自然排序</p>
 </li>
-<li><p>基本原则，类似于equals</p>
+<li>
+<p>基本原则，类似于equals</p>
 <ul>
 <li>自反性、传递性、不自相矛盾、compare==0时必须equals</li>
 </ul>
 </li>
-<li><p>快速构建compareTo方法：comparator<img src="diagram/image-20200118092704727.png" alt="image-20200118092704727"></p>
+<li>
+<p>快速构建compareTo方法：comparator<img src="diagram/image-20200118092704727.png" alt="image-20200118092704727"></p>
 </li>
-<li><p>基本数据类型用包装类的compare方法来比较</p>
+<li>
+<p>基本数据类型用包装类的compare方法来比较</p>
 </li>
 </ul>
 

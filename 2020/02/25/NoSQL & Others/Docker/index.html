@@ -83,17 +83,21 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <h1 id="Docker-学习笔记"><a href="#Docker-学习笔记" class="headerlink" title="Docker 学习笔记"></a>Docker 学习笔记</h1><p><strong>为什么需要Docker？</strong></p>
+  <h1 id="Docker-学习笔记">Docker 学习笔记</h1>
+<p><strong>为什么需要Docker？</strong></p>
 <p>为了解决开发环境和部署环境不一致而造成的不便</p>
 <p><strong>为什么可以？</strong></p>
 <p>打包成镜像，直接搬迁整套运行环境（软件，操作系统，各种jdk、mysql版本）</p>
 <p><strong>和传统的虚拟机有什么区别？</strong></p>
 <ul>
-<li><p>虚拟机占用资源多，比较笨重</p>
+<li>
+<p>虚拟机占用资源多，比较笨重</p>
 </li>
-<li><p>Linux容器不模拟完整的操作系统，只复刻需要的部分，启动快，更轻量</p>
+<li>
+<p>Linux容器不模拟完整的操作系统，只复刻需要的部分，启动快，更轻量</p>
 </li>
-<li><p>进程隔离，容器之间相互独立，耦合度更低</p>
+<li>
+<p>进程隔离，容器之间相互独立，耦合度更低</p>
 </li>
 </ul>
 <p><strong>Docker的三要素：</strong></p>
@@ -101,65 +105,86 @@ document.addEventListener('DOMContentLoaded', function () {
 <li>镜像&amp;容器（类比 ：类和实例，容器是实例化的镜像）</li>
 <li>仓库：集中存放镜像文件的场所</li>
 </ul>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ol>
-<li><p>启动交互式容器&amp;关停</p>
+<h2 id="基本操作">基本操作</h2>
+<ol>
+<li>
+<p>启动交互式容器&amp;关停</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -it xxx</span><br><span class="line"></span><br><span class="line">docker stop xxx</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查看日志：</p>
+<li>
+<p>查看日志：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker log -t -f --tail n ID</span><br><span class="line"># t为时间，f为实时查看，tail n为后n条记录</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>进入容器内部&amp;无关闭退出&amp;关闭退出</p>
+<li>
+<p>进入容器内部&amp;无关闭退出&amp;关闭退出</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker attach ID #进入容器内部</span><br><span class="line">Ctrl+p+q #快捷键无关闭退出</span><br><span class="line">exit #关闭退出</span><br><span class="line"></span><br><span class="line">docker exec -t ID [COMMAND] #直接在外部输入命令并返回结果</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>从docker容器复制文件到宿主机：</p>
+<li>
+<p>从docker容器复制文件到宿主机：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp 容器ID container-path local-path</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
-<h2 id="Docker底层原理"><a href="#Docker底层原理" class="headerlink" title="Docker底层原理"></a>Docker底层原理</h2><h3 id="基本描述："><a href="#基本描述：" class="headerlink" title="基本描述："></a>基本描述：</h3><ul>
+<h2 id="Docker底层原理">Docker底层原理</h2>
+<h3 id="基本描述：">基本描述：</h3>
+<ul>
 <li>UnionFS（联合文件系统）：多层叠加，逐级依赖</li>
 <li>只有最外层可写，内层只读</li>
 <li>实现资源共享</li>
 <li>容器可持久化</li>
 </ul>
 <p><strong>容器与主机  -v（可直接创建文件夹） 挂载后能够共享文件数据</strong></p>
-<p>如果inspect 容器设定中，==volumeRW==为<strong>true</strong> ：无论容器是否开启都可以自由读写<br><strong>否则，容器只可读不可写</strong></p>
-<h3 id="容器的数据传递："><a href="#容器的数据传递：" class="headerlink" title="容器的数据传递："></a>容器的数据传递：</h3><p><strong>几个要点：</strong></p>
+<p>如果inspect 容器设定中，<mark>volumeRW</mark>为<strong>true</strong> ：无论容器是否开启都可以自由读写<br>
+<strong>否则，容器只可读不可写</strong></p>
+<h3 id="容器的数据传递：">容器的数据传递：</h3>
+<p><strong>几个要点：</strong></p>
 <ul>
 <li>文件之间相互继承会导致数据共享，子类的改动将会使父类也改动</li>
 <li>两类同样继承于一个父类，当父类被删除时，子类间依然满足数据共享</li>
 </ul>
 <p><strong>结论：容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用他为止</strong></p>
-<h3 id="DockerFile："><a href="#DockerFile：" class="headerlink" title="DockerFile："></a>DockerFile：</h3><p>==基础镜像：scratch（所有的镜像的父类）==</p>
-<h4 id="保留字："><a href="#保留字：" class="headerlink" title="保留字："></a>保留字：</h4><ol>
-<li><p><strong>DockerFile生成镜像：</strong></p>
+<h3 id="DockerFile：">DockerFile：</h3>
+<p><mark>基础镜像：scratch（所有的镜像的父类）</mark></p>
+<h4 id="保留字：">保留字：</h4>
+<ol>
+<li>
+<p><strong>DockerFile生成镜像：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.写好dockerfile</span><br><span class="line">2.docker build -f dockerfilePath -t isoName .  #注意最后的&quot;.&quot;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>FROM</strong>：继承镜像，相当于include,import</p>
+<li>
+<p><strong>FROM</strong>：继承镜像，相当于include,import</p>
 </li>
-<li><p><strong>MAINTAINER</strong>：作者姓名及邮箱</p>
+<li>
+<p><strong>MAINTAINER</strong>：作者姓名及邮箱</p>
 </li>
-<li><p><strong>RUN</strong>： 容器构建时需要执行的命令</p>
+<li>
+<p><strong>RUN</strong>： 容器构建时需要执行的命令</p>
 </li>
-<li><p><strong>WORKDIR</strong>：创建容器后，终端默认登陆进来的工作目录</p>
+<li>
+<p><strong>WORKDIR</strong>：创建容器后，终端默认登陆进来的工作目录</p>
 </li>
-<li><p><strong>EXPOSE</strong>:容器对外暴露的端口号</p>
+<li>
+<p><strong>EXPOSE</strong>:容器对外暴露的端口号</p>
 </li>
-<li><p><strong>ENV</strong>:镜像构建过程中设置环境变量</p>
+<li>
+<p><strong>ENV</strong>:镜像构建过程中设置环境变量</p>
 </li>
-<li><p><strong>ADD</strong>:将宿主机的文件拷贝进入镜像并自动解压缩</p>
+<li>
+<p><strong>ADD</strong>:将宿主机的文件拷贝进入镜像并自动解压缩</p>
 </li>
-<li><p><strong>COPY</strong>:同上，但不能自动解压缩</p>
+<li>
+<p><strong>COPY</strong>:同上，但不能自动解压缩</p>
 </li>
-<li><p><strong>VOLUME</strong>:容器数据卷，用于数据保存和持久化</p>
+<li>
+<p><strong>VOLUME</strong>:容器数据卷，用于数据保存和持久化</p>
 </li>
-<li><p><strong>CMD</strong>:指定容器启动时要执行的命令，但多条CMD的情况下只有最后一条生效</p>
+<li>
+<p><strong>CMD</strong>:指定容器启动时要执行的命令，但多条CMD的情况下只有最后一条生效</p>
 </li>
-<li><p><strong>ENTRYPOINT</strong>:同上，但是支持多条命令</p>
+<li>
+<p><strong>ENTRYPOINT</strong>:同上，但是支持多条命令</p>
 </li>
-<li><p><strong>ONBUILD</strong>:父镜像被继承后，需要执行的命令</p>
+<li>
+<p><strong>ONBUILD</strong>:父镜像被继承后，需要执行的命令</p>
 </li>
 </ol>
 

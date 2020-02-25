@@ -84,63 +84,65 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="70-Climbing-Stairs"><a href="#70-Climbing-Stairs" class="headerlink" title="70. Climbing Stairs"></a><a href="https://leetcode-cn.com/problems/climbing-stairs/" target="_blank" rel="noopener">70. Climbing Stairs</a></h1><p><img src="diagram/image-20200210141009273.png" alt="image-20200210141009273"></p>
-<h2 id="解法一：DP"><a href="#解法一：DP" class="headerlink" title="解法一：DP"></a>解法一：DP</h2><ul>
+<h1 id="70-Climbing-Stairs"><a href="https://leetcode-cn.com/problems/climbing-stairs/" target="_blank" rel="noopener">70. Climbing Stairs</a></h1>
+<p><img src="diagram/image-20200210141009273.png" alt="image-20200210141009273"></p>
+<h2 id="解法一：DP">解法一：DP</h2>
+<ul>
 <li><strong>基本情况</strong>：一层楼梯有一种方法，两层楼梯两种方法，因此dp[0]=1,dp[1]=2</li>
 <li><strong>转移方程</strong>：对于大于等于2的层数，dp[n-1]=dp[n-2]+dp[n-3]，即为一般解</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">1</span>)&#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">2</span>)&#123;<span class="keyword">return</span> <span class="number">2</span>;&#125;</span><br><span class="line">        <span class="keyword">int</span>[] dp=<span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;n;i++)&#123;dp[i]=dp[i-<span class="number">1</span>]+dp[i-<span class="number">2</span>];&#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="121-Best-Time-to-Buy-and-Sell-Stock"><a href="#121-Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="121. Best Time to Buy and Sell Stock"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121. Best Time to Buy and Sell Stock</a></h1><p><img src="diagram/image-20200210141943340.png" alt="image-20200210141943340"></p>
-<h2 id="解法一：线性扫描"><a href="#解法一：线性扫描" class="headerlink" title="解法一：线性扫描"></a>解法一：线性扫描</h2><p>线性扫描，考虑到不能只求最大值和最小值，但是记录Index也是无用功</p>
+<h1 id="121-Best-Time-to-Buy-and-Sell-Stock"><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121. Best Time to Buy and Sell Stock</a></h1>
+<p><img src="diagram/image-20200210141943340.png" alt="image-20200210141943340"></p>
+<h2 id="解法一：线性扫描">解法一：线性扫描</h2>
+<p>线性扫描，考虑到不能只求最大值和最小值，但是记录Index也是无用功</p>
 <p>不妨只更新最小值，那么计算利润的值就必定是在最小值之后，那就只需无脑更新最大利润就行了</p>
 <p>时间复杂度：$ O(N) $</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> maxProfit=<span class="number">0</span>,minPrice=Integer.MAX_VALUE; <span class="comment">//只需要最大利润和最小值</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">            minPrice=Math.min(prices[i],minPrice); </span><br><span class="line">            maxProfit=Math.max(maxProfit,prices[i]-minPrice);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxProfit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="解法二：DP"><a href="#解法二：DP" class="headerlink" title="解法二：DP"></a>解法二：DP</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="198-House-Robber"><a href="#198-House-Robber" class="headerlink" title="198. House Robber"></a><a href="https://leetcode-cn.com/problems/house-robber/" target="_blank" rel="noopener">198. House Robber</a></h1><p><img src="diagram/image-20200210145604103.png" alt="image-20200210145604103"></p>
-<h2 id="解法一：DP-1"><a href="#解法一：DP-1" class="headerlink" title="解法一：DP"></a>解法一：DP</h2><ul>
-<li><p><strong>特殊情况</strong>：可抢劫的房子不到三家，即0,1,2</p>
+<h2 id="解法二：DP">解法二：DP</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="198-House-Robber"><a href="https://leetcode-cn.com/problems/house-robber/" target="_blank" rel="noopener">198. House Robber</a></h1>
+<p><img src="diagram/image-20200210145604103.png" alt="image-20200210145604103"></p>
+<h2 id="解法一：DP-v2">解法一：DP</h2>
+<ul>
+<li>
+<p><strong>特殊情况</strong>：可抢劫的房子不到三家，即0,1,2</p>
 </li>
-<li><p><strong>基本情况</strong>：第一家的价值是其自身，第二家的价值是第一家和第二家价值的最大值，即</p>
+<li>
+<p><strong>基本情况</strong>：第一家的价值是其自身，第二家的价值是第一家和第二家价值的最大值，即</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>]=nums[<span class="number">0</span>];</span><br><span class="line">dp[<span class="number">1</span>]=Math.max(nums[<span class="number">0</span>],nums[<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>转移方程</strong>：由基本情况可以推出，第n家的价值</p>
+<li>
+<p><strong>转移方程</strong>：由基本情况可以推出，第n家的价值</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dp[n]=Math.max(</span><br><span class="line">    dp[n-<span class="number">2</span>]+nums[n],</span><br><span class="line">	dp[n-<span class="number">1</span>]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>结果</strong>：不是最后一家就是倒数第二家，取最大值即可</p>
+<li>
+<p><strong>结果</strong>：不是最后一家就是倒数第二家，取最大值即可</p>
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//三种特殊情况,不考虑会越界</span></span><br><span class="line">        <span class="keyword">if</span>(nums.length==<span class="number">0</span> || nums==<span class="keyword">null</span>)&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(nums.length==<span class="number">1</span>)&#123;<span class="keyword">return</span> nums[<span class="number">0</span>];&#125;</span><br><span class="line">        <span class="keyword">if</span>(nums.length==<span class="number">2</span>)&#123;<span class="keyword">return</span> Math.max(nums[<span class="number">0</span>],nums[<span class="number">1</span>]);&#125;</span><br><span class="line">        <span class="keyword">int</span>[] dp=<span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="comment">//两种基本情况</span></span><br><span class="line">        dp[<span class="number">0</span>]=nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>]=Math.max(dp[<span class="number">0</span>],nums[<span class="number">1</span>]);</span><br><span class="line">        <span class="comment">//状态转移</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;nums.length;i++)&#123;dp[i]=Math.max((dp[i-<span class="number">2</span>]+nums[i]),dp[i-<span class="number">1</span>]);&#125;</span><br><span class="line">        <span class="comment">//最后两家的价值取最大值即可</span></span><br><span class="line">        <span class="keyword">return</span> Math.max(dp[nums.length-<span class="number">1</span>],dp[nums.length-<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="303-Range-Sum-Query-Immutable"><a href="#303-Range-Sum-Query-Immutable" class="headerlink" title="303. Range Sum Query - Immutable"></a><a href="https://leetcode-cn.com/problems/range-sum-query-immutable/" target="_blank" rel="noopener">303. Range Sum Query - Immutable</a></h1><p><img src="diagram/image-20200210151642862.png" alt="image-20200210151642862"></p>
-<h2 id="解法一：缓存"><a href="#解法一：缓存" class="headerlink" title="解法一：缓存"></a>解法一：缓存</h2><p>由于会大量调用，所以如果每次都遍历一次来计算会很慢，所以这里需要加入缓存</p>
+<h1 id="303-Range-Sum-Query-Immutable"><a href="https://leetcode-cn.com/problems/range-sum-query-immutable/" target="_blank" rel="noopener">303. Range Sum Query - Immutable</a></h1>
+<p><img src="diagram/image-20200210151642862.png" alt="image-20200210151642862"></p>
+<h2 id="解法一：缓存">解法一：缓存</h2>
+<p>由于会大量调用，所以如果每次都遍历一次来计算会很慢，所以这里需要加入缓存</p>
 <p>nums传入初始化时，就把到n为止的sum计算出来，结果返回两个边界的差值就行了</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumArray</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] sum;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NumArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        sum=<span class="keyword">new</span> <span class="keyword">int</span>[nums.length+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            sum[i+<span class="number">1</span>]=nums[i]+sum[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sumRange</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sum[j+<span class="number">1</span>]-sum[i];</span><br><span class="line">        <span class="comment">//注意这里是j+1 和 i ，因为如果是i+1的话，会把nums[i]也算进去，那得到的和就没有nums[i]了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="62-Unique-Paths（-Medium？Easy？-）"><a href="#62-Unique-Paths（-Medium？Easy？-）" class="headerlink" title="62. Unique Paths（==Medium？Easy？==）"></a><a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">62. Unique Paths（==Medium？Easy？==）</a></h1><p><img src="diagram/image-20200210165721753.png" alt="image-20200210165721753"></p>
-<h2 id="解法一：DP-2"><a href="#解法一：DP-2" class="headerlink" title="解法一：DP"></a>解法一：DP</h2><ul>
-<li><p><strong>基本情况</strong>：每个格子对应的解数应为</p>
+<h1 id="62-Unique-Paths（Medium？Easy？）"><a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">62. Unique Paths（<mark>Medium？Easy？</mark>）</a></h1>
+<p><img src="diagram/image-20200210165721753.png" alt="image-20200210165721753"></p>
+<h2 id="解法一：DP-v3">解法一：DP</h2>
+<ul>
+<li>
+<p><strong>基本情况</strong>：每个格子对应的解数应为</p>
 </li>
-<li><p><strong>转移方程</strong>：每个格子对应的解数应为 左方格子的解数+上方格子的解数，因此</p>
+<li>
+<p><strong>转移方程</strong>：每个格子对应的解数应为 左方格子的解数+上方格子的解数，因此</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j]=dp[i-<span class="number">1</span>][j]+dp[i][j-<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>边界问题</strong>：由于边界上的格子上方或左方没有格子，直接计算会导致越界，因此长宽各扩展一格==val=0==的格子来作辅助格子</p>
+<li>
+<p><strong>边界问题</strong>：由于边界上的格子上方或左方没有格子，直接计算会导致越界，因此长宽各扩展一格<mark>val=0</mark>的格子来作辅助格子</p>
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m+<span class="number">1</span>][n+<span class="number">1</span>]; <span class="comment">//长宽都+1，自动初始化为0作为辅助</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">                dp[i][j]=(i==<span class="number">1</span>&amp;&amp;j==<span class="number">1</span>)?<span class="number">1</span>:dp[i-<span class="number">1</span>][j]+dp[i][j-<span class="number">1</span>];</span><br><span class="line">                <span class="comment">//dp[1][1]为1，其他则由其按转移方程推得</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m][n];<span class="comment">//右下角即为结果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
 </div>
 

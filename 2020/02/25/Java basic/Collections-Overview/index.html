@@ -84,16 +84,18 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h1><h2 id="Traversing-Collections（集合遍历）"><a href="#Traversing-Collections（集合遍历）" class="headerlink" title="Traversing Collections（集合遍历）"></a>Traversing Collections（集合遍历）</h2><blockquote>
+<h1 id="Interface">Interface</h1>
+<h2 id="Traversing-Collections（集合遍历）">Traversing Collections（集合遍历）</h2>
+<blockquote>
 <p>什么是集合类？集合类不是简单的用来存储元素的，而是为了方便地取出存储的元素</p>
 </blockquote>
-<h3 id="Aggregate-Operations（聚合操作）"><a href="#Aggregate-Operations（聚合操作）" class="headerlink" title="Aggregate Operations（聚合操作）"></a>Aggregate Operations（聚合操作）</h3><blockquote>
+<h3 id="Aggregate-Operations（聚合操作）">Aggregate Operations（聚合操作）</h3>
+<blockquote>
 <p>In JDK 8 and later, the preferred method of iterating over a collection is to obtain a stream and perform aggregate operations on it. Aggregate operations are often used in conjunction with lambda expressions to make programming more expressive, using less lines of code. The following code sequentially iterates through a collection of shapes and prints out the red objects:</p>
 </blockquote>
-<p>jdk1.8开始，==更推荐用 stream + 聚合操作==的方式配合 ==lambda表达式== 进行</p>
+<p>jdk1.8开始，<mark>更推荐用 stream + 聚合操作</mark>的方式配合 <mark>lambda表达式</mark> 进行</p>
 <p><strong>优点是，让程序可读性更强</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myShapesCollection.stream()</span><br><span class="line">.filter(e -&gt; e.getColor() == Color.RED)         <span class="comment">//过滤器，筛掉不需要的元素</span></span><br><span class="line">.forEach(e -&gt; System.out.println(e.getName())); <span class="comment">//forEach遍历</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>Likewise, you could easily request a parallel stream, which might make sense if the collection is large enough and your computer has enough cores:</p>
 </blockquote>
@@ -105,20 +107,18 @@ document.addEventListener('DOMContentLoaded', function () {
 <li>不要使用有状态的<code>lambda</code>表达式，这会导致每次执行的结果大概率不同</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myShapesCollection.parallelStream()             <span class="comment">//并行管道，适合多核处理器+超大容量集合</span></span><br><span class="line">.filter(e -&gt; e.getColor() == Color.RED)</span><br><span class="line">.forEach(e -&gt; System.out.println(e.getName()));</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>There are many different ways to collect data with this API. For example, you might want to convert the elements of a <code>Collection</code> to <code>String</code> objects, then join them, separated by commas:</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String joined = elements.stream()			</span><br><span class="line">.map(Object::toString)						<span class="comment">//类型转换</span></span><br><span class="line">.collect(Collectors.joining(<span class="string">", "</span>));         <span class="comment">//切割拼接</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>Or perhaps sum the salaries of all employees:</p>
 </blockquote>
 <p><strong>归约 &amp; 合并：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Averager</span> <span class="keyword">implements</span> <span class="title">IntConsumer</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">average</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> count &gt; <span class="number">0</span> ? ((<span class="keyword">double</span>) total)/count : <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123; total += i; count++; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">combine</span><span class="params">(Averager other)</span> </span>&#123;</span><br><span class="line">        total += other.total;</span><br><span class="line">        count += other.count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>collect Method <code>(Averager::new , Averager::accept , Averager::combine)</code><ul>
+<li>collect Method <code>(Averager::new , Averager::accept , Averager::combine)</code>
+<ul>
 <li><code>supplier</code>:提供一个存储结果的类的构造器</li>
 <li><code>accumulator</code>：累加器，操作<code>supplier</code>中的数据</li>
 <li><code>combiner</code>：组合器，将两个<code>supplier</code>中的对应字段</li>
@@ -128,31 +128,27 @@ document.addEventListener('DOMContentLoaded', function () {
 <li>reduce Method <code>(0,(a,b) -&gt; a+b)</code> 初值+累加操作</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> total = employees.stream()</span><br><span class="line">.collect(Collectors.summingInt(Employee::getSalary))); <span class="comment">//求和</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="for-each-Construct（加强型for循环）"><a href="#for-each-Construct（加强型for循环）" class="headerlink" title="for-each Construct（加强型for循环）"></a>for-each Construct（加强型for循环）</h3><p>不必多说</p>
+<h3 id="for-each-Construct（加强型for循环）">for-each Construct（加强型for循环）</h3>
+<p>不必多说</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(Integer e:c)&#123;</span><br><span class="line">    System.out.println(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Iterators（迭代器遍历）"><a href="#Iterators（迭代器遍历）" class="headerlink" title="Iterators（迭代器遍历）"></a>Iterators（迭代器遍历）</h3><p>不必多说</p>
+<h3 id="Iterators（迭代器遍历）">Iterators（迭代器遍历）</h3>
+<p>不必多说</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Iterator i = c.iterator();</span><br><span class="line"><span class="keyword">while</span>(i.hasNext())&#123;</span><br><span class="line">    System.out.println(i.next());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Collection-Interface-Bulk-Operations（批量操作）"><a href="#Collection-Interface-Bulk-Operations（批量操作）" class="headerlink" title="Collection Interface Bulk Operations（批量操作）"></a>Collection Interface Bulk Operations（批量操作）</h2><ul>
+<h2 id="Collection-Interface-Bulk-Operations（批量操作）">Collection Interface Bulk Operations（批量操作）</h2>
+<ul>
 <li><code>containsAll</code> — returns <code>true</code> if the target <code>Collection</code> contains all of the elements in the specified <code>Collection</code>.</li>
 <li><code>addAll</code> — adds all of the elements in the specified <code>Collection</code> to the target <code>Collection</code>.</li>
 <li><code>removeAll</code> — removes from the target <code>Collection</code> all of its elements that are also contained in the specified <code>Collection</code>.</li>
 <li><code>retainAll</code> — removes from the target <code>Collection</code> all its elements that are <em>not</em> also contained in the specified <code>Collection</code>. That is, it retains only those elements in the target <code>Collection</code> that are also contained in the specified <code>Collection</code>.</li>
 <li><code>clear</code> — removes all elements from the <code>Collection</code>.</li>
 </ul>
-<h2 id="Collection-Interface-Array-Operations（数组操作）"><a href="#Collection-Interface-Array-Operations（数组操作）" class="headerlink" title="Collection Interface Array Operations（数组操作）"></a>Collection Interface Array Operations（数组操作）</h2><p>For example, suppose that <code>c</code> is a <code>Collection</code>. The following snippet dumps the contents of <code>c</code> into a newly allocated array of <code>Object</code> whose length is identical to the number of elements in <code>c</code>.</p>
+<h2 id="Collection-Interface-Array-Operations（数组操作）">Collection Interface Array Operations（数组操作）</h2>
+<p>For example, suppose that <code>c</code> is a <code>Collection</code>. The following snippet dumps the contents of <code>c</code> into a newly allocated array of <code>Object</code> whose length is identical to the number of elements in <code>c</code>.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object[] a = c.toArray();</span><br></pre></td></tr></table></figure>
-
 <p>Suppose that <code>c</code> is known to contain only strings (perhaps because <code>c</code> is of type <code>Collection</code>). The following snippet dumps the contents of <code>c</code> into a newly allocated array of <code>String</code> whose length is identical to the number of elements in <code>c</code>.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] a = c.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="Implementations"><a href="#Implementations" class="headerlink" title="Implementations"></a>Implementations</h1><p>Implementations are the data objects used to store collections, which implement the interfaces described in <a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/index.html" target="_blank" rel="noopener">the Interfaces section</a>. This lesson describes the following kinds of implementations:</p>
+<h1 id="Implementations">Implementations</h1>
+<p>Implementations are the data objects used to store collections, which implement the interfaces described in <a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/index.html" target="_blank" rel="noopener">the Interfaces section</a>. This lesson describes the following kinds of implementations:</p>
 <ul>
 <li><strong>General-purpose implementations</strong> are the most commonly used implementations, designed for everyday use. They are summarized in the table titled General-purpose-implementations.</li>
 <li><strong>Special-purpose implementations</strong> are designed for use in special situations and display nonstandard performance characteristics, usage restrictions, or behavior.</li>
@@ -161,7 +157,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><strong>Convenience implementations</strong> are mini-implementations, typically made available via static factory methods, that provide convenient, efficient alternatives to general-purpose implementations for special collections (for example, singleton sets).</li>
 <li><strong>Abstract implementations</strong> are skeletal implementations that facilitate the construction of custom implementations — described later in the <a href="https://docs.oracle.com/javase/tutorial/collections/custom-implementations/index.html" target="_blank" rel="noopener">Custom Collection Implementations</a> section. An advanced topic, it’s not particularly difficult, but relatively few people will need to do it.</li>
 </ul>
-<h2 id="General-purpose-Implementations-常规实现类"><a href="#General-purpose-Implementations-常规实现类" class="headerlink" title="General-purpose Implementations(常规实现类)"></a>General-purpose Implementations(常规实现类)</h2><table>
+<h2 id="General-purpose-Implementations-常规实现类">General-purpose Implementations(常规实现类)</h2>
+<table>
 <thead>
 <tr>
 <th>Interfaces</th>
@@ -172,7 +169,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <th>Hash table + Linked list Implementations</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>Set</code></td>
 <td><code>HashSet</code></td>
 <td></td>
@@ -212,44 +210,59 @@ document.addEventListener('DOMContentLoaded', function () {
 <td></td>
 <td><code>LinkedHashMap</code></td>
 </tr>
-</tbody></table>
-<h2 id="Set-Implementations（Set实现类）"><a href="#Set-Implementations（Set实现类）" class="headerlink" title="Set Implementations（Set实现类）"></a>Set Implementations（Set实现类）</h2><h3 id="General-Purpose-Set-Implementations"><a href="#General-Purpose-Set-Implementations" class="headerlink" title="General-Purpose Set Implementations"></a>General-Purpose Set Implementations</h3><ul>
+</tbody>
+</table>
+<h2 id="Set-Implementations（Set实现类）">Set Implementations（Set实现类）</h2>
+<h3 id="General-Purpose-Set-Implementations">General-Purpose Set Implementations</h3>
+<ul>
 <li>HashSet：HashSet，非线程安全</li>
 <li>TreeSet ：有序集合，非线程安全</li>
 <li>LinkedHashSet ：记录插入顺序的HashSet</li>
 </ul>
-<h3 id="Special-Purpose-Set-Implementations"><a href="#Special-Purpose-Set-Implementations" class="headerlink" title="Special-Purpose Set Implementations"></a>Special-Purpose Set Implementations</h3><ul>
+<h3 id="Special-Purpose-Set-Implementations">Special-Purpose Set Implementations</h3>
+<ul>
 <li>EnumSet ：高性能的EnumSet</li>
 <li>CopyOnWriteArraySet : 并发包中的Set，线程安全，用于并发场景</li>
 </ul>
-<h2 id="List-Implementations（List实现类）"><a href="#List-Implementations（List实现类）" class="headerlink" title="List Implementations（List实现类）"></a>List Implementations（List实现类）</h2><h3 id="General-Purpose-Set-Implementations-1"><a href="#General-Purpose-Set-Implementations-1" class="headerlink" title="General-Purpose Set Implementations"></a>General-Purpose Set Implementations</h3><ul>
+<h2 id="List-Implementations（List实现类）">List Implementations（List实现类）</h2>
+<h3 id="General-Purpose-Set-Implementations-v2">General-Purpose Set Implementations</h3>
+<ul>
 <li>ArrayList ：基于数组的List，非线程安全</li>
 <li>LinkedList：基于链表的List，非线程安全</li>
 </ul>
-<h3 id="Special-Purpose-Set-Implementations-1"><a href="#Special-Purpose-Set-Implementations-1" class="headerlink" title="Special-Purpose Set Implementations"></a>Special-Purpose Set Implementations</h3><ul>
-<li><p>CopyOnWriteArrayList：适合维护事件处理型List，即修改不频繁，但是遍历和潜在时间消耗大的情形</p>
+<h3 id="Special-Purpose-Set-Implementations-v2">Special-Purpose Set Implementations</h3>
+<ul>
+<li>
+<p>CopyOnWriteArrayList：适合维护事件处理型List，即修改不频繁，但是遍历和潜在时间消耗大的情形</p>
 <blockquote>
 <p>This implementation is well suited to maintaining event-handler lists, in which change is infrequent, and traversal is frequent and potentially time-consuming.</p>
 </blockquote>
 </li>
 </ul>
-<h2 id="Map-Implementations（Map实现类）"><a href="#Map-Implementations（Map实现类）" class="headerlink" title="Map Implementations（Map实现类）"></a>Map Implementations（Map实现类）</h2><h3 id="General-Purpose-Map-Implementations"><a href="#General-Purpose-Map-Implementations" class="headerlink" title="General-Purpose Map Implementations"></a>General-Purpose Map Implementations</h3><ul>
+<h2 id="Map-Implementations（Map实现类）">Map Implementations（Map实现类）</h2>
+<h3 id="General-Purpose-Map-Implementations">General-Purpose Map Implementations</h3>
+<ul>
 <li>HashMap：线程不安全</li>
 <li>TreeMap：Key有序的Map，线程不安全</li>
 <li>LinkedHashMap：记录插入顺序的HashMap</li>
 </ul>
-<h3 id="Special-Purpose-Map-Implementations"><a href="#Special-Purpose-Map-Implementations" class="headerlink" title="Special-Purpose Map Implementations"></a>Special-Purpose Map Implementations</h3><ul>
+<h3 id="Special-Purpose-Map-Implementations">Special-Purpose Map Implementations</h3>
+<ul>
 <li>EnumMap：高性能的EnumMap</li>
 <li>WeakHashMap：专门存放弱引用的HashMap</li>
 <li>IdentityHashMap：基于HashTable，看不懂，用不到吧？</li>
 </ul>
-<h3 id="Concurrent-Map-Implementations"><a href="#Concurrent-Map-Implementations" class="headerlink" title="Concurrent Map Implementations"></a>Concurrent Map Implementations</h3><ul>
+<h3 id="Concurrent-Map-Implementations">Concurrent Map Implementations</h3>
+<ul>
 <li>ConcurrentMap：高并发、高性能的HashTable，</li>
 </ul>
-<h2 id="Queue-Implementations（Queue实现类）"><a href="#Queue-Implementations（Queue实现类）" class="headerlink" title="Queue Implementations（Queue实现类）"></a>Queue Implementations（Queue实现类）</h2><h3 id="General-Purpose-Queue-Implementations"><a href="#General-Purpose-Queue-Implementations" class="headerlink" title="General-Purpose Queue Implementations"></a>General-Purpose Queue Implementations</h3><ul>
+<h2 id="Queue-Implementations（Queue实现类）">Queue Implementations（Queue实现类）</h2>
+<h3 id="General-Purpose-Queue-Implementations">General-Purpose Queue Implementations</h3>
+<ul>
 <li>PriorityQueue：基于Heap的优先队列，默认为<code>nature ordering</code></li>
 </ul>
-<h3 id="Concurrent-Queue-Implementations"><a href="#Concurrent-Queue-Implementations" class="headerlink" title="Concurrent Queue Implementations"></a>Concurrent Queue Implementations</h3><ul>
+<h3 id="Concurrent-Queue-Implementations">Concurrent Queue Implementations</h3>
+<ul>
 <li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/LinkedBlockingQueue.html" target="_blank" rel="noopener"><code>LinkedBlockingQueue</code></a> — an optionally bounded FIFO blocking queue backed by linked nodes</li>
 <li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ArrayBlockingQueue.html" target="_blank" rel="noopener"><code>ArrayBlockingQueue</code></a> — a bounded FIFO blocking queue backed by an array</li>
 <li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/PriorityBlockingQueue.html" target="_blank" rel="noopener"><code>PriorityBlockingQueue</code></a> — an unbounded blocking priority queue backed by a heap</li>

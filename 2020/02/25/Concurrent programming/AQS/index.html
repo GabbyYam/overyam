@@ -84,22 +84,26 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="原理概览"><a href="#原理概览" class="headerlink" title="原理概览"></a>原理概览</h1><ul>
-<li><p><code>AQS</code>，全称<code>AbstractQueueSynchronizer</code>，是用于维护线程等待队列的数据结构</p>
+<h1 id="原理概览">原理概览</h1>
+<ul>
+<li>
+<p><code>AQS</code>，全称<code>AbstractQueueSynchronizer</code>，是用于维护线程等待队列的数据结构</p>
 </li>
-<li><p><code>AQS</code>中的队列是<code>FIFO</code>的<strong>双向队列</strong></p>
+<li>
+<p><code>AQS</code>中的队列是<code>FIFO</code>的<strong>双向队列</strong></p>
 </li>
-<li><p><code>AQS</code>中的节点均为<code>volatile</code>修饰</p>
+<li>
+<p><code>AQS</code>中的节点均为<code>volatile</code>修饰</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> waitStatus;	<span class="comment">//等待状态</span></span><br><span class="line"><span class="keyword">volatile</span> Node prev;         <span class="comment">//前驱节点</span></span><br><span class="line"><span class="keyword">volatile</span> Node next;			<span class="comment">//后继节点</span></span><br><span class="line"><span class="keyword">volatile</span> Thread thread;		<span class="comment">//代表的线程</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> state; <span class="comment">//同步状态，即锁的个数</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>实现==自定义同步器==需要实现的以下方法：</p>
+<li>
+<p>实现<mark>自定义同步器</mark>需要实现的以下方法：</p>
 <ul>
 <li>纯独占模式：<code>ReentrantLock</code></li>
 <li>双模式：<code>ReentrantWriteReadLock</code></li>
 <li>其中<code>acquire</code>和<code>release</code>继承于AQS，不需要重写，用于管理位于双向队列中的各节点</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断线程是否取得锁</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">isHeldExclusively</span><span class="params">()</span>    </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//独占模式</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> arg)</span>	<span class="comment">//用于AQS中的acquire方法，尝试获取资源，并设置状态</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryRelease</span><span class="params">(<span class="keyword">int</span> arg)</span>	<span class="comment">//用于AQS中的release方法，尝试释放资源,并设置状态</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="comment">//共享模式</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">tryAcquireShared</span><span class="params">(<span class="keyword">int</span> arg)</span>	</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryReleaseShared</span><span class="params">(<span class="keyword">int</span> arg)</span></span></span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 

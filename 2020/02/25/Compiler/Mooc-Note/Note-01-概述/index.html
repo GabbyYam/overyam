@@ -83,26 +83,28 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>高级语言语言 （编译）=&gt; 汇编语言 （汇编）=&gt; 机器语言</p>
+  <h1 id="概述">概述</h1>
+<p>高级语言语言 （编译）=&gt; 汇编语言 （汇编）=&gt; 机器语言</p>
 <p><strong>结构：类似于语言翻译</strong></p>
 <ul>
 <li>分析部分：分析源语言</li>
 <li>优化器</li>
 <li>综合部分：组织目标语言</li>
 </ul>
-<p><strong>词法分析：</strong>识别各个单词，判断该词的category</p>
+<p>**词法分析：**识别各个单词，判断该词的category</p>
 <ul>
 <li>词法单元以token的形式呈现 &lt;Kind,Type&gt;</li>
 <li>关键词(key word)</li>
-<li>常量 </li>
+<li>常量</li>
 <li>运算符 =-+*</li>
-<li>界限符 :({[])</li>
+<li>界限符 😦{[])</li>
 <li>标识符：变量名、方法名、类名、etc</li>
 </ul>
 <p><strong>语句通过分析树来进行分析</strong></p>
 <p><strong>语义分析：</strong></p>
 <ul>
-<li>收集标识符的属性信息<ul>
+<li>收集标识符的属性信息
+<ul>
 <li>Kind</li>
 <li>Type</li>
 <li>储存位置、位置</li>

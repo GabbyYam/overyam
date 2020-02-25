@@ -84,17 +84,22 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="Generics"><a href="#Generics" class="headerlink" title="Generics"></a>Generics</h1><h2 id="能加泛型的地方一定要加泛型，不要用原始的方法"><a href="#能加泛型的地方一定要加泛型，不要用原始的方法" class="headerlink" title="能加泛型的地方一定要加泛型，不要用原始的方法"></a>能加泛型的地方一定要加泛型，不要用原始的方法</h2><p><strong>泛型的优点：</strong></p>
+<h1 id="Generics">Generics</h1>
+<h2 id="能加泛型的地方一定要加泛型，不要用原始的方法">能加泛型的地方一定要加泛型，不要用原始的方法</h2>
+<p><strong>泛型的优点：</strong></p>
 <ul>
 <li>可以检查collections &amp; method 被放入一些其他不需要的object</li>
 <li>安全，可读性强</li>
 </ul>
-<h2 id="消除unchecked-warning"><a href="#消除unchecked-warning" class="headerlink" title="消除unchecked warning"></a>消除unchecked warning</h2><ul>
+<h2 id="消除unchecked-warning">消除unchecked warning</h2>
+<ul>
 <li>&lt;&gt;是一种消除unchecked warning的方法（靠编译器自行推算）</li>
 <li>如果能证明代码没问题，用suppressWarings（“unchecked”）来消掉</li>
 </ul>
-<h2 id="能用List不要用Array"><a href="#能用List不要用Array" class="headerlink" title="能用List不要用Array"></a>能用List不要用Array</h2><p>因为Array的类型会随所存类型而变，这会让Array存在很多不确定性</p>
-<h2 id="优先使用generic-type-而不是-raw-type"><a href="#优先使用generic-type-而不是-raw-type" class="headerlink" title="优先使用generic type 而不是 raw type"></a>优先使用generic type 而不是 raw type</h2><p><strong>==有点困难。。。搁置以后再看==</strong></p>
+<h2 id="能用List不要用Array">能用List不要用Array</h2>
+<p>因为Array的类型会随所存类型而变，这会让Array存在很多不确定性</p>
+<h2 id="优先使用generic-type-而不是-raw-type">优先使用generic type 而不是 raw type</h2>
+<p><strong><mark>有点困难。。。搁置以后再看</mark></strong></p>
 
 </div>
 

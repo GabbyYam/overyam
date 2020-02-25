@@ -84,19 +84,30 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><h2 id="检查参数是否合法"><a href="#检查参数是否合法" class="headerlink" title="检查参数是否合法"></a>检查参数是否合法</h2><p>参数检查的例子参考jdk源码阅读</p>
-<h2 id="需要的时候准备一些防护性的copy"><a href="#需要的时候准备一些防护性的copy" class="headerlink" title="需要的时候准备一些防护性的copy"></a>需要的时候准备一些防护性的copy</h2><p>在传入可变参数时需要特别注意，外部可能会通过改变传入参数而间接的影响到类内部的实现。因此需要在初始化的时候进行保护性拷贝</p>
-<h2 id="谨慎地对method命名"><a href="#谨慎地对method命名" class="headerlink" title="谨慎地对method命名"></a>谨慎地对method命名</h2><p>命名标准参考阿里开发手册</p>
-<h2 id="慎用重载"><a href="#慎用重载" class="headerlink" title="慎用重载"></a>慎用重载</h2><ul>
-<li><p>重载类型的选择是在编译时进行的，注意如果参数是在运行时才得以区分：比如generic，重载方法就会失效</p>
+<h1 id="Methods">Methods</h1>
+<h2 id="检查参数是否合法">检查参数是否合法</h2>
+<p>参数检查的例子参考jdk源码阅读</p>
+<h2 id="需要的时候准备一些防护性的copy">需要的时候准备一些防护性的copy</h2>
+<p>在传入可变参数时需要特别注意，外部可能会通过改变传入参数而间接的影响到类内部的实现。因此需要在初始化的时候进行保护性拷贝</p>
+<h2 id="谨慎地对method命名">谨慎地对method命名</h2>
+<p>命名标准参考阿里开发手册</p>
+<h2 id="慎用重载">慎用重载</h2>
+<ul>
+<li>
+<p>重载类型的选择是在编译时进行的，注意如果参数是在运行时才得以区分：比如generic，重载方法就会失效</p>
 </li>
-<li><p>不要重载参数数目相同的method</p>
+<li>
+<p>不要重载参数数目相同的method</p>
 </li>
-<li><p>比起重载，不如取个不同的名字免得麻烦</p>
+<li>
+<p>比起重载，不如取个不同的名字免得麻烦</p>
 </li>
 </ul>
-<h2 id="慎用可变参数"><a href="#慎用可变参数" class="headerlink" title="慎用可变参数"></a>慎用可变参数</h2><p>用你<img src="diagram/047C9D59.png" alt="img">的可变参数呢</p>
-<h2 id="返回零长度的数组和集合，而不是null"><a href="#返回零长度的数组和集合，而不是null" class="headerlink" title="返回零长度的数组和集合，而不是null"></a>返回零长度的数组和集合，而不是null</h2><h2 id="为所有可被外部调用的API编写说明文档"><a href="#为所有可被外部调用的API编写说明文档" class="headerlink" title="为所有可被外部调用的API编写说明文档"></a>为所有可被外部调用的API编写说明文档</h2><ul>
+<h2 id="慎用可变参数">慎用可变参数</h2>
+<p>用你<img src="diagram/047C9D59.png" alt="img">的可变参数呢</p>
+<h2 id="返回零长度的数组和集合，而不是null">返回零长度的数组和集合，而不是null</h2>
+<h2 id="为所有可被外部调用的API编写说明文档">为所有可被外部调用的API编写说明文档</h2>
+<ul>
 <li>参数及其要求</li>
 <li>返回类型和内容</li>
 <li>何时抛出什么异常</li>

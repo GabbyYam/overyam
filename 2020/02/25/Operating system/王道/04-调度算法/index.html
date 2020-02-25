@@ -84,56 +84,77 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h1><h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><ul>
+<h1 id="调度算法">调度算法</h1>
+<h2 id="评价指标">评价指标</h2>
+<ul>
 <li>CPU利用率：实际运行时间/总时间</li>
 <li>系统吞吐量：单位时间内完成作业的数量</li>
 <li>周转时间：完成时间-提交时间</li>
 <li>等待时间：注意进程等待时间和作业等待时间不同</li>
 </ul>
-<h2 id="调度算法有哪些？"><a href="#调度算法有哪些？" class="headerlink" title="调度算法有哪些？"></a>调度算法有哪些？</h2><h3 id="FCFS（先来先服务）"><a href="#FCFS（先来先服务）" class="headerlink" title="FCFS（先来先服务）"></a>FCFS（先来先服务）</h3><ul>
+<h2 id="调度算法有哪些？">调度算法有哪些？</h2>
+<h3 id="FCFS（先来先服务）">FCFS（先来先服务）</h3>
+<ul>
 <li>从公平出发</li>
 <li>非抢占式</li>
 <li>优点：实现简单</li>
 <li>缺点：排在长作业后的短作业的带权周转时间很大，用户体验不好（对长作业有利，对短作业不利）</li>
 <li>不会产生饥饿</li>
 </ul>
-<h3 id="SJF（短作业优先）"><a href="#SJF（短作业优先）" class="headerlink" title="SJF（短作业优先）"></a>SJF（短作业优先）</h3><ul>
-<li><p>追求<strong>最短</strong>的平均等待时间、周转时间和带权周转时间（<strong>==在所有进程几乎同时到达的情况下==</strong>）</p>
+<h3 id="SJF（短作业优先）">SJF（短作业优先）</h3>
+<ul>
+<li>
+<p>追求<strong>最短</strong>的平均等待时间、周转时间和带权周转时间（<strong><mark>在所有进程几乎同时到达的情况下</mark></strong>）</p>
 </li>
-<li><p>非抢占式（也有非抢占式的版本，其平均等待时间是最短的）</p>
+<li>
+<p>非抢占式（也有非抢占式的版本，其平均等待时间是最短的）</p>
 </li>
-<li><p>优点：平均效率比较高</p>
+<li>
+<p>优点：平均效率比较高</p>
 </li>
-<li><p>缺点：不公平，对短的作业有利，长作业不利</p>
+<li>
+<p>缺点：不公平，对短的作业有利，长作业不利</p>
 </li>
-<li><p>会产生饥饿</p>
+<li>
+<p>会产生饥饿</p>
 </li>
 </ul>
-<h3 id="HRRN-高响应比优先"><a href="#HRRN-高响应比优先" class="headerlink" title="HRRN 高响应比优先"></a>HRRN 高响应比优先</h3><ul>
+<h3 id="HRRN-高响应比优先">HRRN 高响应比优先</h3>
+<ul>
 <li>响应比=（等待时间+要求服务的时间）/要求服务的时间</li>
 <li>非抢占式</li>
 <li>避免长作业饥饿的情况</li>
 </ul>
-<h3 id="RR-时间片轮转调度"><a href="#RR-时间片轮转调度" class="headerlink" title="RR 时间片轮转调度"></a>RR 时间片轮转调度</h3><ul>
-<li><p>按到达就绪队列的顺序，顺序安排时间片，也就是时分的FCFS</p>
+<h3 id="RR-时间片轮转调度">RR 时间片轮转调度</h3>
+<ul>
+<li>
+<p>按到达就绪队列的顺序，顺序安排时间片，也就是时分的FCFS</p>
 </li>
-<li><p><strong>抢占式</strong>，通过时钟中断来判断</p>
+<li>
+<p><strong>抢占式</strong>，通过时钟中断来判断</p>
 </li>
-<li><p>如果时间片过大（每个时间片内都可以完成一个进程作业）会导致算法退化为FCFS</p>
+<li>
+<p>如果时间片过大（每个时间片内都可以完成一个进程作业）会导致算法退化为FCFS</p>
 </li>
-<li><p>如果时间片过小，会增大无畏的切换消耗</p>
+<li>
+<p>如果时间片过小，会增大无畏的切换消耗</p>
 </li>
-<li><p>优点：响应快、公平，适合分时操作系统</p>
+<li>
+<p>优点：响应快、公平，适合分时操作系统</p>
 </li>
-<li><p>缺点：存在切换开销</p>
+<li>
+<p>缺点：存在切换开销</p>
 </li>
-<li><p>不会导致饥饿</p>
+<li>
+<p>不会导致饥饿</p>
 </li>
 </ul>
-<h3 id="优先级调度"><a href="#优先级调度" class="headerlink" title="优先级调度"></a>优先级调度</h3><ul>
+<h3 id="优先级调度">优先级调度</h3>
+<ul>
 <li>永远选择优先级高的进程或作业</li>
 <li>抢占式和非抢占式都可以</li>
-<li>优先级怎么设置呢？<ul>
+<li>优先级怎么设置呢？
+<ul>
 <li>系统进程一般先于用户进程</li>
 <li>前后先于后台</li>
 <li>I/O繁忙性优先</li>
@@ -141,10 +162,13 @@ document.addEventListener('DOMContentLoaded', function () {
 </li>
 <li>可能导致饥饿</li>
 </ul>
-<h3 id="多级反馈队列调度（Ultimate）"><a href="#多级反馈队列调度（Ultimate）" class="headerlink" title="==多级反馈队列调度（Ultimate）=="></a>==多级反馈队列调度（Ultimate）==</h3><ul>
-<li><p><img src="diagram/image-20200201172436161.png" alt="image-20200201172436161"></p>
+<h3 id="多级反馈队列调度（Ultimate）"><mark>多级反馈队列调度（Ultimate）</mark></h3>
+<ul>
+<li>
+<p><img src="diagram/image-20200201172436161.png" alt="image-20200201172436161"></p>
 </li>
-<li><p>可能导致饥饿</p>
+<li>
+<p>可能导致饥饿</p>
 </li>
 </ul>
 

@@ -84,26 +84,35 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="进程同步-amp-互斥"><a href="#进程同步-amp-互斥" class="headerlink" title="进程同步&amp;互斥"></a>进程同步&amp;互斥</h1><h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><p>概念：进程间存在异步性，因此有时需要进程间满足一定的执行次序，同步保证了这种执行次序</p>
-<h2 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>互斥即对资源上锁，某资源不能在同一时间多访问，因此要上锁，同Java中的synchronized</p>
-<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><ul>
-<li><p>单标志法：用一个数来标志允许访问临界资源的进程PID</p>
+<h1 id="进程同步-互斥">进程同步&amp;互斥</h1>
+<h2 id="同步">同步</h2>
+<p>概念：进程间存在异步性，因此有时需要进程间满足一定的执行次序，同步保证了这种执行次序</p>
+<h2 id="互斥">互斥</h2>
+<h3 id="概念">概念</h3>
+<p>互斥即对资源上锁，某资源不能在同一时间多访问，因此要上锁，同Java中的synchronized</p>
+<h3 id="实现方式">实现方式</h3>
+<ul>
+<li>
+<p>单标志法：用一个数来标志允许访问临界资源的进程PID</p>
 <ul>
 <li>违背了<strong>空闲让进</strong>原则</li>
 </ul>
 </li>
-<li><p>双标志检查法：用一个flag[]数组来标记进程访问临界资源的意愿</p>
+<li>
+<p>双标志检查法：用一个flag[]数组来标记进程访问临界资源的意愿</p>
 <ul>
 <li>辣鸡方法，会导致无限等待</li>
 </ul>
 </li>
-<li><p>Peterson算法：同双标志法，但是主动让出进入机会</p>
+<li>
+<p>Peterson算法：同双标志法，但是主动让出进入机会</p>
 <ul>
 <li>还不错，但是不满足让权等待原则</li>
 </ul>
 </li>
 </ul>
-<h3 id="硬件实现方法"><a href="#硬件实现方法" class="headerlink" title="硬件实现方法"></a>硬件实现方法</h3><ul>
+<h3 id="硬件实现方法">硬件实现方法</h3>
+<ul>
 <li>中断屏蔽：和原语一样，使用关中断和开中断（但是注意不适用于多处理机的情况）</li>
 <li>TestAndSet指令（TS也成TSL）：</li>
 <li>Swap指令（XCHG）：同上，实现方式用XCHG的方式实现</li>

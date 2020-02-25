@@ -84,18 +84,25 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="信号量机制"><a href="#信号量机制" class="headerlink" title="信号量机制"></a>信号量机制</h1><h2 id="整型信号量"><a href="#整型信号量" class="headerlink" title="整型信号量"></a>整型信号量</h2><ol>
-<li><p>用一个<strong>整数</strong>来记录系统资源的数量</p>
+<h1 id="信号量机制">信号量机制</h1>
+<h2 id="整型信号量">整型信号量</h2>
+<ol>
+<li>
+<p>用一个<strong>整数</strong>来记录系统资源的数量</p>
 </li>
-<li><p>用原语实现wait和signal</p>
+<li>
+<p>用原语实现wait和signal</p>
 </li>
-<li><p>缺点：不满足==让权等待==，会导致==忙等==的情况出现</p>
+<li>
+<p>缺点：不满足<mark>让权等待</mark>，会导致<mark>忙等</mark>的情况出现</p>
 </li>
 </ol>
-<h2 id="记录型信号量"><a href="#记录型信号量" class="headerlink" title="记录型信号量"></a>记录型信号量</h2><ol>
-<li>不仅用一个<strong>整数</strong>表示系统资源，同时==维护一个等待队列==</li>
+<h2 id="记录型信号量">记录型信号量</h2>
+<ol>
+<li>不仅用一个<strong>整数</strong>表示系统资源，同时<mark>维护一个等待队列</mark></li>
 </ol>
-<h2 id="同步的实现"><a href="#同步的实现" class="headerlink" title="同步的实现"></a>同步的实现</h2><p>根据前驱关系进行PV操作实现阻塞队列</p>
+<h2 id="同步的实现">同步的实现</h2>
+<p>根据前驱关系进行PV操作实现阻塞队列</p>
 
 </div>
 

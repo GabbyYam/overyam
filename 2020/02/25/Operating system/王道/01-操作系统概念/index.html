@@ -84,31 +84,42 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="知识结构"><a href="#知识结构" class="headerlink" title="知识结构"></a>知识结构</h2><p><img src="diagram/image-20200131110830222.png" alt="image-20200131110830222"></p>
-<h2 id="操作系统的特征"><a href="#操作系统的特征" class="headerlink" title="操作系统的特征"></a>操作系统的特征</h2><ul>
-<li><p>并发</p>
+<h1 id="概述">概述</h1>
+<h2 id="知识结构">知识结构</h2>
+<p><img src="diagram/image-20200131110830222.png" alt="image-20200131110830222"></p>
+<h2 id="操作系统的特征">操作系统的特征</h2>
+<ul>
+<li>
+<p>并发</p>
 </li>
-<li><p>共享：带锁和不带锁</p>
+<li>
+<p>共享：带锁和不带锁</p>
 </li>
-<li><p>虚拟：空分和时分</p>
+<li>
+<p>虚拟：空分和时分</p>
 </li>
-<li><p>异步</p>
+<li>
+<p>异步</p>
 </li>
 </ul>
-<h2 id="分类与发展"><a href="#分类与发展" class="headerlink" title="分类与发展"></a>分类与发展</h2><p><img src="diagram/image-20200131113341590.png" alt="image-20200131113341590"></p>
-<h2 id="运行机制和体系结构"><a href="#运行机制和体系结构" class="headerlink" title="运行机制和体系结构"></a>运行机制和体系结构</h2><p>处理器的两种状态：</p>
+<h2 id="分类与发展">分类与发展</h2>
+<p><img src="diagram/image-20200131113341590.png" alt="image-20200131113341590"></p>
+<h2 id="运行机制和体系结构">运行机制和体系结构</h2>
+<p>处理器的两种状态：</p>
 <ul>
 <li>用户态：可以执行特权指令</li>
 <li>核心态</li>
 </ul>
 <p>内核：</p>
 <ul>
-<li>大内核：<ul>
+<li>大内核：
+<ul>
 <li>缺点：核心代码多，难维护</li>
 <li>优点：高性能</li>
 </ul>
 </li>
-<li>微内核<ul>
+<li>微内核
+<ul>
 <li>缺点：切换内核有消耗</li>
 <li>优点：核心代码不复杂，结构清晰</li>
 </ul>
@@ -116,14 +127,16 @@ document.addEventListener('DOMContentLoaded', function () {
 </ul>
 <p>中断：进入核心态</p>
 <ul>
-<li>内中断：CPU自行进入核心态<ul>
+<li>内中断：CPU自行进入核心态
+<ul>
 <li>自愿中断：自行停止的</li>
 <li>强制中断：故障（比如：缺页），终止（比如：除零）</li>
 </ul>
 </li>
 <li>外中断：应用程序请求操作系统完成特权指令相关操作</li>
 </ul>
-<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>调系统提供的相关服务</p>
+<h2 id="系统调用">系统调用</h2>
+<p>调系统提供的相关服务</p>
 <p><strong>为什么需要系统调用？</strong>：因为有些操作如果让用户直接进行操作将危害到系统的安全，因此只让用户提交请求，让系统代为管理和完成相关操作</p>
 
 </div>

@@ -84,28 +84,37 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="Enum-amp-Annotation"><a href="#Enum-amp-Annotation" class="headerlink" title="Enum &amp; Annotation"></a>Enum &amp; Annotation</h1><h2 id="用Enum类型来替代静态域定义常量"><a href="#用Enum类型来替代静态域定义常量" class="headerlink" title="用Enum类型来替代静态域定义常量"></a>用Enum类型来替代静态域定义常量</h2><p>实际上Enum的内部实现就是用<strong>static final</strong>来实现的</p>
+<h1 id="Enum-Annotation">Enum &amp; Annotation</h1>
+<h2 id="用Enum类型来替代静态域定义常量">用Enum类型来替代静态域定义常量</h2>
+<p>实际上Enum的内部实现就是用<strong>static final</strong>来实现的</p>
 <p>为什么不直接用<strong>static final int</strong>？</p>
 <ul>
 <li>类型不安全，不能检查到底是什么类型的，很可能会让apple和orange比较变得合法</li>
 <li>表达能力不够强大</li>
 </ul>
-<h2 id="用-实例域-替代-ordinal-方法"><a href="#用-实例域-替代-ordinal-方法" class="headerlink" title="用 实例域 替代 ordinal() 方法"></a>用 实例域 替代 ordinal() 方法</h2><p>ordinal方法为什么不好？</p>
+<h2 id="用-实例域-替代-ordinal-方法">用 实例域 替代 ordinal() 方法</h2>
+<p>ordinal方法为什么不好？</p>
 <ul>
 <li>ordinal返回的值不固定，而是随着Enum的变化而变化</li>
 </ul>
-<h2 id="EnumSet-替代-bit域"><a href="#EnumSet-替代-bit域" class="headerlink" title="EnumSet 替代 bit域"></a>EnumSet 替代 bit域</h2><p>暂时用不到</p>
-<h2 id="EnumMap替代ordinal-索引"><a href="#EnumMap替代ordinal-索引" class="headerlink" title="EnumMap替代ordinal 索引"></a>EnumMap替代ordinal 索引</h2><p><img src="diagram/image-20200124093525547.png" alt="image-20200124093525547"></p>
+<h2 id="EnumSet-替代-bit域">EnumSet 替代 bit域</h2>
+<p>暂时用不到</p>
+<h2 id="EnumMap替代ordinal-索引">EnumMap替代ordinal 索引</h2>
+<p><img src="diagram/image-20200124093525547.png" alt="image-20200124093525547"></p>
 <p>不要用 ordinal建立索引，修改Enum后会错乱</p>
-<h2 id="用接口实现可拓展的Enum"><a href="#用接口实现可拓展的Enum" class="headerlink" title="用接口实现可拓展的Enum"></a>用接口实现可拓展的Enum</h2><p>实现某接口，将自动获取该接口内的Enum</p>
-<h2 id="用注解而不是命名模式（naming-pattern）"><a href="#用注解而不是命名模式（naming-pattern）" class="headerlink" title="用注解而不是命名模式（naming pattern）"></a>用注解而不是命名模式（naming pattern）</h2><p>naming pattern的缺点：</p>
+<h2 id="用接口实现可拓展的Enum">用接口实现可拓展的Enum</h2>
+<p>实现某接口，将自动获取该接口内的Enum</p>
+<h2 id="用注解而不是命名模式（naming-pattern）">用注解而不是命名模式（naming pattern）</h2>
+<p>naming pattern的缺点：</p>
 <ul>
 <li>错误命名会导致测试用例不执行</li>
 <li>不能保证程序用于指定的元素</li>
 <li>很难将参数和程序元素关联</li>
 </ul>
-<p>==先学完注解再看这部分吧….难顶==</p>
-<h2 id="永远记得加上-override注解"><a href="#永远记得加上-override注解" class="headerlink" title="永远记得加上@override注解"></a>永远记得加上@override注解</h2><h2 id="标记接口定义来类型"><a href="#标记接口定义来类型" class="headerlink" title="标记接口定义来类型"></a>标记接口定义来类型</h2><p><strong>例如：serializable、cloneable</strong></p>
+<p><mark>先学完注解再看这部分吧…难顶</mark></p>
+<h2 id="永远记得加上-override注解">永远记得加上@override注解</h2>
+<h2 id="标记接口定义来类型">标记接口定义来类型</h2>
+<p><strong>例如：serializable、cloneable</strong></p>
 
 </div>
 

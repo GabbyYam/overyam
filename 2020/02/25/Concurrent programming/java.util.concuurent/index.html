@@ -83,28 +83,34 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <h1 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h1><p><strong>重要概念：</strong></p>
+  <h1 id="JUC">JUC</h1>
+<p><strong>重要概念：</strong></p>
 <ul>
 <li>进程/线程</li>
 <li>并发/并行</li>
 </ul>
 <p><strong>三个核心包：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.util.concurrent</span><br><span class="line">java.util.concurrent.atomic</span><br><span class="line">java.util.concurrent.locks</span><br></pre></td></tr></table></figure>
-
 <p>基本套路：在高内聚低耦合的前提下：线程，操作，资源类</p>
 <ul>
-<li><p>new资源类</p>
+<li>
+<p>new资源类</p>
 </li>
-<li><p>newThread01/02  匿名内部类和lambda表达式，调用资源类实例方法</p>
+<li>
+<p>newThread01/02  匿名内部类和lambda表达式，调用资源类实例方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(&#123;实现方法&#125;,name:<span class="string">"..."</span>).start();</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>arrayList-&gt;线程不安全，初值为10，扩容一次多一半</p>
+<li>
+<p>arrayList-&gt;线程不安全，初值为10，扩容一次多一半</p>
 </li>
-<li><p>CopyOnWriteArrayList:线程安全</p>
+<li>
+<p>CopyOnWriteArrayList:线程安全</p>
 </li>
-<li><p>判断/干活/通知</p>
+<li>
+<p>判断/干活/通知</p>
 </li>
-<li><p>防止虚假唤醒-&gt;使用while来进行循环判断</p>
+<li>
+<p>防止虚假唤醒-&gt;使用while来进行循环判断</p>
 </li>
 </ul>
 

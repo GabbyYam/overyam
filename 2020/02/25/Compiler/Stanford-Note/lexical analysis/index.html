@@ -83,24 +83,27 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <h1 id="Lexical-Analysis（词法分析）"><a href="#Lexical-Analysis（词法分析）" class="headerlink" title="Lexical Analysis（词法分析）"></a>Lexical Analysis（词法分析）</h1><p><strong>主要任务：</strong></p>
+  <h1 id="Lexical-Analysis（词法分析）">Lexical Analysis（词法分析）</h1>
+<p><strong>主要任务：</strong></p>
 <ul>
-<li><p><strong>将一段program分割成不同的成分</strong></p>
+<li>
+<p><strong>将一段program分割成不同的成分</strong></p>
 </li>
-<li><p><strong>并标记对应的token（即词性：逻辑运算符、运算符、变量名、关键字、etc）</strong></p>
+<li>
+<p><strong>并标记对应的token（即词性：逻辑运算符、运算符、变量名、关键字、etc）</strong></p>
 </li>
 </ul>
 <p>token的形式：&lt;class,string&gt;,for example:</p>
 <ul>
-<li>&lt;Id,”foo”&gt;</li>
-<li>&lt;op,”=”&gt;</li>
-<li>&lt;Int,”42”&gt;</li>
+<li>&lt;Id,“foo”&gt;</li>
+<li>&lt;op,&quot;=&quot;&gt;</li>
+<li>&lt;Int,“42”&gt;</li>
 <li>…</li>
 </ul>
-<p>标点符号没有token，而是用自己本身表示，比如 </p>
+<p>标点符号没有token，而是用自己本身表示，比如</p>
 <ul>
-<li>“:” </li>
-<li>“(“</li>
+<li>“:”</li>
+<li>“(”</li>
 <li>“;”</li>
 </ul>
 <p>正则语言-regular language：</p>

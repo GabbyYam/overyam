@@ -84,21 +84,23 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="book-content">
           <div class="book-post">
   <p>[TOC]</p>
-<h1 id="二进制镜像翻转"><a href="#二进制镜像翻转" class="headerlink" title="二进制镜像翻转"></a>二进制镜像翻转</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// HD, Figure 7-1</span></span><br><span class="line">    i = (i &amp; <span class="number">0x55555555</span>) &lt;&lt; <span class="number">1</span> | (i &gt;&gt;&gt; <span class="number">1</span>) &amp; <span class="number">0x55555555</span>;</span><br><span class="line">    i = (i &amp; <span class="number">0x33333333</span>) &lt;&lt; <span class="number">2</span> | (i &gt;&gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x33333333</span>;</span><br><span class="line">    i = (i &amp; <span class="number">0x0f0f0f0f</span>) &lt;&lt; <span class="number">4</span> | (i &gt;&gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x0f0f0f0f</span>;</span><br><span class="line">    i = (i &lt;&lt; <span class="number">24</span>) | ((i &amp; <span class="number">0xff00</span>) &lt;&lt; <span class="number">8</span>) |</span><br><span class="line">        ((i &gt;&gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xff00</span>) | (i &gt;&gt;&gt; <span class="number">24</span>);</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h1 id="二进制镜像翻转">二进制镜像翻转</h1>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// HD, Figure 7-1</span></span><br><span class="line">    i = (i &amp; <span class="number">0x55555555</span>) &lt;&lt; <span class="number">1</span> | (i &gt;&gt;&gt; <span class="number">1</span>) &amp; <span class="number">0x55555555</span>;</span><br><span class="line">    i = (i &amp; <span class="number">0x33333333</span>) &lt;&lt; <span class="number">2</span> | (i &gt;&gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x33333333</span>;</span><br><span class="line">    i = (i &amp; <span class="number">0x0f0f0f0f</span>) &lt;&lt; <span class="number">4</span> | (i &gt;&gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x0f0f0f0f</span>;</span><br><span class="line">    i = (i &lt;&lt; <span class="number">24</span>) | ((i &amp; <span class="number">0xff00</span>) &lt;&lt; <span class="number">8</span>) |</span><br><span class="line">        ((i &gt;&gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xff00</span>) | (i &gt;&gt;&gt; <span class="number">24</span>);</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中用到的16进制数的二进制形式：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//0x55555555 = 1010101010101010101010101010101 (偶数位为0，奇数位为1）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//0x33333333 = 110011001100110011001100110011 (1和0每隔两位交替出现)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//0x0f0f0f0f = 00001111000011110000111100001111 (1和0每隔四位交替出现)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//0xff00 = 1111 1111 1111 1111 0000 0000 0000 0000 (0和1每隔八位交替出现)</span></span><br></pre></td></tr></table></figure>
-
-<p>==<strong>算法分析：</strong>==</p>
+<p><mark><strong>算法分析：</strong></mark></p>
 <p>基本思想是，对于一个数，要想将它镜像翻转，我们可以考虑以下方式：</p>
 <p><strong>先将相邻的数字两两交换，接着四四交换，以此类推，即可将数字翻转（如果该数只有奇数位，中间一位不变）</strong></p>
 <p>考虑使用位操作实现，先交换奇偶位，我们知道，一个数和0与将被置为0，和1与将等于它自身，那么：</p>
 <ul>
-<li><p>取出i的奇数位，其余位置0，并向左移一位，此时奇数位移动到了偶数位</p>
+<li>
+<p>取出i的奇数位，其余位置0，并向左移一位，此时奇数位移动到了偶数位</p>
 </li>
-<li><p>取出i的偶数位，此时偶数位在奇数位</p>
+<li>
+<p>取出i的偶数位，此时偶数位在奇数位</p>
 </li>
-<li><p>将两者相或：即完成偶数位和奇数位的交换</p>
+<li>
+<p>将两者相或：即完成偶数位和奇数位的交换</p>
 </li>
 </ul>
 <p>同理，如果将交换后的数两两分组并视为一个整体，我们可以继续交换奇偶位，直至该整数被成功镜像翻转</p>
