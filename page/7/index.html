@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Hexo
+  
+</title>
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+  <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Hexo</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Hexo</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">John Doe</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">44</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2020/02/25/Concurrent%20programming/synchronized/" >
+  Concurrent programming/synchronized
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2020/02/25/Concurrent%20programming/synchronized/"><span class="article-date">
+  2020-02-25
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <p>[TOC]</p>
+<h1 id="synchronized两个基本用法"><a href="#synchronized两个基本用法" class="headerlink" title="synchronized两个基本用法"></a>synchronized两个基本用法</h1><ul>
+<li><p>同步方法：对于同步方法，JVM采用的是 ACC_SYNCHRONIZED 标记符来实现同步</p>
+<blockquote>
+<p>Method-level synchronization is performed implicitly, as part of method invocation and return (<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.11.8" target="_blank" rel="noopener">§2.11.8</a>). A <code>synchronized</code> method is distinguished in the run-time constant pool’s <code>method_info</code> structure (<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.6" target="_blank" rel="noopener">§4.6</a>) by the <code>ACC_SYNCHRONIZED</code> flag, which is checked by the method invocation instructions. When invoking a method for which <code>ACC_SYNCHRONIZED</code> is set, the executing thread enters a monitor, invokes the method itself, and exits the monitor whether the method invocation completes normally or abruptly. During the time the executing thread owns the monitor, no other thread may enter it. If an exception is thrown during invocation of the <code>synchronized</code> method and the <code>synchronized</code> method does not handle the exception, the monitor for the method is automatically exited before the exception is rethrown out of the <code>synchronized</code> method.</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">doSth</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">descriptor:</span> <span class="string">()V</span></span><br><span class="line"><span class="attr">flags:</span> <span class="string">ACC_PUBLIC,</span> <span class="string">ACC_SYNCHRONIZED</span></span><br><span class="line"><span class="attr">Code:</span></span><br><span class="line"><span class="string">stack=2,</span> <span class="string">locals=1,</span> <span class="string">args_size=1</span></span><br><span class="line"><span class="attr">0:</span> <span class="string">getstatic</span>     <span class="comment">#2    // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line"><span class="attr">3:</span> <span class="string">ldc</span>           <span class="comment">#3    // String Hello World</span></span><br><span class="line"><span class="attr">5:</span> <span class="string">invokevirtual</span> <span class="comment">#4    // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span><br><span class="line"><span class="attr">8:</span> <span class="string">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#方法级别下的同步是隐式进行的，同步方法的常量池中会有一个ACC_SYNCHRONIZED标志。当某个线程要访问某个方法的时候，会检查是否有ACC_SYNCHRONIZED，如果有设置，则需要先获得监视器锁，然后开始执行方法，方法执行之后再释放监视器锁。这时如果其他线程来请求执行方法，会因为无法获得监视器锁而被阻断住。值得注意的是，如果在方法执行过程中，发生了异常，并且方法内部并没有处理该异常，那么在异常被抛到方法外面之前监视器锁会被自动释放。</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>同步代码块：对于代码块，JVM采用 monitorenter和monitorexit来实现</p>
+<blockquote>
+<p>Synchronization in the Java Virtual Machine is implemented by monitor entry and exit, either explicitly (by use of the <em>monitorenter</em> and <em>monitorexit</em> instructions) or implicitly (by the method invocation and return instructions).</p>
+<p>The <em>monitorenter</em> and <em>monitorexit</em> instructions enable the compilation of <code>synchronized</code> statements. </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSth1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (SynchronizedTest<span class="class">.<span class="keyword">class</span>)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">descriptor:</span> <span class="string">()V</span></span><br><span class="line"><span class="attr">flags:</span> <span class="string">ACC_PUBLIC</span></span><br><span class="line"><span class="attr">Code:</span></span><br><span class="line"><span class="string">stack=2,</span> <span class="string">locals=3,</span> <span class="string">args_size=1</span></span><br><span class="line"><span class="attr">0:</span> <span class="string">ldc</span>           <span class="comment">#5   // class com/hollis/SynchronizedTest</span></span><br><span class="line"><span class="attr">2:</span> <span class="string">dup</span></span><br><span class="line"><span class="attr">3:</span> <span class="string">astore_1</span></span><br><span class="line"><span class="attr">4:</span> <span class="string">monitorenter</span></span><br><span class="line"><span class="attr">5:</span> <span class="string">getstatic</span>     <span class="comment">#2    // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line"><span class="attr">8:</span> <span class="string">ldc</span>           <span class="comment">#3    // String Hello World</span></span><br><span class="line"><span class="attr">10:</span> <span class="string">invokevirtual</span> <span class="comment">#4   //Methodjava/io/PrintStream.println(Ljava/lang/String;)V</span></span><br><span class="line"><span class="attr">13:</span> <span class="string">aload_1</span></span><br><span class="line"><span class="attr">14:</span> <span class="string">monitorexit</span></span><br><span class="line"><span class="attr">15:</span> <span class="string">goto</span>          <span class="number">23</span></span><br><span class="line"><span class="attr">18:</span> <span class="string">astore_2</span></span><br><span class="line"><span class="attr">19:</span> <span class="string">aload_1</span></span><br><span class="line"><span class="attr">20:</span> <span class="string">monitorexit</span></span><br><span class="line"><span class="attr">21:</span> <span class="string">aload_2</span></span><br><span class="line"><span class="attr">22:</span> <span class="string">athrow</span></span><br><span class="line"><span class="attr">23:</span> <span class="string">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#大致内容如下： 可以把执行monitorenter指令理解为加锁，执行monitorexit理解为释放锁。 每个对象维护着一个记录着被锁次数的计数器。未被锁定的对象的该计数器为0，当一个线程获得锁（执行monitorenter）后，该计数器自增变为 1 ，当同一个线程再次获得该对象的锁的时候，计数器再次自增。当同一个线程释放锁（执行monitorexit指令）的时候，计数器再自减。当计数器为0的时候。锁将被释放，其他线程便可以获得锁。</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h1 id="synchronized的锁机制"><a href="#synchronized的锁机制" class="headerlink" title="synchronized的锁机制"></a>synchronized的锁机制</h1><p>synchronized在jdk1.6以前只有传统的锁机制，属于==<strong>重量级锁</strong>==，显然性能是不怎么好的</p>
+<p>然而在==jdk1.6引入两种新的锁机制：轻量级锁和偏向锁==，两者的引入是为了解决没有或几乎没有线程竞争时重量级锁资源消耗问题</p>
+<p>考虑锁机制的实现之前，先谈谈对象头</p>
+<h2 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h2><ul>
+<li><p>JVM中，对象在内存中除了自身的信息外还存有一个对象头，保存了一些hashcode、GC相关以及锁相关的数据</p>
+</li>
+<li><p>对象头中存有两类信息：一是mark word，二是类型指针</p>
+<ul>
+<li><p>类型指针指向该类所属的类对象</p>
+</li>
+<li><p>markword用于存储hashcode、GC相关代信息以及锁相关的信息，markword的长度取决于操作系统的位数,以下是一个32位系统下markword各状态的格式<img src="diagram/16759dd1b0b96268" alt=""></p>
+<p>可以看到，处于不同锁态的对象，markword的内容也不一样</p>
+</li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2020/02/25/Concurrent%20programming/AQS/" >
+  Concurrent programming/AQS
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2020/02/25/Concurrent%20programming/AQS/"><span class="article-date">
+  2020-02-25
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <p>[TOC]</p>
+<h1 id="原理概览"><a href="#原理概览" class="headerlink" title="原理概览"></a>原理概览</h1><ul>
+<li><p><code>AQS</code>，全称<code>AbstractQueueSynchronizer</code>，是用于维护线程等待队列的数据结构</p>
+</li>
+<li><p><code>AQS</code>中的队列是<code>FIFO</code>的<strong>双向队列</strong></p>
+</li>
+<li><p><code>AQS</code>中的节点均为<code>volatile</code>修饰</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> waitStatus;	<span class="comment">//等待状态</span></span><br><span class="line"><span class="keyword">volatile</span> Node prev;         <span class="comment">//前驱节点</span></span><br><span class="line"><span class="keyword">volatile</span> Node next;			<span class="comment">//后继节点</span></span><br><span class="line"><span class="keyword">volatile</span> Thread thread;		<span class="comment">//代表的线程</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> state; <span class="comment">//同步状态，即锁的个数</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现==自定义同步器==需要实现的以下方法：</p>
+<ul>
+<li>纯独占模式：<code>ReentrantLock</code></li>
+<li>双模式：<code>ReentrantWriteReadLock</code></li>
+<li>其中<code>acquire</code>和<code>release</code>继承于AQS，不需要重写，用于管理位于双向队列中的各节点</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断线程是否取得锁</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">isHeldExclusively</span><span class="params">()</span>    </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">//独占模式</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> arg)</span>	<span class="comment">//用于AQS中的acquire方法，尝试获取资源，并设置状态</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryRelease</span><span class="params">(<span class="keyword">int</span> arg)</span>	<span class="comment">//用于AQS中的release方法，尝试释放资源,并设置状态</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="comment">//共享模式</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">tryAcquireShared</span><span class="params">(<span class="keyword">int</span> arg)</span>	</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryReleaseShared</span><span class="params">(<span class="keyword">int</span> arg)</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2020/02/25/Compiler/Stanford-Note/lexical%20analysis/" >
+  Compiler/Stanford-Note/lexical analysis
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2020/02/25/Compiler/Stanford-Note/lexical%20analysis/"><span class="article-date">
+  2020-02-25
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h1 id="Lexical-Analysis（词法分析）"><a href="#Lexical-Analysis（词法分析）" class="headerlink" title="Lexical Analysis（词法分析）"></a>Lexical Analysis（词法分析）</h1><p><strong>主要任务：</strong></p>
+<ul>
+<li><p><strong>将一段program分割成不同的成分</strong></p>
+</li>
+<li><p><strong>并标记对应的token（即词性：逻辑运算符、运算符、变量名、关键字、etc）</strong></p>
+</li>
+</ul>
+<p>token的形式：&lt;class,string&gt;,for example:</p>
+<ul>
+<li>&lt;Id,”foo”&gt;</li>
+<li>&lt;op,”=”&gt;</li>
+<li>&lt;Int,”42”&gt;</li>
+<li>…</li>
+</ul>
+<p>标点符号没有token，而是用自己本身表示，比如 </p>
+<ul>
+<li>“:” </li>
+<li>“(“</li>
+<li>“;”</li>
+</ul>
+<p>正则语言-regular language：</p>
+<p>交集（x）、并集（+）、反复（*）</p>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2020/02/25/Compiler/Mooc-Note/Note-01-%E6%A6%82%E8%BF%B0/" >
+  Compiler/Mooc-Note/Note-01-概述
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2020/02/25/Compiler/Mooc-Note/Note-01-%E6%A6%82%E8%BF%B0/"><span class="article-date">
+  2020-02-25
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>高级语言语言 （编译）=&gt; 汇编语言 （汇编）=&gt; 机器语言</p>
+<p><strong>结构：类似于语言翻译</strong></p>
+<ul>
+<li>分析部分：分析源语言</li>
+<li>优化器</li>
+<li>综合部分：组织目标语言</li>
+</ul>
+<p><strong>词法分析：</strong>识别各个单词，判断该词的category</p>
+<ul>
+<li>词法单元以token的形式呈现 &lt;Kind,Type&gt;</li>
+<li>关键词(key word)</li>
+<li>常量 </li>
+<li>运算符 =-+*</li>
+<li>界限符 :({[])</li>
+<li>标识符：变量名、方法名、类名、etc</li>
+</ul>
+<p><strong>语句通过分析树来进行分析</strong></p>
+<p><strong>语义分析：</strong></p>
+<ul>
+<li>收集标识符的属性信息<ul>
+<li>Kind</li>
+<li>Type</li>
+<li>储存位置、位置</li>
+<li>值</li>
+<li>作用域</li>
+<li>参数和返回信息</li>
+</ul>
+</li>
+<li>语义检查</li>
+</ul>
+<p><strong>中间代码生成：即代码翻译的中间形式</strong></p>
+<ul>
+<li>三地址指令（操作符，操作数，被操作数，赋值数）</li>
+</ul>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2020/02/25/Algorithm/Leetcode/Tree-Medium/" >
+  Algorithm/Leetcode/Tree-Medium
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2020/02/25/Algorithm/Leetcode/Tree-Medium/"><span class="article-date">
+  2020-02-25
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <p>[TOC]</p>
+<h1 id="94-Binary-Tree-Inorder-Traversal"><a href="#94-Binary-Tree-Inorder-Traversal" class="headerlink" title="94. Binary Tree Inorder Traversal"></a><a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="noopener">94. Binary Tree Inorder Traversal</a></h1><p><img src="diagram/image-20200211153052914.png" alt="image-20200211153052914"></p>
+<h2 id="解法一：递归法"><a href="#解法一：递归法" class="headerlink" title="解法一：递归法"></a>解法一：递归法</h2><p>没什么好说的，不会砍手</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; inorder=<span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        inorder=inorderTraversal(root.left);</span><br><span class="line">        inorder.add(root.val);</span><br><span class="line">        inorder=inorderTraversal(root.right);&#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> inorder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：迭代法"><a href="#解法二：迭代法" class="headerlink" title="解法二：迭代法"></a>解法二：迭代法</h2><p>比递归法难理解一些，重点是理解好如何回溯</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; inorder=<span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">    Stack&lt;TreeNode&gt; stack=<span class="keyword">new</span> Stack&lt;TreeNode&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        TreeNode curr=root; <span class="comment">//辅助接点curr，指向当前访问的TreeNode</span></span><br><span class="line">        <span class="keyword">while</span>(curr!=<span class="keyword">null</span> || !stack.isEmpty())&#123; <span class="comment">//当前访问的节点不为空或栈不为空，说明还没遍历完</span></span><br><span class="line">            <span class="keyword">while</span>(curr!=<span class="keyword">null</span>)&#123; <span class="comment">//不断压入左节点</span></span><br><span class="line">                stack.push(curr);</span><br><span class="line">                curr=curr.left;</span><br><span class="line">            &#125;</span><br><span class="line">            curr=stack.pop(); <span class="comment">//**回溯**</span></span><br><span class="line">            inorder.add(curr.val); <span class="comment">//将当前访问的节点加入</span></span><br><span class="line">            curr=curr.right; <span class="comment">//如果有右节点则访问右节点，如果没有将在下一轮回溯或者结束</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> inorder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法三：-莫比斯遍历"><a href="#解法三：-莫比斯遍历" class="headerlink" title="解法三： 莫比斯遍历"></a>解法三： 莫比斯遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="96-Unique-Binary-Search-Trees"><a href="#96-Unique-Binary-Search-Trees" class="headerlink" title="96. Unique Binary Search Trees"></a><a href="https://leetcode-cn.com/problems/unique-binary-search-trees/" target="_blank" rel="noopener">96. Unique Binary Search Trees</a></h1><p><img src="diagram/image-20200211165519568.png" alt="image-20200211165519568"></p>
+<h2 id="解法一：递归法-1"><a href="#解法一：递归法-1" class="headerlink" title="解法一：递归法"></a>解法一：递归法</h2><ul>
+<li><p><strong>思路：</strong>分别以1-n的任意整数为根，那么左右子树有哪些值是可以确定的，因此可以递归地来做</p>
+</li>
+<li><p><strong>要点：</strong>{4,5,6,7,8}在此处可以等价于{1,2,3,4,5}，因此可以很方便的进行递归</p>
+</li>
+<li><p><strong>缺点：</strong>没有保存递归结果，增加了许多重复的操作，下一个解法考虑对结果进行缓存</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">1</span>)<span class="keyword">return</span> <span class="number">1</span>; <span class="comment">//特殊情况，以及递归的基准</span></span><br><span class="line">        <span class="keyword">int</span> uniqueNum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;uniqueNum+=numTrees(i-<span class="number">1</span>)*numTrees(n-i);&#125; <span class="comment">//递归左右区间的乘积</span></span><br><span class="line">        <span class="keyword">return</span> uniqueNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：记忆化递归"><a href="#解法二：记忆化递归" class="headerlink" title="解法二：记忆化递归"></a>解法二：记忆化递归</h2><p>直接递归的缺点是重复递归很多地方，所以需要剪枝</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dp=<span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> dynamicNumTrees(n,dp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dynamicNumTrees</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span>[] dp)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">1</span>)&#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(dp[n]!=<span class="number">0</span>)&#123;<span class="keyword">return</span> dp[n];&#125; <span class="comment">//加入DP缓存</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;dp[n]+=dynamicNumTrees(i-<span class="number">1</span>,dp)*dynamicNumTrees(n-i,dp);&#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="95-Unique-Binary-Search-Trees-II"><a href="#95-Unique-Binary-Search-Trees-II" class="headerlink" title="95. Unique Binary Search Trees II"></a><a href="https://leetcode-cn.com/problems/unique-binary-search-trees-ii/" target="_blank" rel="noopener">95. Unique Binary Search Trees II</a></h1><p><img src="diagram/image-20200211195518011.png" alt="image-20200211195518011"></p>
+<h2 id="解法一：递归法-2"><a href="#解法一：递归法-2" class="headerlink" title="解法一：递归法"></a>解法一：递归法</h2><p>和上题类似的递归思路，不过注意==root的创建时机==</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">generateTrees</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)<span class="keyword">return</span> <span class="keyword">new</span> LinkedList&lt;TreeNode&gt;(); <span class="comment">//特殊情况</span></span><br><span class="line">        <span class="keyword">return</span> generate(<span class="number">1</span>,n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TreeNode&gt; <span class="title">generate</span><span class="params">(<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">        List&lt;TreeNode&gt; BSTs=<span class="keyword">new</span> LinkedList&lt;TreeNode&gt;();     <span class="comment">//注意ArrayList不能加入null</span></span><br><span class="line">        <span class="keyword">if</span>(lo&gt;hi)&#123;BSTs.add(<span class="keyword">null</span>);<span class="keyword">return</span> BSTs;&#125;              <span class="comment">//加入null</span></span><br><span class="line">        <span class="keyword">if</span>(lo==hi)&#123;BSTs.add(<span class="keyword">new</span> TreeNode(lo));<span class="keyword">return</span> BSTs;&#125; <span class="comment">//递归基准</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=lo;i&lt;=hi;i++)&#123;</span><br><span class="line">            List&lt;TreeNode&gt; leftList=generate(lo,i-<span class="number">1</span>);</span><br><span class="line">            List&lt;TreeNode&gt; rightList=generate(i+<span class="number">1</span>,hi); <span class="comment">//分别取得左右子树的递归结果</span></span><br><span class="line">            <span class="keyword">for</span>(TreeNode leftRoot:leftList)&#123;</span><br><span class="line">                <span class="keyword">for</span>(TreeNode rightRoot:rightList)&#123;    </span><br><span class="line">                    TreeNode root=<span class="keyword">new</span> TreeNode(i);<span class="comment">//root应该在循环体内new，否则会和上一轮的混淆</span></span><br><span class="line">                    root.left=leftRoot;</span><br><span class="line">                    root.right=rightRoot;</span><br><span class="line">                    BSTs.add(root);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> BSTs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：记忆化递归-1"><a href="#解法二：记忆化递归-1" class="headerlink" title="解法二：记忆化递归"></a>解法二：记忆化递归</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal"><a href="#105-Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal" class="headerlink" title="105. Construct Binary Tree from Preorder and Inorder Traversal"></a><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" rel="noopener">105. Construct Binary Tree from Preorder and Inorder Traversal</a></h1><p><img src="diagram/image-20200211234824881.png" alt=""></p>
+<h2 id="解法一：递归法-3"><a href="#解法一：递归法-3" class="headerlink" title="解法一：递归法"></a>解法一：递归法</h2><p>这题的重点是如何分别在inorder和preorder中划分左右子树</p>
+<ul>
+<li><strong>preorder的头部是root</strong></li>
+<li><strong>inorder如何划分：</strong>在inorder中找到root，那么在此之前的为left，之后的为right</li>
+<li><strong>preorder如何划分：</strong>inorder中，left-root即为left的长度leftSize，由此推出以下关系</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//左子树</span></span><br><span class="line">next_p_lo=p_lo+<span class="number">1</span>;</span><br><span class="line">next_p_hi=p_lo+leftSize;</span><br><span class="line">next_i_lo=i_lo;</span><br><span class="line">next_i_hi=i_lo+leftSize+<span class="number">1</span>;</span><br><span class="line"><span class="comment">//右子树</span></span><br><span class="line">next_p_lo=p_lo+leftSize+<span class="number">1</span>;</span><br><span class="line">next_p_hi=p_hi;</span><br><span class="line">next_i_lo=i_lo+leftSize+<span class="number">1</span>;</span><br><span class="line">next_i_hi=p_hi;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">buildTree</span><span class="params">(<span class="keyword">int</span>[] preorder, <span class="keyword">int</span>[] inorder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len=preorder.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> build(preorder,inorder,<span class="number">0</span>,len,<span class="number">0</span>,len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">build</span><span class="params">(<span class="keyword">int</span>[] preorder,<span class="keyword">int</span>[] inorder,<span class="keyword">int</span> p_lo,<span class="keyword">int</span> p_hi,<span class="keyword">int</span> i_lo,<span class="keyword">int</span> i_hi)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p_lo&gt;p_hi || i_lo&gt;i_hi)&#123;<span class="keyword">return</span> <span class="keyword">null</span>;&#125; <span class="comment">//越界判定 &amp; 递归结束</span></span><br><span class="line">        <span class="keyword">int</span> leftSize=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=i_lo;i&lt;=i_hi;i++)&#123; <span class="comment">//在inorder中找到root并算出leftSize</span></span><br><span class="line">            <span class="keyword">if</span>(inorder[i]==preorder[p_lo])&#123;leftSize=i-i_lo;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode root=<span class="keyword">new</span> TreeNode(preorder[p_lo]); <span class="comment">//依据已有关系，构造根节点和左右子树</span></span><br><span class="line">        root.left=build(preorder,inorder,p_lo+<span class="number">1</span>,p_lo+leftSize,i_lo,i_lo+leftSize-<span class="number">1</span>);</span><br><span class="line">        root.right=build(preorder,inorder,p_lo+leftSize+<span class="number">1</span>,p_hi,i_lo+leftSize+<span class="number">1</span>,i_hi);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="98-Validate-Binary-Search-Tree"><a href="#98-Validate-Binary-Search-Tree" class="headerlink" title="98. Validate Binary Search Tree"></a><a href="https://leetcode-cn.com/problems/validate-binary-search-tree/" target="_blank" rel="noopener">98. Validate Binary Search Tree</a></h1><p><img src="diagram/image-20200212032652708.png" alt="image-20200212032652708"></p>
+<h2 id="解法一：中序遍历"><a href="#解法一：中序遍历" class="headerlink" title="解法一：中序遍历"></a>解法一：中序遍历</h2><p>判断BST，<strong>容易简单认为是</strong>只要左子树比根节点小，右子树比根节点大，以此递归就行</p>
+<p>但是，上述策略忽略了一点：==左子树&lt;右子树==</p>
+<p>因此必须保证这一点，考虑到==BST的特性：中序遍历==，得出以下解法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; inorder=<span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        inorder(root);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;inorder.size();i++)&#123; <span class="comment">//检查中序遍历结果是否顺序即可</span></span><br><span class="line">            <span class="keyword">if</span>(inorder.get(i)&lt;=inorder.get(i-<span class="number">1</span>))<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            inorder(root.left);</span><br><span class="line">            inorder.add(root.val);</span><br><span class="line">            inorder(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：迭代法-1"><a href="#解法二：迭代法-1" class="headerlink" title="解法二：迭代法"></a>解法二：迭代法</h2><p>边迭代边检查，还可以写成递归法，不过同理就不写了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    Stack&lt;TreeNode&gt; stack=<span class="keyword">new</span> Stack&lt;TreeNode&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValidBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="keyword">null</span>)<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        TreeNode curr=root;</span><br><span class="line">        Integer val=<span class="keyword">null</span>; <span class="comment">//注意这里要用Integer而不是int，因为可以用null,不然无论设成什么都能被卡掉</span></span><br><span class="line">        <span class="keyword">while</span>(curr!=<span class="keyword">null</span> || !stack.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">while</span>(curr!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(curr);</span><br><span class="line">                curr=curr.left;</span><br><span class="line">            &#125;</span><br><span class="line">            curr=stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(val!=<span class="keyword">null</span> &amp;&amp; curr.val&lt;=val)&#123;<span class="keyword">return</span> <span class="keyword">false</span>;&#125; <span class="comment">//错误判定</span></span><br><span class="line">            val=curr.val;</span><br><span class="line">            curr=curr.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+
+
+  <div class="pagination">
+    <a class="extend prev" rel="prev" href="/page/6/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">Next</a>
+  </div>
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Hexo - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/scripts/main.js"></script>
+
+
+</body>
+</html>

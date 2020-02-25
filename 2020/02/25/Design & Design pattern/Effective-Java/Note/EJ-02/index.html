@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Design &amp; Design pattern/Effective-Java/Note/EJ-02
+  
+</title>
+
+<meta name="description" content="[TOC] 对象的通用方法（讨论如何覆写非final方法）重写 equals不需要重写equals的情况：  对于每一个对象实例应该是unique的时 根据API设计的需要，没必要提供逻辑上的相等时 父类已经重写equals方法且子类直接继承就合适时 外部没有权限访问该类的内部方法时  重写需要满足一下性质  自反性：self equals self时必须返回true 对称性：如果A equals">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design &amp; Design pattern&#x2F;Effective-Java&#x2F;Note&#x2F;EJ-02">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/Design%20&%20Design%20pattern/Effective-Java/Note/EJ-02/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] 对象的通用方法（讨论如何覆写非final方法）重写 equals不需要重写equals的情况：  对于每一个对象实例应该是unique的时 根据API设计的需要，没必要提供逻辑上的相等时 父类已经重写equals方法且子类直接继承就合适时 外部没有权限访问该类的内部方法时  重写需要满足一下性质  自反性：self equals self时必须返回true 对称性：如果A equals">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Design%20&%20Design%20pattern/Effective-Java/Note/EJ-02/diagram/image-20200118092704727.png">
+<meta property="article:published_time" content="2020-02-25T14:34:22.403Z">
+<meta property="article:modified_time" content="2020-01-18T01:34:37.070Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/25/Design%20&%20Design%20pattern/Effective-Java/Note/EJ-02/diagram/image-20200118092704727.png">
+
+
+  <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Hexo</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Hexo</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">John Doe</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">44</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-Design &amp; Design pattern/Effective-Java/Note/EJ-02" class="article article-type-post">
+  
+    <h1 class="article-header">
+      Design & Design pattern/Effective-Java/Note/EJ-02
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2020-02-25
+</span>
+
+    
+
+    
+
+  </div>
+  <div class="article-entry">
+    <p>[TOC]</p>
+<h1 id="对象的通用方法（讨论如何覆写非final方法）"><a href="#对象的通用方法（讨论如何覆写非final方法）" class="headerlink" title="对象的通用方法（讨论如何覆写非final方法）"></a>对象的通用方法（讨论如何覆写非final方法）</h1><h2 id="重写-equals"><a href="#重写-equals" class="headerlink" title="重写 equals"></a>重写 equals</h2><p><strong>不需要重写equals的情况：</strong></p>
+<ul>
+<li>对于每一个对象实例应该是unique的时</li>
+<li>根据API设计的需要，没必要提供逻辑上的相等时</li>
+<li>父类已经重写equals方法且子类直接继承就合适时</li>
+<li>外部没有权限访问该类的内部方法时</li>
+</ul>
+<p><strong>重写需要满足一下性质</strong></p>
+<ul>
+<li>自反性：self equals self时必须返回true</li>
+<li>对称性：如果A equals B返回true 那么反之也要返回true</li>
+<li>传递性：A equals B 且B equals C，那么A也必须equals C</li>
+<li>不变性：每次调用应该返回相同的结果</li>
+<li>非空性：对于所有非空的对象equals null 必须返回false</li>
+</ul>
+<p><strong>==如果不满足以上性质会怎么样？有空的时候思考一下，待补全。==</strong></p>
+<p><strong>高质量的equals实现代码的一些tips：</strong></p>
+<ul>
+<li><p>用 == 来判定参数是否是一个对象的引用，如果是则返回true（自反性），此为一种效率上的优化，因为做全面的对比代价可能较大</p>
+</li>
+<li><p>用 instanceof 去判断参数的类型，如果类型不对那么直接返回false</p>
+</li>
+<li><p>如果通过的instanceof的测试，将参数强转为对应类的对象以保证下面的检测正确的进行</p>
+</li>
+<li><p>对于所有有意义的字段field进行比对，如果matches则通过返回true，否则返回false</p>
+<ul>
+<li><p>其中对于<strong>非float/double类型的基本数据类型</strong>，直接用==判断，对象则递归地用equals判断</p>
+<p>而float和double则用以下方法来判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Float.compare();</span><br><span class="line">Double.compare();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>某些部分可能存在非法的null，用Objects.equals（）来检查避免报空指针异常</p>
+</li>
+<li><p>优先比对最可能不同的部分，至于一些派生而来的字段不需要比对（因为没有意义，比如c=a+b;如果a，b相同则c必定相同）</p>
+</li>
+<li><p><strong>写完equals方法后，检查是否满足重写的五大性质</strong></p>
+</li>
+<li><p>当然最好的方法其实是用IDE或AutoValue自动生成（？</p>
+</li>
+</ul>
+<h2 id="如果重写了equals那么就必须重写hashCode"><a href="#如果重写了equals那么就必须重写hashCode" class="headerlink" title="如果重写了equals那么就必须重写hashCode"></a>如果重写了equals那么就必须重写hashCode</h2><p><strong>重写得到hashCode方法产生的hash值必须满足以下性质：</strong></p>
+<ul>
+<li>在同一程序内反复调用应该返回相同的hash值，而在不同的程序中则不需要</li>
+<li>如果两个object是equals（Object）的，那么hashCode也应该相同</li>
+<li>如果不equals（Object），不要求一定不同，但是要尽量让hash散列表更加均匀</li>
+</ul>
+<p><strong>以下是一个简单易用的hashCode生成策略：</strong></p>
+<ul>
+<li><p>对于每个有意义的字段都要分别递归地取得他们的hash值</p>
+</li>
+<li><p>对于基本数据类型，用包装类的hashCode方法</p>
+</li>
+<li><p>对于引用类型，同样递归的调取hashCode</p>
+</li>
+<li><p>对于组合派生而来的字段直接跳过即可</p>
+</li>
+<li><p>空值默认为hash值为0</p>
+</li>
+<li><p>如果某字段是个数组，分几种情况</p>
+<ul>
+<li>有意义字段：同上述</li>
+<li>无意义字段：非0常数</li>
+<li>如果所有都有意义，可以采用Arrays.hashCode</li>
+</ul>
+</li>
+<li><p>对每一步得到的hash值，作以下计算</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//31*x可以被JVM优化，计算效率比较高</span></span><br><span class="line">result=result*<span class="number">31</span>+c;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="记得一定要重写toString方法"><a href="#记得一定要重写toString方法" class="headerlink" title="记得一定要重写toString方法"></a>记得一定要重写toString方法</h2><p>debug、调试用，好处多多</p>
+<h2 id="重写clone方法"><a href="#重写clone方法" class="headerlink" title="重写clone方法"></a>重写clone方法</h2><p><strong>重写的clone方法必须满足以下基本要求：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x.clone()!=x;</span><br><span class="line">x.clone().getClass()==x.getClass();</span><br><span class="line">x.clone().euqals(x)==<span class="keyword">true</span>;<span class="comment">//这条并不强制要求</span></span><br></pre></td></tr></table></figure>
+
+<p>….明日再战….太痛苦了…==待补全==</p>
+<h2 id="实现Comparable-接口"><a href="#实现Comparable-接口" class="headerlink" title="实现Comparable 接口"></a>实现Comparable 接口</h2><ul>
+<li><p>并非定义在Object内</p>
+</li>
+<li><p>实现该接口能带来种种便利，比如自然排序</p>
+</li>
+<li><p>基本原则，类似于equals</p>
+<ul>
+<li>自反性、传递性、不自相矛盾、compare==0时必须equals</li>
+</ul>
+</li>
+<li><p>快速构建compareTo方法：comparator<img src="diagram/image-20200118092704727.png" alt="image-20200118092704727"></p>
+</li>
+<li><p>基本数据类型用包装类的compare方法来比较</p>
+</li>
+</ul>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Hexo - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/scripts/main.js"></script>
+
+
+</body>
+</html>

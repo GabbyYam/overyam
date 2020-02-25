@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Concurrent programming/synchronized
+  
+</title>
+
+<meta name="description" content="[TOC] synchronized两个基本用法 同步方法：对于同步方法，JVM采用的是 ACC_SYNCHRONIZED 标记符来实现同步  Method-level synchronization is performed implicitly, as part of method invocation and return (§2.11.8). A synchronized method i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Concurrent programming&#x2F;synchronized">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/Concurrent%20programming/synchronized/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] synchronized两个基本用法 同步方法：对于同步方法，JVM采用的是 ACC_SYNCHRONIZED 标记符来实现同步  Method-level synchronization is performed implicitly, as part of method invocation and return (§2.11.8). A synchronized method i">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Concurrent%20programming/synchronized/diagram/16759dd1b0b96268">
+<meta property="article:published_time" content="2020-02-25T14:34:22.183Z">
+<meta property="article:modified_time" content="2019-12-13T17:00:09.232Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/25/Concurrent%20programming/synchronized/diagram/16759dd1b0b96268">
+
+
+  <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Hexo</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Hexo</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">John Doe</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">44</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-Concurrent programming/synchronized" class="article article-type-post">
+  
+    <h1 class="article-header">
+      Concurrent programming/synchronized
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2020-02-25
+</span>
+
+    
+
+    
+
+  </div>
+  <div class="article-entry">
+    <p>[TOC]</p>
+<h1 id="synchronized两个基本用法"><a href="#synchronized两个基本用法" class="headerlink" title="synchronized两个基本用法"></a>synchronized两个基本用法</h1><ul>
+<li><p>同步方法：对于同步方法，JVM采用的是 ACC_SYNCHRONIZED 标记符来实现同步</p>
+<blockquote>
+<p>Method-level synchronization is performed implicitly, as part of method invocation and return (<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.11.8" target="_blank" rel="noopener">§2.11.8</a>). A <code>synchronized</code> method is distinguished in the run-time constant pool’s <code>method_info</code> structure (<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.6" target="_blank" rel="noopener">§4.6</a>) by the <code>ACC_SYNCHRONIZED</code> flag, which is checked by the method invocation instructions. When invoking a method for which <code>ACC_SYNCHRONIZED</code> is set, the executing thread enters a monitor, invokes the method itself, and exits the monitor whether the method invocation completes normally or abruptly. During the time the executing thread owns the monitor, no other thread may enter it. If an exception is thrown during invocation of the <code>synchronized</code> method and the <code>synchronized</code> method does not handle the exception, the monitor for the method is automatically exited before the exception is rethrown out of the <code>synchronized</code> method.</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">doSth</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">descriptor:</span> <span class="string">()V</span></span><br><span class="line"><span class="attr">flags:</span> <span class="string">ACC_PUBLIC,</span> <span class="string">ACC_SYNCHRONIZED</span></span><br><span class="line"><span class="attr">Code:</span></span><br><span class="line"><span class="string">stack=2,</span> <span class="string">locals=1,</span> <span class="string">args_size=1</span></span><br><span class="line"><span class="attr">0:</span> <span class="string">getstatic</span>     <span class="comment">#2    // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line"><span class="attr">3:</span> <span class="string">ldc</span>           <span class="comment">#3    // String Hello World</span></span><br><span class="line"><span class="attr">5:</span> <span class="string">invokevirtual</span> <span class="comment">#4    // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span><br><span class="line"><span class="attr">8:</span> <span class="string">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#方法级别下的同步是隐式进行的，同步方法的常量池中会有一个ACC_SYNCHRONIZED标志。当某个线程要访问某个方法的时候，会检查是否有ACC_SYNCHRONIZED，如果有设置，则需要先获得监视器锁，然后开始执行方法，方法执行之后再释放监视器锁。这时如果其他线程来请求执行方法，会因为无法获得监视器锁而被阻断住。值得注意的是，如果在方法执行过程中，发生了异常，并且方法内部并没有处理该异常，那么在异常被抛到方法外面之前监视器锁会被自动释放。</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>同步代码块：对于代码块，JVM采用 monitorenter和monitorexit来实现</p>
+<blockquote>
+<p>Synchronization in the Java Virtual Machine is implemented by monitor entry and exit, either explicitly (by use of the <em>monitorenter</em> and <em>monitorexit</em> instructions) or implicitly (by the method invocation and return instructions).</p>
+<p>The <em>monitorenter</em> and <em>monitorexit</em> instructions enable the compilation of <code>synchronized</code> statements. </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSth1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (SynchronizedTest<span class="class">.<span class="keyword">class</span>)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">descriptor:</span> <span class="string">()V</span></span><br><span class="line"><span class="attr">flags:</span> <span class="string">ACC_PUBLIC</span></span><br><span class="line"><span class="attr">Code:</span></span><br><span class="line"><span class="string">stack=2,</span> <span class="string">locals=3,</span> <span class="string">args_size=1</span></span><br><span class="line"><span class="attr">0:</span> <span class="string">ldc</span>           <span class="comment">#5   // class com/hollis/SynchronizedTest</span></span><br><span class="line"><span class="attr">2:</span> <span class="string">dup</span></span><br><span class="line"><span class="attr">3:</span> <span class="string">astore_1</span></span><br><span class="line"><span class="attr">4:</span> <span class="string">monitorenter</span></span><br><span class="line"><span class="attr">5:</span> <span class="string">getstatic</span>     <span class="comment">#2    // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line"><span class="attr">8:</span> <span class="string">ldc</span>           <span class="comment">#3    // String Hello World</span></span><br><span class="line"><span class="attr">10:</span> <span class="string">invokevirtual</span> <span class="comment">#4   //Methodjava/io/PrintStream.println(Ljava/lang/String;)V</span></span><br><span class="line"><span class="attr">13:</span> <span class="string">aload_1</span></span><br><span class="line"><span class="attr">14:</span> <span class="string">monitorexit</span></span><br><span class="line"><span class="attr">15:</span> <span class="string">goto</span>          <span class="number">23</span></span><br><span class="line"><span class="attr">18:</span> <span class="string">astore_2</span></span><br><span class="line"><span class="attr">19:</span> <span class="string">aload_1</span></span><br><span class="line"><span class="attr">20:</span> <span class="string">monitorexit</span></span><br><span class="line"><span class="attr">21:</span> <span class="string">aload_2</span></span><br><span class="line"><span class="attr">22:</span> <span class="string">athrow</span></span><br><span class="line"><span class="attr">23:</span> <span class="string">return</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#大致内容如下： 可以把执行monitorenter指令理解为加锁，执行monitorexit理解为释放锁。 每个对象维护着一个记录着被锁次数的计数器。未被锁定的对象的该计数器为0，当一个线程获得锁（执行monitorenter）后，该计数器自增变为 1 ，当同一个线程再次获得该对象的锁的时候，计数器再次自增。当同一个线程释放锁（执行monitorexit指令）的时候，计数器再自减。当计数器为0的时候。锁将被释放，其他线程便可以获得锁。</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h1 id="synchronized的锁机制"><a href="#synchronized的锁机制" class="headerlink" title="synchronized的锁机制"></a>synchronized的锁机制</h1><p>synchronized在jdk1.6以前只有传统的锁机制，属于==<strong>重量级锁</strong>==，显然性能是不怎么好的</p>
+<p>然而在==jdk1.6引入两种新的锁机制：轻量级锁和偏向锁==，两者的引入是为了解决没有或几乎没有线程竞争时重量级锁资源消耗问题</p>
+<p>考虑锁机制的实现之前，先谈谈对象头</p>
+<h2 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h2><ul>
+<li><p>JVM中，对象在内存中除了自身的信息外还存有一个对象头，保存了一些hashcode、GC相关以及锁相关的数据</p>
+</li>
+<li><p>对象头中存有两类信息：一是mark word，二是类型指针</p>
+<ul>
+<li><p>类型指针指向该类所属的类对象</p>
+</li>
+<li><p>markword用于存储hashcode、GC相关代信息以及锁相关的信息，markword的长度取决于操作系统的位数,以下是一个32位系统下markword各状态的格式<img src="diagram/16759dd1b0b96268" alt=""></p>
+<p>可以看到，处于不同锁态的对象，markword的内容也不一样</p>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Hexo - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/scripts/main.js"></script>
+
+
+</body>
+</html>

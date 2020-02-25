@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Algorithm/Leetcode/Array-Easy
+  
+</title>
+
+<meta name="description" content="[TOC] Two sum 暴力法，同冒泡法，送死写法哈希表：为了最快得到target的index，HashMap是个好方法，$Time:O(n^2)  Space:O(n^2)$12345678910111213&#x2F;&#x2F;原始版本为两遍Hash表，但是发现可以合写在一起class Solution &amp;#123;    public int[] twoSum(int[] nums, int target">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Algorithm&#x2F;Leetcode&#x2F;Array-Easy">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/Algorithm/Leetcode/Array-Easy/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] Two sum 暴力法，同冒泡法，送死写法哈希表：为了最快得到target的index，HashMap是个好方法，$Time:O(n^2)  Space:O(n^2)$12345678910111213&#x2F;&#x2F;原始版本为两遍Hash表，但是发现可以合写在一起class Solution &amp;#123;    public int[] twoSum(int[] nums, int target">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Algorithm/Leetcode/Array-Easy/diagram/image-20200117212607765.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Algorithm/Leetcode/Array-Easy/diagram/image-20200117214959579.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Algorithm/Leetcode/Array-Easy/diagram/image-20200208201328627.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Algorithm/Leetcode/Array-Easy/diagram/image-20200208203153984.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Algorithm/Leetcode/Array-Easy/diagram/image-20200209103136523.png">
+<meta property="article:published_time" content="2020-02-25T14:34:21.116Z">
+<meta property="article:modified_time" content="2020-02-09T11:24:52.117Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/25/Algorithm/Leetcode/Array-Easy/diagram/image-20200117212607765.png">
+
+
+  <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Hexo</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Hexo</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">John Doe</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">44</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-Algorithm/Leetcode/Array-Easy" class="article article-type-post">
+  
+    <h1 class="article-header">
+      Algorithm/Leetcode/Array-Easy
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2020-02-25
+</span>
+
+    
+
+    
+
+  </div>
+  <div class="article-entry">
+    <p>[TOC]</p>
+<h1 id="Two-sum"><a href="#Two-sum" class="headerlink" title="Two sum"></a>Two sum</h1><p><img src="diagram/image-20200117212607765.png" alt="image-20200117212607765"></p>
+<h2 id="暴力法，同冒泡法，送死写法"><a href="#暴力法，同冒泡法，送死写法" class="headerlink" title="暴力法，同冒泡法，送死写法"></a>暴力法，同冒泡法，送死写法</h2><h2 id="哈希表：为了最快得到target的index，HashMap是个好方法，-Time-O-n-2-Space-O-n-2"><a href="#哈希表：为了最快得到target的index，HashMap是个好方法，-Time-O-n-2-Space-O-n-2" class="headerlink" title="哈希表：为了最快得到target的index，HashMap是个好方法，$Time:O(n^2)  Space:O(n^2)$"></a>哈希表：为了最快得到target的index，HashMap是个好方法，$Time:O(n^2)  Space:O(n^2)$</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原始版本为两遍Hash表，但是发现可以合写在一起</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;Integer,Integer&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(nums[i])&amp;&amp;map.get(nums[i])!=i)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;i,map.get(nums[i])<span class="comment">//此值的index及其对应满足条件的index</span></span><br><span class="line">                &#125;;</span><br><span class="line">            map.put(target-nums[i],i);<span class="comment">//不满足的话存入Map准备下一次搜索</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"no such answer!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Remove-Duplicates-From-Sorted-Array"><a href="#Remove-Duplicates-From-Sorted-Array" class="headerlink" title="Remove Duplicates From Sorted Array"></a>Remove Duplicates From Sorted Array</h1><p><img src="diagram/image-20200117214959579.png" alt="image-20200117214959579"></p>
+<h2 id="双指针：说双指针其实也不是双指针"><a href="#双指针：说双指针其实也不是双指针" class="headerlink" title="双指针：说双指针其实也不是双指针"></a>双指针：说双指针其实也不是双指针</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.length&lt;=<span class="number">1</span>)<span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//1的情况</span></span><br><span class="line">        <span class="keyword">int</span> len=<span class="number">1</span>;<span class="comment">//因为第一个必定是nums[0],所以从1开始</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i]!=nums[i+<span class="number">1</span>])&#123;</span><br><span class="line">                nums[len]=nums[i+<span class="number">1</span>];<span class="comment">//每找到一个新的值，放到前面对应的位置</span></span><br><span class="line">                len++;<span class="comment">//更新最新前面的指针</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="Remove-Element"><a href="#Remove-Element" class="headerlink" title="Remove Element"></a>Remove Element</h1><p><img src="diagram/image-20200208201328627.png" alt="image-20200208201328627"></p>
+<h2 id="解法一：-我的双指针"><a href="#解法一：-我的双指针" class="headerlink" title="解法一：==我的双指针=="></a>解法一：==我的双指针==</h2><p>第一想到的虽然是覆盖，但还是鬼使神差得选择了交换</p>
+<ol>
+<li>从后往前找一个非val的值</li>
+<li>从前往后找一个等于val的值</li>
+<li>二者交换（交换的方法很蠢，浪费时间和空间，不如直接覆盖）</li>
+</ol>
+<p>缺点：需要考虑很多边界情况，而且还麻烦</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//考虑特殊情况，0，1,2,空</span></span><br><span class="line">        <span class="keyword">if</span>(nums.length==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[<span class="number">0</span>]==val)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> lo=<span class="number">0</span>,hi=nums.length-<span class="number">1</span>,count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(lo&lt;hi)&#123;</span><br><span class="line">            <span class="comment">//从后往前找</span></span><br><span class="line">            <span class="keyword">while</span>(nums[hi] == val)&#123;</span><br><span class="line">                hi--;</span><br><span class="line">                count++;  <span class="comment">//目标值++</span></span><br><span class="line">                <span class="keyword">if</span>(hi&lt;<span class="number">0</span>)&#123;<span class="keyword">return</span> nums.length-count;&#125; </span><br><span class="line">                <span class="comment">//注意如果已经找到最前面了就不要再找了，直接返回目前的结果</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//从后往前找</span></span><br><span class="line">            <span class="keyword">while</span>(lo&lt;hi &amp;&amp; nums[lo]!=val)&#123; <span class="comment">//注意必须满足lo&lt;hi</span></span><br><span class="line">                lo++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//交换</span></span><br><span class="line">            <span class="keyword">int</span> temp=nums[lo];</span><br><span class="line">            nums[lo]=nums[hi];</span><br><span class="line">            nums[hi]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.length-count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：-官方双指针-改"><a href="#解法二：-官方双指针-改" class="headerlink" title="解法二：==官方双指针==[改]"></a>解法二：==官方双指针==<strong>[改]</strong></h2><p>直接覆盖的方法，简单优雅</p>
+<ol>
+<li>从前往后找一个等于val的值</li>
+<li>用后排的一个值直接覆盖</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> lo=<span class="number">0</span>,hi=nums.length;</span><br><span class="line">        <span class="keyword">while</span>(lo&lt;hi)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[lo]==val)&#123;nums[lo]=nums[--hi];&#125;<span class="comment">//如果是val就用后面的值覆盖</span></span><br><span class="line">            <span class="comment">//就算后面的值也是val也没关系，因为下一轮覆盖还是会把它覆盖掉</span></span><br><span class="line">            <span class="keyword">else</span> lo++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hi;<span class="comment">//最后返回最后一次覆盖的位置，即为删除后的长度</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="35-Search-Insert-Position"><a href="#35-Search-Insert-Position" class="headerlink" title="35. Search Insert Position"></a><a href="https://leetcode-cn.com/problems/search-insert-position/" target="_blank" rel="noopener">35. Search Insert Position</a></h1><p><img src="diagram/image-20200208203153984.png" alt="image-20200208203153984"></p>
+<h2 id="解法：二分查找（虽然思想简单，但是-边界问题搞人-）"><a href="#解法：二分查找（虽然思想简单，但是-边界问题搞人-）" class="headerlink" title="解法：二分查找（虽然思想简单，但是==边界问题搞人==）"></a>解法：二分查找（虽然思想简单，但是==边界问题搞人==）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">searchInsert</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> lo=<span class="number">0</span>,hi=nums.length-<span class="number">1</span>,mi=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(target&lt;=nums[lo])&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;  <span class="comment">//小于最小值按0处理</span></span><br><span class="line">        <span class="keyword">if</span>(target&gt;nums[hi])&#123;<span class="keyword">return</span> hi+<span class="number">1</span>;&#125; <span class="comment">//大于最大值按length处理</span></span><br><span class="line">        <span class="keyword">while</span>(lo&lt;=hi)&#123; <span class="comment">//注意必须是 &lt;= 否则会错过一次循环判定</span></span><br><span class="line">            mi=(lo+hi)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(target==nums[mi])&#123;<span class="keyword">return</span> mi;&#125; <span class="comment">//如果刚好相等，那返回该处索引</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(target&lt;nums[mi])&#123;hi=mi-<span class="number">1</span>;&#125; <span class="comment">//二分查找模板</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(target&gt;nums[mi])&#123;lo=mi+<span class="number">1</span>;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果没有刚好相等的，要进行最后一轮判定</span></span><br><span class="line">        <span class="keyword">if</span>(nums[mi]&lt;target)<span class="keyword">return</span> mi+<span class="number">1</span>; <span class="comment">//小于target，要+1</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> mi;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="53-Maximum-Subarray"><a href="#53-Maximum-Subarray" class="headerlink" title="53. Maximum Subarray"></a>53. Maximum Subarray</h1><p><img src="diagram/image-20200209103136523.png" alt="image-20200209103136523"></p>
+<h2 id="解法一：经典-分治法"><a href="#解法一：经典-分治法" class="headerlink" title="解法一：经典==分治法=="></a>解法一：经典==分治法==</h2><ol>
+<li>最大和序列可能的情况：左边界序列，右边界序列，中间序列</li>
+<li>因此先计算左右边界序列的最大值，再递归地比较中间序列，就能找到最大的子序列和</li>
+<li>时间复杂度：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> maxSub(nums,<span class="number">0</span>,nums.length-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSub</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(hi&lt;lo)&#123;<span class="keyword">return</span> Integer.MIN_VALUE;<span class="comment">//注意越界后要返回一个最小的值，否则无法通过负数的情况</span></span><br><span class="line">                 &#125;<span class="comment">// lo必须小于等于hi</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> maxLeft=nums[lo],maxRight=nums[hi],sumLeft=<span class="number">0</span>,sumRight=<span class="number">0</span>;<span class="comment">//一些待用变量</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=lo;i&lt;=hi;i++)&#123;<span class="comment">//找到左边界的最大和序列</span></span><br><span class="line">            sumLeft+=nums[i];</span><br><span class="line">            maxLeft=Math.max(sumLeft,maxLeft);</span><br><span class="line">            <span class="comment">//if(sumLeft&gt;maxLeft)&#123;</span></span><br><span class="line">            <span class="comment">//    maxLeft=sumLeft;</span></span><br><span class="line">            <span class="comment">//    indexLeft=i;</span></span><br><span class="line">            <span class="comment">//&#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=hi;i&gt;=lo;i--)&#123;<span class="comment">//找到右边界的最大和序列</span></span><br><span class="line">            sumRight+=nums[i];</span><br><span class="line">            maxRight=Math.max(sumRight,maxRight);</span><br><span class="line">            <span class="comment">//if(sumRight&gt;maxRight)&#123;</span></span><br><span class="line">            <span class="comment">//    maxRight=sumRight;</span></span><br><span class="line">            <span class="comment">//    indexRight=i;</span></span><br><span class="line">            <span class="comment">//&#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> maxSide=Math.max(maxLeft,maxRight);</span><br><span class="line">        <span class="keyword">return</span> Math.max(maxSide,maxSub(nums,lo+<span class="number">1</span>,hi-<span class="number">1</span>)); <span class="comment">//左右边界最大和序列 与 中间和序列 比较</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="解法二：线性扫描"><a href="#解法二：线性扫描" class="headerlink" title="解法二：线性扫描"></a>解法二：线性扫描</h2><ol>
+<li>计算当前的和</li>
+<li>比较最大值</li>
+<li>如果当前和 小于等于0，那么和直接归零，因为前面的结果不能让后面更大了，因此也没有继续加和的必要了</li>
+<li>时间复杂度：$O(N)$</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>,max=nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">            sum+=nums[i];          <span class="comment">//计算当前和</span></span><br><span class="line">            max=Math.max(sum,max); <span class="comment">//注意要先比较max，不然会导致sum=0和全负数的情况比较，结果错误</span></span><br><span class="line">            <span class="keyword">if</span>(sum&lt;=<span class="number">0</span>)&#123;sum=<span class="number">0</span>;&#125;     <span class="comment">//小于0就可以滚蛋了，因为肯定没有后面的和大</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Hexo - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/scripts/main.js"></script>
+
+
+</body>
+</html>

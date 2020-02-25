@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Operating system/王道/03-调度的基本概念
+  
+</title>
+
+<meta name="description" content="[TOC] 处理机调度三种层次的调度  高级调度：外存调入内存 中级调度（内存调度）：通过挂起到外存从而回收内存 低级调度（进程调度）：简单的进程分配  什么时候需要进程调度？进程主动放弃处理机 主动请求系统调用产生阻塞 终止 异常  进程被动放弃处理机 中断 高优先级进程介入 时分分片用完  不能调度的情况 中断过程进行时 原语进行时 &#x3D;&#x3D;内核&#x3D;&#x3D;程序临界区（注意:处于普通临界区时是可以进行调度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Operating system&#x2F;王道&#x2F;03-调度的基本概念">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/03-%E8%B0%83%E5%BA%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] 处理机调度三种层次的调度  高级调度：外存调入内存 中级调度（内存调度）：通过挂起到外存从而回收内存 低级调度（进程调度）：简单的进程分配  什么时候需要进程调度？进程主动放弃处理机 主动请求系统调用产生阻塞 终止 异常  进程被动放弃处理机 中断 高优先级进程介入 时分分片用完  不能调度的情况 中断过程进行时 原语进行时 &#x3D;&#x3D;内核&#x3D;&#x3D;程序临界区（注意:处于普通临界区时是可以进行调度">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/03-%E8%B0%83%E5%BA%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/diagram/image-20200131185439946.png">
+<meta property="article:published_time" content="2020-02-25T14:34:22.643Z">
+<meta property="article:modified_time" content="2020-02-01T03:28:26.500Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/25/Operating%20system/%E7%8E%8B%E9%81%93/03-%E8%B0%83%E5%BA%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/diagram/image-20200131185439946.png">
+
+
+  <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Hexo</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Hexo</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">John Doe</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">44</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-Operating system/王道/03-调度的基本概念" class="article article-type-post">
+  
+    <h1 class="article-header">
+      Operating system/王道/03-调度的基本概念
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2020-02-25
+</span>
+
+    
+
+    
+
+  </div>
+  <div class="article-entry">
+    <p>[TOC]</p>
+<h1 id="处理机调度"><a href="#处理机调度" class="headerlink" title="处理机调度"></a>处理机调度</h1><h2 id="三种层次的调度"><a href="#三种层次的调度" class="headerlink" title="三种层次的调度"></a>三种层次的调度</h2><p><img src="diagram/image-20200131185439946.png" alt="image-20200131185439946"></p>
+<ul>
+<li>高级调度：外存调入内存</li>
+<li>中级调度（内存调度）：通过挂起到外存从而回收内存</li>
+<li>低级调度（进程调度）：简单的进程分配</li>
+</ul>
+<h2 id="什么时候需要进程调度？"><a href="#什么时候需要进程调度？" class="headerlink" title="什么时候需要进程调度？"></a>什么时候需要进程调度？</h2><h3 id="进程主动放弃处理机"><a href="#进程主动放弃处理机" class="headerlink" title="进程主动放弃处理机"></a>进程主动放弃处理机</h3><ol>
+<li>主动请求系统调用产生阻塞</li>
+<li>终止</li>
+<li>异常</li>
+</ol>
+<h3 id="进程被动放弃处理机"><a href="#进程被动放弃处理机" class="headerlink" title="进程被动放弃处理机"></a>进程被动放弃处理机</h3><ol>
+<li>中断</li>
+<li>高优先级进程介入</li>
+<li>时分分片用完</li>
+</ol>
+<h3 id="不能调度的情况"><a href="#不能调度的情况" class="headerlink" title="不能调度的情况"></a>不能调度的情况</h3><ul>
+<li>中断过程进行时</li>
+<li>原语进行时</li>
+<li><strong>==内核==程序临界区</strong>（注意:处于普通临界区时是可以进行调度的，这样有利于提高并发度）</li>
+</ul>
+<h2 id="进程调度方式"><a href="#进程调度方式" class="headerlink" title="进程调度方式"></a>进程调度方式</h2><h3 id="非剥夺调度方式"><a href="#非剥夺调度方式" class="headerlink" title="非剥夺调度方式"></a>非剥夺调度方式</h3><p>等待当前进程主动放弃CPU使用权</p>
+<h3 id="剥夺调度方式"><a href="#剥夺调度方式" class="headerlink" title="剥夺调度方式"></a>剥夺调度方式</h3><p>用于时分、实时操作系统</p>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Hexo - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/scripts/main.js"></script>
+
+
+</body>
+</html>
