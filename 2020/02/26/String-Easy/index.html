@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    String-Easy
+  
+</title>
+
+<meta name="description" content="Abstract： 更新部分Easy难度 string相关题解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String-Easy">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/2020/02/26/String-Easy/">
+<meta property="og:site_name" content="Overyam">
+<meta property="og:description" content="Abstract： 更新部分Easy难度 string相关题解">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/String-Easy/image-20200226235254934.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/String-Easy/image-20200226235312264.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/String-Easy/image-20200226235335075.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/String-Easy/image-20200226235401209.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/String-Easy/image-20200226235519434.png">
+<meta property="article:published_time" content="2020-02-26T15:17:22.000Z">
+<meta property="article:modified_time" content="2020-02-26T15:55:21.982Z">
+<meta property="article:author" content="GabbyYam">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/2020/02/26/String-Easy/image-20200226235254934.png">
+<meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;GabbyYam">
+
+
+  <link rel="alternative" href="/atom.xml" title="Overyam" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png">
+
+
+
+<link rel="stylesheet" href="/overyam/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/overyam/styles/main.css">
+
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+
+  <script>
+   setTimeout(function() {
+     hljs.initHighlighting()
+   },0)
+  </script>
+  <script type="text/javascript">
+    var trim_indent = true;
+  var line_number = true;
+  // enable highlight
+  $('pre code').each(function(i, block) {
+    var texts = $(this).text().split('\n');
+     // trim indent
+     if (trim_indent){
+      var tab = texts[0].match(/^\s{0,}/);
+      if (tab) {
+        var arr = [];
+        texts.forEach(function(temp) {
+          arr.push(temp.replace(tab, ''));
+        });
+        $(this).text(arr.join('\n'));
+      }
+    }
+    // add line number
+    if (line_number) {
+      console.log("show line number in front-end");
+      var lines = texts.length - 1;
+      var $numbering = $('<ul/>').addClass('pre-numbering');
+      $(this).addClass('has-numbering').parent().append($numbering);
+      for (i = 1; i <= lines; i++) {
+        $numbering.append($('<li/>').text(i));
+      }
+    }
+    // hightlight
+    hljs.highlightBlock(block);
+  </script>>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/overyam/">Overyam</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/overyam/">Overyam</a></h1>
+    
+      <p class="subtitle">
+        欢迎来到世界的尽头..才怪啦
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+          <div class="description">写点自己喜欢的东西</div>
+        
+        
+          <div class="author">GabbyYam</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://raw.githubusercontent.com/GabbyYam/img_repo/master/img/profile.jpg"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">7</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">-leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">6</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">7</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/overyam/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://weibo.com/5651098077/profile?topnav=1&wvr=6&is_all=1" title="WeiBo" target="_blank" rel="noopener">WeiBo</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-String-Easy" class="article article-type-post">
+  
+    <h1 class="article-header">
+      String-Easy
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2020-02-26
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <p><strong>Abstract：</strong> 更新部分<code>Easy</code>难度 <code>string</code>相关题解</p>
+<a id="more"></a>
+<h1 id="13-Roman-to-Integer"><a href="https://leetcode-cn.com/problems/roman-to-integer/" target="_blank" rel="noopener">13. Roman to Integer</a></h1>
+<p><img src="image-20200226235254934.png" alt="image-20200226235254934"></p>
+<h2 id="解法一：Hash表">解法一：Hash表</h2>
+<p>优先判定两个字符的值，其他没什么可说的</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int romanToInt(String s) {
+        Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+        map.put(&quot;I&quot;, 1);
+        map.put(&quot;IV&quot;, 4);
+        map.put(&quot;V&quot;, 5);
+        map.put(&quot;IX&quot;, 9);
+        map.put(&quot;X&quot;, 10);
+        map.put(&quot;XL&quot;, 40);
+        map.put(&quot;L&quot;, 50);
+        map.put(&quot;XC&quot;, 90);
+        map.put(&quot;C&quot;, 100);
+        map.put(&quot;CD&quot;, 400);
+        map.put(&quot;D&quot;, 500);
+        map.put(&quot;CM&quot;, 900);
+        map.put(&quot;M&quot;, 1000);
+        
+        int ans=0;
+        for(int i=0;i&lt;s.length();i++){
+            if(i+1&lt;s.length() &amp;&amp; map.containsKey(s.substring(i,i+2))){
+                ans+=map.get(s.substring(i,i+2));
+                i++;
+            }
+            else ans+=map.get(s.substring(i,i+1));
+        }
+        return ans;
+    }
+}
+</code></pre>
+<h1 id="14-Longest-Common-Prefix"><a href="https://leetcode-cn.com/problems/longest-common-prefix/" target="_blank" rel="noopener">14. Longest Common Prefix</a></h1>
+<p><img src="image-20200226235312264.png" alt="image-20200226235312264"></p>
+<h2 id="解法一：线性扫描（从前往后）">解法一：线性扫描（从前往后）</h2>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length==0 || strs==null){return &quot;&quot;;}
+        String common=&quot;&quot;;
+        int min_len=Integer.MAX_VALUE;
+        for(String s:strs){min_len=Math.min(min_len,s.length());} //先找最小长度min_len
+        for(int curr=0;curr&lt;min_len;curr++){
+            char c=strs[0].charAt(curr); //以第一个为准
+            for(String s:strs){if(s.charAt(curr)!=c)return common;}
+            common+=c;
+        }
+        return common;
+    }
+}
+</code></pre>
+<p><mark><strong>[改进版]</strong></mark></p>
+<ul>
+<li><strong>String</strong>：改进了String的操作相关，String重载的==+操作==相当耗时，因此不使用<strong>字符串拼接</strong>，<strong>而是substring</strong>的方法</li>
+<li>**遍历：**根本不需要找到最短的字符串，只要遍历时多判断一次是否超出就行了</li>
+<li>**效果：**12ms -&gt;2ms</li>
+</ul>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length==0 || strs==null){return &quot;&quot;;}
+        for(int curr=0;curr&lt;strs[0].length();curr++){
+            char c=strs[0].charAt(curr);
+            for(String s:strs){
+                if(s.length()==curr || s.charAt(curr)!=c) //新增s.length()==curr判断一下就行
+                    return strs[0].substring(0,curr); //改为substring,String+操作是相当费时的
+            }
+        }
+        return strs[0];
+    }
+}
+</code></pre>
+<h2 id="解法二：线性扫描（从后往前）">解法二：线性扫描（从后往前）</h2>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">public String longestCommonPrefix(String[] strs) {
+   if (strs.length == 0) return &quot;&quot;;
+   String prefix = strs[0];
+   for (int i = 1; i &lt; strs.length; i++)
+       while (strs[i].indexOf(prefix) != 0) { //以第一个为准
+           prefix = prefix.substring(0, prefix.length() - 1); //如果不满足，每次缩小一个字符
+           if (prefix.isEmpty()) return &quot;&quot;; //直到为空
+       }        
+   return prefix;
+}
+</code></pre>
+<h1 id="20-Valid-Parentheses"><a href="https://leetcode-cn.com/problems/valid-parentheses/" target="_blank" rel="noopener">20. Valid Parentheses</a></h1>
+<p><img src="image-20200226235335075.png" alt="image-20200226235335075"></p>
+<h2 id="解法一：栈（标准解法）">解法一：栈（标准解法）</h2>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public boolean isValid(String s) {
+        Stack&lt;Character&gt; stack = new Stack&lt;Character&gt;();
+        for(int curr=0;curr&lt;s.length();curr++){
+            char c=s.charAt(curr);
+            if(c=='(' || c=='[' || c=='{') //如果是左括号，压入栈中
+                stack.push(c);
+            else if(c==')'){               //如果是右括号，检查栈是否为空，不为空的话检查是否匹配
+                if(stack.isEmpty() || stack.pop()!='(')return false; //注意isEmpty在前
+            }
+            else if(c==']'){
+                if(stack.isEmpty() || stack.pop()!='[')return false;
+            }
+            else if(c=='}'){
+                if(stack.isEmpty() || stack.pop()!='{')return false;
+            }
+        }
+        return stack.isEmpty();//最后如果栈空则为ture,否则为false
+    }
+}
+</code></pre>
+<h1 id="28-Implement-strStr"><a href="https://leetcode-cn.com/problems/implement-strstr/" target="_blank" rel="noopener">28. Implement strStr()</a></h1>
+<p><img src="image-20200226235401209.png" alt="image-20200226235401209"></p>
+<h2 id="解法一：猥琐API法（太脏了，自裁）">解法一：猥琐API法（<mark>太脏了，自裁</mark>）</h2>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int strStr(String haystack, String needle) {
+        return haystack.indexOf(needle); //这题要实现的就是indexOf的功能
+    }
+}
+</code></pre>
+<h2 id="解法二：暴力匹配">解法二：暴力匹配</h2>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int strStr(String haystack, String needle) {
+        //以下三者均会卡掉for循环，需要特别处理，且equals要第一个判定，否则第二条需要进一步限定
+        if(haystack.equals(needle))return 0;                     //字典等于词
+        if(haystack.length()==0)return -1;                       //字典为空
+        if(needle.length()==0) return 0;                         //词为空
+        
+        //注意curr_hay&lt;haystack.length()-needle.length()+1，必须+1，否则匹配不到最后一位
+        for(int curr_hay=0;curr_hay&lt;haystack.length()-needle.length()+1;curr_hay++){
+            for(int curr_nee=0;curr_nee&lt;needle.length();curr_nee++){
+                if(haystack.charAt(curr_hay+curr_nee)!=needle.charAt(curr_nee))
+                    break;
+                if(curr_nee==needle.length()-1)//匹配到最后一个依然正确，返回此时的curr_hay
+                    return curr_hay;
+            }
+        }
+        return -1; //没找到则返回-1
+    }
+}
+</code></pre>
+<h2 id="解法三：KMP（以后再说吧）">解法三：KMP（<mark>以后再说吧</mark>）</h2>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">//问就是不会
+</code></pre>
+<h1 id="58-Length-of-Last-Word"><a href="https://leetcode-cn.com/problems/length-of-last-word/" target="_blank" rel="noopener">58. Length of Last Word</a></h1>
+<p><img src="image-20200226235519434.png" alt="image-20200226235519434"></p>
+<h2 id="要点分析">要点分析</h2>
+<ul>
+<li>**特殊情况：**末尾有空格</li>
+<li>如何找到最后一个空格？</li>
+<li>连续空格怎么处理？</li>
+</ul>
+<h2 id="解法一：分段切割">解法一：分段切割</h2>
+<ul>
+<li>**缺点：**substring耗时，trim耗时</li>
+</ul>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int lengthOfLastWord(String s) {
+       s=s.trim(); //开局剪切，保证末尾没有空格
+       String res=s;
+       for(int i=0;i&lt;s.length();i++){
+           if(s.charAt(i)==' ')res=s.substring(i+1,s.length()); //每遇到一个空格，把前面的砍掉
+       }
+       return res.length(); //最后的长度即为所求
+    }
+}
+</code></pre>
+<ul>
+<li>改进版，从后往前切割，大大节省时间</li>
+</ul>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int lengthOfLastWord(String s) {
+       s=s.trim(); //开局剪切，保证末尾没有空格
+       String res=s;
+       for(int i=s.length()-1;i&gt;-1;i--){ //从后往前砍
+           if(s.charAt(i)==' '){return s.substring(i+1,s.length());}
+       }
+       return res.length(); //最后的长度即为所求
+    }
+}
+</code></pre>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/overyam/images/cc/cc.png">
+      
+          <img src="/overyam/images/cc/by.png">
+        
+          <img src="/overyam/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Overyam - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/overyam/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/overyam/scripts/main.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Array-Easy
+  
+</title>
+
+<meta name="description" content="Abstract： 更新部分Easy难度 Array相关题解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Array-Easy">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/2020/02/26/Array-Easy/">
+<meta property="og:site_name" content="Overyam">
+<meta property="og:description" content="Abstract： 更新部分Easy难度 Array相关题解">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/Array-Easy/image-20200226115823526.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/Array-Easy/image-20200226144922682.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/Array-Easy/image-20200226145029241.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/Array-Easy/image-20200226145151262.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/2020/02/26/Array-Easy/image-20200226145315266.png">
+<meta property="article:published_time" content="2020-02-26T05:48:50.000Z">
+<meta property="article:modified_time" content="2020-02-26T09:11:03.451Z">
+<meta property="article:author" content="GabbyYam">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/2020/02/26/Array-Easy/image-20200226115823526.png">
+<meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;GabbyYam">
+
+
+  <link rel="alternative" href="/atom.xml" title="Overyam" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png">
+
+
+
+<link rel="stylesheet" href="/overyam/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/overyam/styles/main.css">
+
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+
+  <script>
+   setTimeout(function() {
+     hljs.initHighlighting()
+   },0)
+  </script>
+  <script type="text/javascript">
+    var trim_indent = true;
+  var line_number = true;
+  // enable highlight
+  $('pre code').each(function(i, block) {
+    var texts = $(this).text().split('\n');
+     // trim indent
+     if (trim_indent){
+      var tab = texts[0].match(/^\s{0,}/);
+      if (tab) {
+        var arr = [];
+        texts.forEach(function(temp) {
+          arr.push(temp.replace(tab, ''));
+        });
+        $(this).text(arr.join('\n'));
+      }
+    }
+    // add line number
+    if (line_number) {
+      console.log("show line number in front-end");
+      var lines = texts.length - 1;
+      var $numbering = $('<ul/>').addClass('pre-numbering');
+      $(this).addClass('has-numbering').parent().append($numbering);
+      for (i = 1; i <= lines; i++) {
+        $numbering.append($('<li/>').text(i));
+      }
+    }
+    // hightlight
+    hljs.highlightBlock(block);
+  </script>>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/overyam/">Overyam</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/overyam/">Overyam</a></h1>
+    
+      <p class="subtitle">
+        欢迎来到世界的尽头..才怪啦
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+          <div class="description">写点自己喜欢的东西</div>
+        
+        
+          <div class="author">GabbyYam</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://raw.githubusercontent.com/GabbyYam/img_repo/master/img/profile.jpg"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">7</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">-leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">6</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">7</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/overyam/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://weibo.com/5651098077/profile?topnav=1&wvr=6&is_all=1" title="WeiBo" target="_blank" rel="noopener">WeiBo</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-Array-Easy" class="article article-type-post">
+  
+    <h1 class="article-header">
+      Array-Easy
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2020-02-26
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <p><strong>Abstract：</strong> 更新部分<code>Easy</code>难度 <code>Array</code>相关题解</p>
+<a id="more"></a>
+<h1 id="1-Two-Sum"><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">1. Two Sum</a></h1>
+<p><img src="image-20200226115823526.png" alt="image-20200226115823526"></p>
+<h2 id="解法一：暴力法">解法一：暴力法</h2>
+<p>冒泡排序，送死写法，就不多说了</p>
+<h2 id="解法二：哈希表">解法二：哈希表</h2>
+<p>为了最快得到target的index，HashMap是个好方法，$Time:O(n^2)  Space:O(n^2)$</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">//原始版本为两遍Hash表，但是发现可以合写在一起
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map&lt;Integer,Integer&gt; map=new HashMap&lt;Integer,Integer&gt;();
+        for (int i=0;i&lt;nums.length;i++){
+            if (map.containsKey(nums[i])&amp;&amp;map.get(nums[i])!=i)
+                return new int[] {i,map.get(nums[i])//此值的index及其对应满足条件的index
+                };
+            map.put(target-nums[i],i);//不满足的话存入Map准备下一次搜索
+        }
+        throw new IllegalArgumentException(&quot;no such answer!&quot;);
+    }
+}
+</code></pre>
+<h1 id="83-Remove-Duplicates-from-Sorted-List"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="noopener">83. Remove Duplicates from Sorted List</a></h1>
+<p><img src="image-20200226144922682.png" alt="image-20200226144922682"></p>
+<h2 id="解法一：双指针">解法一：双指针</h2>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length&lt;=1)return 1;//1的情况
+        int len=1;//因为第一个必定是nums[0],所以从1开始
+        for(int i=0;i&lt;nums.length-1;i++){
+            if (nums[i]!=nums[i+1]){
+                nums[len]=nums[i+1];//每找到一个新的值，放到前面对应的位置
+                len++;//更新最新前面的指针
+            }
+        }
+        return len;
+    }
+}
+</code></pre>
+<h1 id="27-Remove-Element"><a href="https://leetcode-cn.com/problems/remove-element/" target="_blank" rel="noopener">27. Remove Element</a></h1>
+<p><img src="image-20200226145029241.png" alt="image-20200226145029241"></p>
+<h2 id="解法一：我的双指针">解法一：我的双指针</h2>
+<p>第一想到的虽然是覆盖，但还是鬼使神差得选择了交换</p>
+<ol>
+<li>从后往前找一个非val的值</li>
+<li>从前往后找一个等于val的值</li>
+<li>二者交换（交换的方法很蠢，浪费时间和空间，不如直接覆盖）</li>
+</ol>
+<p>缺点：需要考虑很多边界情况，而且还麻烦</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int removeElement(int[] nums, int val) {
+        //考虑特殊情况，0，1,2,空
+        if(nums.length==1){
+            if(nums[0]==val)return 0;
+            else return 1;
+        }
+        int lo=0,hi=nums.length-1,count=0;
+        while(lo&lt;hi){
+            //从后往前找
+            while(nums[hi] == val){
+                hi--;
+                count++;  //目标值++
+                if(hi&lt;0){return nums.length-count;} 
+                //注意如果已经找到最前面了就不要再找了，直接返回目前的结果
+            }
+            //从后往前找
+            while(lo&lt;hi &amp;&amp; nums[lo]!=val){ //注意必须满足lo&lt;hi
+                lo++;
+            }
+            //交换
+            int temp=nums[lo];
+            nums[lo]=nums[hi];
+            nums[hi]=temp;
+        }
+        return nums.length-count;
+    }
+}
+</code></pre>
+<h2 id="解法二：官方双指针-改">解法二：<mark>官方双指针</mark><strong>[改]</strong></h2>
+<p>直接覆盖的方法，简单优雅</p>
+<ol>
+<li>从前往后找一个等于val的值</li>
+<li>用后排的一个值直接覆盖</li>
+</ol>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int removeElement(int[] nums, int val) {
+        int lo=0,hi=nums.length;
+        while(lo&lt;hi){
+            if(nums[lo]==val){nums[lo]=nums[--hi];}//如果是val就用后面的值覆盖
+            //就算后面的值也是val也没关系，因为下一轮覆盖还是会把它覆盖掉
+            else lo++;
+        }
+        return hi;//最后返回最后一次覆盖的位置，即为删除后的长度
+    }
+}
+</code></pre>
+<h1 id="35-Search-Insert-Position"><a href="https://leetcode-cn.com/problems/search-insert-position/" target="_blank" rel="noopener">35. Search Insert Position</a></h1>
+<p><img src="image-20200226145151262.png" alt="image-20200226145151262"></p>
+<h2 id="解法一：二分查找（虽然思想简单，但是边界问题搞人）">解法一：二分查找（虽然思想简单，但是<mark>边界问题搞人</mark>）</h2>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int lo=0,hi=nums.length-1,mi=0;
+        if(target&lt;=nums[lo]){return 0;}  //小于最小值按0处理
+        if(target&gt;nums[hi]){return hi+1;} //大于最大值按length处理
+        while(lo&lt;=hi){ //注意必须是 &lt;= 否则会错过一次循环判定
+            mi=(lo+hi)/2;
+            if(target==nums[mi]){return mi;} //如果刚好相等，那返回该处索引
+            else if(target&lt;nums[mi]){hi=mi-1;} //二分查找模板
+            else if(target&gt;nums[mi]){lo=mi+1;}
+        }
+        //如果没有刚好相等的，要进行最后一轮判定
+        if(nums[mi]&lt;target)return mi+1; //小于target，要+1
+        else return mi;
+    }
+}
+</code></pre>
+<h1 id="53-Maximum-Subarray"><a href="https://leetcode-cn.com/problems/maximum-subarray/" target="_blank" rel="noopener">53. Maximum Subarray</a></h1>
+<p><img src="image-20200226145315266.png" alt="image-20200226145315266"></p>
+<h2 id="解法一：经典分治法">解法一：经典<mark>分治法</mark></h2>
+<ol>
+<li>最大和序列可能的情况：左边界序列，右边界序列，中间序列</li>
+<li>因此先计算左右边界序列的最大值，再递归地比较中间序列，就能找到最大的子序列和</li>
+<li>时间复杂度：</li>
+</ol>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int maxSubArray(int[] nums) {
+        return maxSub(nums,0,nums.length-1);
+    }
+
+    public int maxSub(int[] nums,int lo,int hi){
+        if(hi&lt;lo){return Integer.MIN_VALUE;//注意越界后要返回一个最小的值，否则无法通过负数的情况
+                 }// lo必须小于等于hi
+        
+        int maxLeft=nums[lo],maxRight=nums[hi],sumLeft=0,sumRight=0;//一些待用变量
+        
+        for(int i=lo;i&lt;=hi;i++){//找到左边界的最大和序列
+            sumLeft+=nums[i];
+            maxLeft=Math.max(sumLeft,maxLeft);
+            //if(sumLeft&gt;maxLeft){
+            //    maxLeft=sumLeft;
+            //    indexLeft=i;
+            //}
+        }
+        for(int i=hi;i&gt;=lo;i--){//找到右边界的最大和序列
+            sumRight+=nums[i];
+            maxRight=Math.max(sumRight,maxRight);
+            //if(sumRight&gt;maxRight){
+            //    maxRight=sumRight;
+            //    indexRight=i;
+            //}
+        }
+        int maxSide=Math.max(maxLeft,maxRight);
+        return Math.max(maxSide,maxSub(nums,lo+1,hi-1)); //左右边界最大和序列 与 中间和序列 比较
+    }
+}
+</code></pre>
+<h2 id="解法二：线性扫描">解法二：线性扫描</h2>
+<ol>
+<li>
+<p>计算当前的和</p>
+</li>
+<li>
+<p>比较最大值</p>
+</li>
+<li>
+<p>如果当前和 小于等于0，那么和直接归零，因为前面的结果不能让后面更大了，因此也没有继续加和的必要了</p>
+</li>
+<li>
+<p>时间复杂度：$O(N)$</p>
+</li>
+</ol>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
+<pre><code class="language-java">class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum=0,max=nums[0];
+        for(int i=0;i&lt;nums.length;i++){
+            sum+=nums[i];          //计算当前和
+            max=Math.max(sum,max); //注意要先比较max，不然会导致sum=0和全负数的情况比较，结果错误
+            if(sum&lt;=0){sum=0;}     //小于0就可以滚蛋了，因为肯定没有后面的和大
+        }
+        return max;
+    }
+}
+</code></pre>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/overyam/images/cc/cc.png">
+      
+          <img src="/overyam/images/cc/by.png">
+        
+          <img src="/overyam/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Overyam - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/overyam/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/overyam/scripts/main.js"></script>
+
+
+</body>
+</html>
