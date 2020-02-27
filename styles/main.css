@@ -196,6 +196,18 @@ body {
   font-family: "微软雅黑", "黑体", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
+.main-content {
+  background: url("https://github.com/GabbyYam/ImageStore/raw/master/img/20200227142000.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+div.trans-box {
+  background-color: #fff;
+  opacity: 0.95;
+  padding: 20px 40px 0;
+}
 .main-container {
   position: absolute;
   top: 0;
@@ -212,7 +224,6 @@ body {
   left: 400px;
   bottom: 0;
   height: 100%;
-  padding: 20px 40px 0;
   overflow: auto;
   word-wrap: break-word;
 }
@@ -636,7 +647,7 @@ body {
   border-width: 1px 0;
   overflow: auto;
   color: #4d4d4c;
-  line-height: 22.400000000000002px;
+  line-height: 30.400000000000002px;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
@@ -684,7 +695,7 @@ body {
   padding-right: 20px;
 }
 .article-entry .highlight .line {
-  height: 22.400000000000002px;
+  height: 30.400000000000002px;
 }
 .article-entry .gist {
   margin: 0 -20px;
