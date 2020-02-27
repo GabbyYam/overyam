@@ -12,16 +12,13 @@
   
 </title>
 
-<meta name="description" content="写点自己喜欢的东西">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Overyam">
 <meta property="og:url" content="https://gabbyyam.github.io/overyam/tags/leetcode/">
 <meta property="og:site_name" content="Overyam">
-<meta property="og:description" content="写点自己喜欢的东西">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="GabbyYam">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:creator" content="@https:&#x2F;&#x2F;twitter.com&#x2F;GabbyYam">
 
 
   <link rel="alternative" href="/atom.xml" title="Overyam" type="application/atom+xml">
@@ -45,6 +42,32 @@
   
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+  <!-- click-heart -->
+  <script type="text/javascript">!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 500%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+  </script>
+
+  <script type="text/javascript">//标题变换
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+       if (document.hidden) {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '**遁入幻想**';
+           clearTimeout(titleTime);
+       }
+       else {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '即将抵达月面..';
+           titleTime = setTimeout(function () {
+               document.title = '欢迎回来！';
+           }, 3000);
+           titleTime = setTimeout(function () {
+               document.title = OriginTitle;
+           }, 4500);
+       }
+    });
+  </script>
+
 
   <script>
    setTimeout(function() {
@@ -101,14 +124,8 @@
   <div class="header">
     <h1 class="title"><a href="/overyam/">Overyam</a></h1>
     
-      <p class="subtitle">
-        欢迎来到世界的尽头..才怪啦
-      </p>
-    
     <div class="info">
       <div class="content">
-        
-          <div class="description">写点自己喜欢的东西</div>
         
         
           <div class="author">GabbyYam</div>
@@ -165,6 +182,12 @@
               </li>
             
           
+            
+              <li>
+                <a href="/overyam/about" title="About" external="false">About</a>
+              </li>
+            
+          
         </ul>
       
         <ul class="nav">
@@ -177,13 +200,7 @@
           
             
               <li>
-                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
-              </li>
-            
-          
-            
-              <li>
-                <a href="/overyam/atom.xml" title="RSS" external="false">RSS</a>
+                <a href="https://github.com/GabbyYam" title="Github" target="_blank" rel="noopener">Github</a>
               </li>
             
           
@@ -194,6 +211,8 @@
 </div>
 
     <div class="main-content">
+
+      <div class="trans-box">
       
         <div style="max-width: 1000px">
       
@@ -455,9 +474,12 @@
   
 </div>
 
+
       
         </div>
       
+      </div>
+
     </div>
   </div>
   
