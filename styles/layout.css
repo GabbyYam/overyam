@@ -13,7 +13,7 @@ body {
   background-position: 50% 50%;
   background-size: cover;
 }
-div.trans-box {
+.trans-box {
   background-color: #fff;
   opacity: 0.95;
   padding: 20px 40px 0;
