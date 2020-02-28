@@ -196,16 +196,9 @@ body {
   font-family: "微软雅黑", "黑体", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
-.main-content {
-  background: url("https://github.com/GabbyYam/ImageStore/raw/master/img/20200227142000.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 50% 50%;
-  background-size: cover;
-}
-div.trans-box {
+.trans-box {
   background-color: #fff;
-  opacity: 0.95;
+  opacity: 0.93;
   padding: 20px 40px 0;
 }
 .main-container {
@@ -226,6 +219,11 @@ div.trans-box {
   height: 100%;
   overflow: auto;
   word-wrap: break-word;
+  background: url("https://github.com/GabbyYam/ImageStore/raw/master/img/20200227142000.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-size: cover;
 }
 .main-footer {
   padding: 20px 0;
