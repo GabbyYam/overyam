@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-27T15:20:42.000Z">
-<meta property="article:modified_time" content="2020-02-27T17:23:10.198Z">
+<meta property="article:modified_time" content="2020-02-28T03:40:33.464Z">
 <meta property="article:author" content="GabbyYam">
 <meta name="twitter:card" content="summary">
 
@@ -53,6 +53,48 @@
   <script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
 
   <script type="text/javascript">
+        /*样式一*/
+    (function($){
+        $.fn.snow = function(options){
+        var $flake = $('<div id="snowbox" />').css({'position': 'absolute','z-index':'9999', 'top': '-50px'}).html('&#10052;'),
+        documentHeight  = $(document).height(),
+        documentWidth   = $(document).width(),
+        defaults = {
+            minSize     : 10,
+            maxSize     : 20,
+            newOn       : 1000,
+            flakeColor  : "#AFDAEF" /* 此处可以定义雪花颜色，若要白色可以改为#FFFFFF */
+        },
+        options = $.extend({}, defaults, options);
+        var interval= setInterval( function(){
+        var startPositionLeft = Math.random() * documentWidth - 100,
+        startOpacity = 0.5 + Math.random(),
+        sizeFlake = options.minSize + Math.random() * options.maxSize,
+        endPositionTop = documentHeight - 200,
+        endPositionLeft = startPositionLeft - 500 + Math.random() * 500,
+        durationFall = documentHeight * 10 + Math.random() * 5000;
+        $flake.clone().appendTo('body').css({
+            left: startPositionLeft,
+            opacity: startOpacity,
+            'font-size': sizeFlake,
+            color: options.flakeColor
+        }).animate({
+            top: endPositionTop,
+            left: endPositionLeft,
+            opacity: 0.2
+        },durationFall,'linear',function(){
+            $(this).remove()
+        });
+        }, options.newOn);
+        };
+    })(jQuery);
+    $(function(){
+        $.fn.snow({ 
+            minSize: 5, /* 定义雪花最小尺寸 */
+            maxSize: 50,/* 定义雪花最大尺寸 */
+            newOn: 300  /* 定义密集程度，数字越小越密集 */
+        });
+    });
         /*样式二*/
     /* 控制下雪 */
     function snowFall(snow) {
@@ -378,7 +420,7 @@
   </div>
   <div class="article-entry">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <div align="life"> 
-<iframe frameborder="no" marginwidth="0" marginheight="0" width="400" height="140" src="https://music.163.com/outchain/player?type=2&id=22766010&auto=0&height=40"></iframe>
+<iframe frameborder="no" marginwidth="0" marginheight="0" src="https://music.163.com/outchain/player?type=2&id=22766010&auto=0&height=40"></iframe>
 </div>
 <h1 id="这是哪？">这是哪？</h1>
 <ul>
