@@ -472,8 +472,7 @@ body {
   text-align: justify;
 }
 .article .article-entry code {
-  background-color: #f1f1f1;
-  border-radius: 2px;
+  border-radius: 10px;
 }
 .article .article-entry blockquote {
   background: #f9f9f9;

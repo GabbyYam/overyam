@@ -78,8 +78,7 @@
   </script>
 
   <!-- Highlight.js -->
-<link rel="stylesheet"
-      href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/kimbie.dark.min.css">
 <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
 </script>
 <script>
@@ -172,7 +171,7 @@
             
               <li class="tag-list-container">
                 <a href="javascript:;">Tag</a>
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrent-programming/" rel="tag">concurrent programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
@@ -231,7 +230,7 @@
 
       <div class="trans-box">
       
-        <div style="max-width: 1000px">
+        <div style="max-width: 1200px">
       
           
 
@@ -270,7 +269,6 @@
 <h1 id="21-Merge-Two-Sorted-Lists"><a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/" target="_blank" rel="noopener">21. Merge Two Sorted Lists</a></h1>
 <p><a href="Linkedlist-Easy/image-20200226234344400.png" title="image-20200226234344400" class="gallery-item"><img src="image-20200226234344400.png" alt="image-20200226234344400"></a></p>
 <h2 id="解法一：递归法">解法一：递归法</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if(l1==null)return l2;
@@ -287,7 +285,6 @@
 }
 </code></pre>
 <h2 id="解法二：迭代法">解法二：迭代法</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode pre_head=new ListNode(-1);  //合并结果的头结点，pre_head.next开始为答案
@@ -311,7 +308,6 @@
 <h1 id="83-Remove-Duplicates-from-Sorted-List"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="noopener">83. Remove Duplicates from Sorted List</a></h1>
 <p><a href="Linkedlist-Easy/image-20200226234447241.png" title="image-20200226234447241" class="gallery-item"><img src="image-20200226234447241.png" alt="image-20200226234447241"></a></p>
 <h2 id="解法一：迭代法">解法一：迭代法</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public ListNode deleteDuplicates(ListNode head) {
        if(head==null)return null;
@@ -329,7 +325,6 @@
 <h1 id="206-Reverse-Linked-List"><a href="https://leetcode-cn.com/problems/reverse-linked-list/" target="_blank" rel="noopener">206. Reverse Linked List</a></h1>
 <p><a href="Linkedlist-Easy/image-20200226234530100.png" title="image-20200226234530100" class="gallery-item"><img src="image-20200226234530100.png" alt="image-20200226234530100"></a></p>
 <h2 id="解法一：递归法-v2">解法一：递归法</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public ListNode reverseList(ListNode head) {
         if(head==null || head.next==null)return head; //递归结束条件
@@ -342,7 +337,6 @@
 }
 </code></pre>
 <h2 id="解法二：迭代法-v2">解法二：迭代法</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public ListNode reverseList(ListNode head) {
         ListNode prev=null;          //prev初始为null,所以不必担心出现循环链表
@@ -360,7 +354,6 @@
 <h1 id="160-Intersection-of-Two-Linked-Lists"><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/" target="_blank" rel="noopener">160. Intersection of Two Linked Lists</a></h1>
 <p><a href="Linkedlist-Easy/image-20200226234623461.png" title="image-20200226234623461" class="gallery-item"><img src="image-20200226234623461.png" alt="image-20200226234623461"></a></p>
 <h2 id="解法一：HashSet">解法一：HashSet</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         Set&lt;ListNode&gt; set=new HashSet&lt;ListNode&gt;();
@@ -380,7 +373,6 @@
 </code></pre>
 <h2 id="解法二：双指针">解法二：双指针</h2>
 <p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/xiang-jiao-lian-biao-by-leetcode/" target="_blank" rel="noopener">参考官方题解3：十分巧妙</a></p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode curr_a=headA;
@@ -403,7 +395,6 @@
 <ul>
 <li>简明，和数组的做法没有区别，但是空间复杂度O(n)</li>
 </ul>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public boolean isPalindrome(ListNode head) {
         Stack&lt;Integer&gt; stack=new Stack&lt;Integer&gt;(); //空间复杂度O(n)

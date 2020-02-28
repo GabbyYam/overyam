@@ -78,8 +78,7 @@
   </script>
 
   <!-- Highlight.js -->
-<link rel="stylesheet"
-      href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/kimbie.dark.min.css">
 <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
 </script>
 <script>
@@ -172,7 +171,7 @@
             
               <li class="tag-list-container">
                 <a href="javascript:;">Tag</a>
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrent-programming/" rel="tag">concurrent programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
@@ -231,7 +230,7 @@
 
       <div class="trans-box">
       
-        <div style="max-width: 1000px">
+        <div style="max-width: 1200px">
       
           
 
@@ -271,7 +270,6 @@
 <p><a href="String-Easy/image-20200226235254934.png" title="image-20200226235254934" class="gallery-item"><img src="image-20200226235254934.png" alt="image-20200226235254934"></a></p>
 <h2 id="解法一：Hash表">解法一：Hash表</h2>
 <p>优先判定两个字符的值，其他没什么可说的</p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int romanToInt(String s) {
         Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
@@ -304,7 +302,6 @@
 <h1 id="14-Longest-Common-Prefix"><a href="https://leetcode-cn.com/problems/longest-common-prefix/" target="_blank" rel="noopener">14. Longest Common Prefix</a></h1>
 <p><a href="String-Easy/image-20200226235312264.png" title="image-20200226235312264" class="gallery-item"><img src="image-20200226235312264.png" alt="image-20200226235312264"></a></p>
 <h2 id="解法一：线性扫描（从前往后）">解法一：线性扫描（从前往后）</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public String longestCommonPrefix(String[] strs) {
         if(strs.length==0 || strs==null){return &quot;&quot;;}
@@ -326,7 +323,6 @@
 <li><strong>遍历：</strong> 根本不需要找到最短的字符串，只要遍历时多判断一次是否超出就行了</li>
 <li><strong>效果：</strong> 12ms -&gt;2ms</li>
 </ul>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public String longestCommonPrefix(String[] strs) {
         if(strs.length==0 || strs==null){return &quot;&quot;;}
@@ -342,7 +338,6 @@
 }
 </code></pre>
 <h2 id="解法二：线性扫描（从后往前）">解法二：线性扫描（从后往前）</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">public String longestCommonPrefix(String[] strs) {
    if (strs.length == 0) return &quot;&quot;;
    String prefix = strs[0];
@@ -357,7 +352,6 @@
 <h1 id="20-Valid-Parentheses"><a href="https://leetcode-cn.com/problems/valid-parentheses/" target="_blank" rel="noopener">20. Valid Parentheses</a></h1>
 <p><a href="String-Easy/image-20200226235335075.png" title="image-20200226235335075" class="gallery-item"><img src="image-20200226235335075.png" alt="image-20200226235335075"></a></p>
 <h2 id="解法一：栈（标准解法）">解法一：栈（标准解法）</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public boolean isValid(String s) {
         Stack&lt;Character&gt; stack = new Stack&lt;Character&gt;();
@@ -382,7 +376,6 @@
 <h1 id="28-Implement-strStr"><a href="https://leetcode-cn.com/problems/implement-strstr/" target="_blank" rel="noopener">28. Implement strStr()</a></h1>
 <p><a href="String-Easy/image-20200226235401209.png" title="image-20200226235401209" class="gallery-item"><img src="image-20200226235401209.png" alt="image-20200226235401209"></a></p>
 <h2 id="解法一：猥琐API法（太脏了，自裁）">解法一：猥琐API法（<mark>太脏了，自裁</mark>）</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int strStr(String haystack, String needle) {
         return haystack.indexOf(needle); //这题要实现的就是indexOf的功能
@@ -390,7 +383,6 @@
 }
 </code></pre>
 <h2 id="解法二：暴力匹配">解法二：暴力匹配</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int strStr(String haystack, String needle) {
         //以下三者均会卡掉for循环，需要特别处理，且equals要第一个判定，否则第二条需要进一步限定
@@ -412,7 +404,6 @@
 }
 </code></pre>
 <h2 id="解法三：KMP（以后再说吧）">解法三：KMP（<mark>以后再说吧</mark>）</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">//问就是不会
 </code></pre>
 <h1 id="58-Length-of-Last-Word"><a href="https://leetcode-cn.com/problems/length-of-last-word/" target="_blank" rel="noopener">58. Length of Last Word</a></h1>
@@ -427,7 +418,6 @@
 <ul>
 <li><strong>缺点</strong>：substring耗时，trim耗时</li>
 </ul>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int lengthOfLastWord(String s) {
        s=s.trim(); //开局剪切，保证末尾没有空格
@@ -442,7 +432,6 @@
 <ul>
 <li>改进版，从后往前切割，大大节省时间</li>
 </ul>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int lengthOfLastWord(String s) {
        s=s.trim(); //开局剪切，保证末尾没有空格

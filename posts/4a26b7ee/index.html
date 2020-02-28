@@ -78,8 +78,7 @@
   </script>
 
   <!-- Highlight.js -->
-<link rel="stylesheet"
-      href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/kimbie.dark.min.css">
 <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
 </script>
 <script>
@@ -172,7 +171,7 @@
             
               <li class="tag-list-container">
                 <a href="javascript:;">Tag</a>
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrent-programming/" rel="tag">concurrent programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
@@ -231,7 +230,7 @@
 
       <div class="trans-box">
       
-        <div style="max-width: 1000px">
+        <div style="max-width: 1200px">
       
           
 
@@ -271,7 +270,6 @@
 <p><a href="Greedy-Easy/image-20200226233308396.png" title="image-20200226233308396" class="gallery-item"><img src="image-20200226233308396.png" alt="image-20200226233308396"></a></p>
 <h2 id="解法一：贪心">解法一：贪心</h2>
 <p>显然，如果允许无限次交易的话，那么只要有差价就能赚，因此总利润就是升价之和</p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int maxProfit(int[] prices) {
         if(prices.length&lt;=1){return 0;} //特殊情况
@@ -291,7 +289,6 @@
 <li><strong>策略</strong>：先排序，用最小的饼干先喂胃口最小的小鬼</li>
 <li><strong>特殊情况</strong>：两者可能为空要注意，但是本题不会有不良影响就是了</li>
 </ul>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int findContentChildren(int[] g, int[] s) {
         Arrays.sort(g);
@@ -314,7 +311,6 @@
 <ul>
 <li><strong>简洁版</strong>：根本不需要专门记录最大人数，另外改掉<code>break</code>这样的不良习惯，出现<code>break</code>只会让代码丑且丢人</li>
 </ul>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int findContentChildren(int[] g, int[] s) {
         Arrays.sort(g);
@@ -333,7 +329,6 @@
 <h2 id="解法一：排序">解法一：排序</h2>
 <p>依题意，每次都用最重的两块石头，那么就每轮排一次序就行了</p>
 <p>虽然简洁易懂，但是<mark>缺点是快排空间消耗比较大</mark>，另外数据规模大时额外消耗的时间也比较大</p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int lastStoneWeight(int[] stones) {
         if(stones==null || stones.length==0){return 0;} //特殊情况 null或为空
@@ -351,7 +346,6 @@
 <h2 id="解法二：优先队列">解法二：优先队列</h2>
 <p>由于问题本质是TopK问题，因此用优先队列是相当王道的做法</p>
 <p>小数据下比简单排序略逊，但是数据量增大时优于排序</p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int lastStoneWeight(int[] stones) {
         if(stones==null || stones.length==0){return 0;}
@@ -372,7 +366,6 @@
 <h2 id="解法一：贪心-v3">解法一：贪心</h2>
 <p>如果是5块和10块没什么可说的，<strong>重点是20块</strong></p>
 <p><strong>如果是20块</strong>，要优先找10块和5块组合，实在不行才用三张5块</p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public boolean lemonadeChange(int[] bills) {
         int five=0,ten=0;//分别记录5块和10块
@@ -397,7 +390,6 @@
 <p><a href="Greedy-Easy/image-20200226234055973.png" title="image-20200226234055973" class="gallery-item"><img src="image-20200226234055973.png" alt="image-20200226234055973"></a></p>
 <h2 id="解法一：HashSet-模拟">解法一：HashSet+模拟</h2>
 <p><mark>麻烦在写逻辑</mark></p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int robotSim(int[] commands, int[][] obstacles) {
         int x=0,y=0,turn=0,maxDistance=0;

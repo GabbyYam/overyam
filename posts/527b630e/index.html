@@ -78,8 +78,7 @@
   </script>
 
   <!-- Highlight.js -->
-<link rel="stylesheet"
-      href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/kimbie.dark.min.css">
 <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
 </script>
 <script>
@@ -172,7 +171,7 @@
             
               <li class="tag-list-container">
                 <a href="javascript:;">Tag</a>
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrent-programming/" rel="tag">concurrent programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li></ul>
               </li>
             
           
@@ -231,7 +230,7 @@
 
       <div class="trans-box">
       
-        <div style="max-width: 1000px">
+        <div style="max-width: 1200px">
       
           
 
@@ -273,8 +272,7 @@
 <p>冒泡排序，送死写法，就不多说了</p>
 <h2 id="解法二：哈希表">解法二：哈希表</h2>
 <p>为了最快得到target的index，HashMap是个好方法，$Time:O(n^2)  Space:O(n^2)$</p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
-<pre><code class="language-java">//原始版本为两遍Hash表，但是发现可以合写在一起
+<pre><code class="language-Java">//原始版本为两遍Hash表，但是发现可以合写在一起
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         Map&lt;Integer,Integer&gt; map=new HashMap&lt;Integer,Integer&gt;();
@@ -291,7 +289,6 @@ class Solution {
 <h1 id="83-Remove-Duplicates-from-Sorted-List"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="noopener">83. Remove Duplicates from Sorted List</a></h1>
 <p><a href="Array-Easy/image-20200226144922682.png" title="image-20200226144922682" class="gallery-item"><img src="image-20200226144922682.png" alt="image-20200226144922682"></a></p>
 <h2 id="解法一：双指针">解法一：双指针</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int removeDuplicates(int[] nums) {
         if(nums.length&lt;=1)return 1;//1的情况
@@ -316,8 +313,7 @@ class Solution {
 <li>二者交换（交换的方法很蠢，浪费时间和空间，不如直接覆盖）</li>
 </ol>
 <p>缺点：需要考虑很多边界情况，而且还麻烦</p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
-<pre><code class="language-java">class Solution {
+<pre><code class="language-Java">class Solution {
     public int removeElement(int[] nums, int val) {
         //考虑特殊情况，0，1,2,空
         if(nums.length==1){
@@ -352,8 +348,7 @@ class Solution {
 <li>从前往后找一个等于val的值</li>
 <li>用后排的一个值直接覆盖</li>
 </ol>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
-<pre><code class="language-java">class Solution {
+<pre><code class="language-Java">class Solution {
     public int removeElement(int[] nums, int val) {
         int lo=0,hi=nums.length;
         while(lo&lt;hi){
@@ -368,7 +363,6 @@ class Solution {
 <h1 id="35-Search-Insert-Position"><a href="https://leetcode-cn.com/problems/search-insert-position/" target="_blank" rel="noopener">35. Search Insert Position</a></h1>
 <p><a href="Array-Easy/image-20200226145151262.png" title="image-20200226145151262" class="gallery-item"><img src="image-20200226145151262.png" alt="image-20200226145151262"></a></p>
 <h2 id="解法一：二分查找（虽然思想简单，但是边界问题搞人）">解法一：二分查找（虽然思想简单，但是<mark>边界问题搞人</mark>）</h2>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int searchInsert(int[] nums, int target) {
         int lo=0,hi=nums.length-1,mi=0;
@@ -394,7 +388,6 @@ class Solution {
 <li>因此先计算左右边界序列的最大值，再递归地比较中间序列，就能找到最大的子序列和</li>
 <li>时间复杂度：</li>
 </ol>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int maxSubArray(int[] nums) {
         return maxSub(nums,0,nums.length-1);
@@ -442,7 +435,6 @@ class Solution {
 <p>时间复杂度：$O(N)$</p>
 </li>
 </ol>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></p>
 <pre><code class="language-java">class Solution {
     public int maxSubArray(int[] nums) {
         int sum=0,max=nums[0];
