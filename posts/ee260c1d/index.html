@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200229205630824.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200229234943330.png">
 <meta property="article:published_time" content="2020-02-28T13:15:28.000Z">
-<meta property="article:modified_time" content="2020-02-29T16:12:49.363Z">
+<meta property="article:modified_time" content="2020-02-29T16:20:00.430Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
     <h1 class="title"><a href="/overyam/">overyam</a></h1>
     
       <p class="subtitle">
-        欢迎加入月球移民计划..才怪
+        欢迎来到月球移民勘探基地..才怪啦
       </p>
     
     <div class="info">
@@ -265,6 +265,7 @@
     }
 }
 </code></pre>
+<p>​</p>
 <h1 id="64-Minimum-Path-Sum"><a href="https://leetcode-cn.com/problems/minimum-path-sum/" target="_blank" rel="noopener">64. Minimum Path Sum</a></h1>
 <p><a href="DP-Medium/image-20200228222649924.png" title="image-20200228222649924" class="gallery-item"><img src="image-20200228222649924.png" alt="image-20200228222649924"></a></p>
 <h2 id="解法一：DP（不需要额外空间）">解法一：DP（不需要额外空间）</h2>
@@ -286,6 +287,7 @@
     }
 }
 </code></pre>
+<p>​</p>
 <h1 id="⭐️5-Longest-Palindromic-Substring">⭐️<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/" target="_blank" rel="noopener">5. Longest Palindromic Substring</a></h1>
 <p><a href="DP-Medium/image-20200229205630824.png" title="image-20200229205630824" class="gallery-item"><img src="image-20200229205630824.png" alt="image-20200229205630824"></a></p>
 <h2 id="解法一：中心扩展（其实就是DP嘛）">解法一：中心扩展（其实就是DP嘛）</h2>
@@ -343,15 +345,22 @@ end=i+len/2;
 </code></pre>
 <h2 id="Manacher-算法">Manacher 算法</h2>
 <p>非常精巧的算法，时间复杂度O(n)，等好好消化理解了再贴上来</p>
+<p>​</p>
 <h1 id="⭐️91-Decode-Ways">⭐️<a href="https://leetcode-cn.com/problems/decode-ways/" target="_blank" rel="noopener">91. Decode Ways</a></h1>
 <p><a href="DP-Medium/image-20200229234943330.png" title="image-20200229234943330" class="gallery-item"><img src="image-20200229234943330.png" alt="image-20200229234943330"></a></p>
 <h2 id="解法一：DP-v2">解法一：DP</h2>
 <p>比较要求细心的一道题，必须关注以下几种<strong>特殊情况</strong>：</p>
-<ol>
-<li>当出现“26”以上时，解码失败，直接return 0</li>
-<li>“10” 和 “20” 只能记一种，因为“0”无法解码</li>
-<li>其余1-26之间的数，和前一次结果叠加，相当于 “xxxab” + “xxxxb” 的结果</li>
-</ol>
+<ul>
+<li>
+<p>当出现&quot;26&quot;以上时，解码失败，直接<code>return 0</code></p>
+</li>
+<li>
+<p>&quot;10&quot;和&quot;20&quot;只能记一种，因为“0”无法解码</p>
+</li>
+<li>
+<p>其余1-26之间的数，和前一次结果叠加，相当于 “xxxab” + “xxxxb” 的结果</p>
+</li>
+</ul>
 <pre><code class="language-java">class Solution {
     public int numDecodings(String s) {
         if( s.charAt(0)=='0') return 0;
