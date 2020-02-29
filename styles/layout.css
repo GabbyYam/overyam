@@ -11,6 +11,9 @@ body {
   opacity: 0.93;
   padding: 20px 40px 0;
 }
+.music {
+  float: right;
+}
 .main-container {
   position: absolute;
   top: 0;
