@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-28T03:54:49.000Z">
-<meta property="article:modified_time" content="2020-02-28T08:12:44.049Z">
+<meta property="article:modified_time" content="2020-02-29T02:03:33.612Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="concurrency">
 <meta name="twitter:card" content="summary">
@@ -103,6 +103,10 @@
     <div class="sidebar">
   <div class="header">
     <h1 class="title"><a href="/overyam/">overyam</a></h1>
+    
+      <p class="subtitle">
+        欢迎加入月球移民计划..才怪
+      </p>
     
     <div class="info">
       <div class="content">
@@ -240,12 +244,12 @@
 </li>
 <li>
 <p><code>AQS</code>中的<strong>节点</strong>和<strong>锁状态</strong>均为<code>volatile</code>修饰，以此保证锁状态和队列的<strong>可见性</strong></p>
-<pre><code class="language-java">volatile int waitStatus;	//等待状态，包含5种枚举值，含义如下
+<pre><code class="language-java">volatile int waitStatus;	//表示线程的等待状态，包含5种枚举值，含义如下
 /**
  *	0,初始化值
- *	1，CANCELED，表示获取锁的请求被取消
+ *	1，CANCELED，表示获取锁的请求取消
  *	-1，SIGNAL，表示线程就绪，等待资源释放
- *	-2，CANCELED，表示获取锁的请求取消
+ *	-2，CONDITION，表示处于等待队列中，等待被唤醒
  * 	-3，PROPAGATE，共享模式时使用
  */
 
@@ -278,9 +282,9 @@ protected boolean tryReleaseShared(int arg)
 <h2 id="加入等待队列的流程">加入等待队列的流程</h2>
 <pre><code class="language-java">//1.请求锁
 public final void acquire(int arg) {
-    if (!tryAcquire(arg) &amp;&amp;								//先尝试获取锁，如果成功，请求队列
-        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))	//独占模式才有此操作
-        selfInterrupt();		//一定情况下自行中断，下面会说
+    if (!tryAcquire(arg) &amp;&amp;	                            //先尝试获取锁，如果失败，请求队列
+        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))  //独占模式才有此操作
+        selfInterrupt();                                //一定情况下自行中断，下面会说
 }
 
 //2.非极端情况下加入Waiter，即添加到队列队尾
@@ -290,7 +294,7 @@ private Node addWaiter(Node mode) {
         Node pred = tail;
         if (pred != null) {
             node.prev = pred;
-            if (compareAndSetTail(pred, node)) {		//对队尾的设置也是CAS操作
+            if (compareAndSetTail(pred, node)) {        //对队尾的设置也是CAS操作
                 pred.next = node;
                 return node;
             }
@@ -301,12 +305,12 @@ private Node addWaiter(Node mode) {
 
 //2.1.如果入队时没有tail，那么初始化一个Node出来
 private Node enq(final Node node) {
-    for (;;) {			 //通过自旋来设置
+    for (;;) {           //通过自旋来设置
         Node t = tail;
         if (t == null) { // Must initialize
             if (compareAndSetHead(new Node()))
                 tail = head;
-        } else {		 //由于不是原子操作，如果此时头部有了，那么还是addWaiter里面的老方法
+        } else {         //由于不是原子操作，如果此时头部有了，那么还是addWaiter里面的老方法
             node.prev = t;
             if (compareAndSetTail(t, node)) {
                 t.next = node;
@@ -322,21 +326,21 @@ final boolean acquireQueued(final Node node, int arg) {
     boolean failed = true;
     try {
         boolean interrupted = false;
-        for (;;) {											//通过自旋
-            final Node p = node.predecessor();				//取得前驱节点
+        for (;;) {                                          //通过自旋
+            final Node p = node.predecessor();              //取得前驱节点
             if (p == head &amp;&amp; tryAcquire(arg)) {	//由于head为虚节点，如果在队首=&gt;尝试取锁
                 setHead(node); //node变为虚节点，相当于删除
                 p.next = null; // help GC
                 failed = false;
                 return interrupted;
             }
-            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;	//判断失败过后是否应该继续留队
-                parkAndCheckInterrupt())					//如果是，再确认是否中断
+            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;    //判断失败过后是否应该继续留队
+                parkAndCheckInterrupt())                    //如果是，再确认是否中断
                 interrupted = true;
         }
     } finally {
         if (failed)
-            cancelAcquire(node);						//如果最终失败，节点设为CANCELED
+            cancelAcquire(node);                        //如果最终失败，节点设为CANCELED
     }
 }
 
@@ -349,7 +353,7 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
              * to signal it, so it can safely park.
              */
         return true;
-    if (ws &gt; 0) {		  //ws=1，表示取消，向前找到下一个未取消的节点，将中间这些取消的节点出队
+    if (ws &gt; 0) {          //ws=1，表示取消，向前找到下一个未取消的节点，将中间这些取消的节点出队
         /*
              * Predecessor was cancelled. Skip over predecessors and
              * indicate retry.
@@ -358,7 +362,7 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
             node.prev = pred = pred.prev;
         } while (pred.waitStatus &gt; 0);
         pred.next = node;
-    } else {			  //此时不是0就是PROPAGATE，设为SIGNAL，等下一轮锁请求
+    } else {               //此时不是0就是PROPAGATE，设为SIGNAL，等下一轮锁请求
         /*
              * waitStatus must be 0 or PROPAGATE.  Indicate that we
              * need a signal, but don't park yet.  Caller will need to
@@ -371,7 +375,7 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
 
 //3.如果留队，还要判断是否中断
 private final boolean parkAndCheckInterrupt() {
-    LockSupport.park(this);   			//通过UNSAFE相关操作，在后面UNSAFE中再详细解释
+    LockSupport.park(this); //通过UNSAFE相关操作，在后面UNSAFE中再详细解释
     return Thread.interrupted();
 }
 
@@ -441,7 +445,7 @@ private void cancelAcquire(Node node) {
 <pre><code class="language-java">//tryAcquire，和原方法名不同是因为tryAcquire间接调用了此方法，就不贴上来了
 final boolean nonfairTryAcquire(int acquires) {
     final Thread current = Thread.currentThread();
-    int c = getState();							//获取当前锁状态
+    int c = getState();	                        //获取当前锁状态
     if (c == 0) {
         if (compareAndSetState(0, acquires)) {	//如果锁空闲，CAS尝试获取锁
             setExclusiveOwnerThread(current);
@@ -460,13 +464,13 @@ final boolean nonfairTryAcquire(int acquires) {
 
 //tryRelease
 protected final boolean tryRelease(int releases) {
-    int c = getState() - releases;							 //释放锁				
+    int c = getState() - releases;                           //释放锁				
     if (Thread.currentThread() != getExclusiveOwnerThread()) //不是锁的持有者无法释放锁
         throw new IllegalMonitorStateException();
     boolean free = false;
     if (c == 0) {											
         free = true;
-        setExclusiveOwnerThread(null);	 	//如果释放后state=0，将锁设为空闲，取消线程独占
+        setExclusiveOwnerThread(null);    //如果释放后state=0，将锁设为空闲，取消线程独占
     }
     setState(c);
     return free;
@@ -485,7 +489,7 @@ protected final boolean isHeldExclusively() {
 <pre><code class="language-java">//公平锁
 int c = getState();
 if (c == 0) {
-    if (!hasQueuedPredecessors() &amp;&amp;         //此处多一个是否为sync队首的判断，该方法来自AQS
+    if (!hasQueuedPredecessors() &amp;&amp;          //此处多一个是否为sync队首的判断，该方法来自AQS
         compareAndSetState(0, acquires)) {
         setExclusiveOwnerThread(current);
         return true;

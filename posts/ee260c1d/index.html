@@ -19,8 +19,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200228211822543.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200228222649924.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200229205630824.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200229234943330.png">
 <meta property="article:published_time" content="2020-02-28T13:15:28.000Z">
-<meta property="article:modified_time" content="2020-02-28T14:32:59.856Z">
+<meta property="article:modified_time" content="2020-02-29T16:12:49.363Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -106,6 +108,10 @@
     <div class="sidebar">
   <div class="header">
     <h1 class="title"><a href="/overyam/">overyam</a></h1>
+    
+      <p class="subtitle">
+        欢迎加入月球移民计划..才怪
+      </p>
     
     <div class="info">
       <div class="content">
@@ -261,7 +267,7 @@
 </code></pre>
 <h1 id="64-Minimum-Path-Sum"><a href="https://leetcode-cn.com/problems/minimum-path-sum/" target="_blank" rel="noopener">64. Minimum Path Sum</a></h1>
 <p><a href="DP-Medium/image-20200228222649924.png" title="image-20200228222649924" class="gallery-item"><img src="image-20200228222649924.png" alt="image-20200228222649924"></a></p>
-<h1 id="解法一：DP（不需要额外空间）">解法一：DP（不需要额外空间）</h1>
+<h2 id="解法一：DP（不需要额外空间）">解法一：DP（不需要额外空间）</h2>
 <p>和上题还是类似的思路，但是注意上边界和左边界上的值比较坑，需要特别地初始化</p>
 <p>需要注意的是，如果使用辅助空间，那么<strong>辅助格子</strong>和<strong>grid</strong>上的<strong>状态转移方程不能统一！！</strong></p>
 <p>因此我这里先对边界值特殊处理，以避免后续麻烦的<strong>多重判断</strong></p>
@@ -277,6 +283,89 @@
             }
         }
         return grid[m-1][n-1];
+    }
+}
+</code></pre>
+<h1 id="⭐️5-Longest-Palindromic-Substring">⭐️<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/" target="_blank" rel="noopener">5. Longest Palindromic Substring</a></h1>
+<p><a href="DP-Medium/image-20200229205630824.png" title="image-20200229205630824" class="gallery-item"><img src="image-20200229205630824.png" alt="image-20200229205630824"></a></p>
+<h2 id="解法一：中心扩展（其实就是DP嘛）">解法一：中心扩展（其实就是DP嘛）</h2>
+<ul>
+<li>
+<p><strong>思路</strong>：对于形如“aba”或“baab”的字符串我们可以通过左右+1的操作来复用之前的计算结果，即</p>
+<pre><code class="language-java">dp(i,j)=(dp(i-1,j+1) &amp;&amp; s.charAt(i)==s.charAt(j));
+</code></pre>
+</li>
+<li>
+<p><strong>要点</strong>：注意分开讨论奇偶长度回文，目的是为了统一寻找回文的标准，如果“abba”当成奇数长串去处理的话就出大麻烦了，另外要注意的是，得到最大回文长度后，如何通过中心元素位置，计算出start和end</p>
+<pre><code class="language-java">//假设最大回文长度为max，中心元素位置为i
+//若max为偶数
+start=i-(max-2)/2=i-max/2+1
+end=i+(max-2)/2+1=i+max/2
+//若max为奇数
+start=i-(max-1)/2=i-max/2
+end=i+(max-1)/2=i+max/2
+</code></pre>
+<p>而官方给出的做法居然将两者统一了…</p>
+<pre><code class="language-java">len=max-1;
+start=i-(len-1)/2;
+end=i+len/2;
+</code></pre>
+</li>
+<li>
+<p>完整解法如下</p>
+</li>
+</ul>
+<pre><code class="language-java">class Solution {
+    public String longestPalindrome(String s) {
+        if(s.length()&lt;=1)return s;
+        int start=0,end=0;
+        for(int i=0;i&lt;s.length();i++){
+            int max=Math.max(centerExpand(s,i,i),centerExpand(s,i,i+1)); //两种中心
+            if(max&gt;end-start){
+                if(max%2==0){
+                    start=i-max/2+1;
+                    end=i+(max/2);
+                }
+                else{
+                    start=i-max/2;
+                    end=i+max/2;
+                }
+            }
+        }
+        return s.substring(start,end+1);
+    }
+
+    public int centerExpand(String s,int lo,int hi){ //用来找到某一中心的最长回文串
+        while(lo&gt;=0 &amp;&amp; hi&lt;s.length() &amp;&amp; s.charAt(lo)==s.charAt(hi)){lo--;hi++;}
+        return hi-lo-1;
+    }
+}
+</code></pre>
+<h2 id="Manacher-算法">Manacher 算法</h2>
+<p>非常精巧的算法，时间复杂度O(n)，等好好消化理解了再贴上来</p>
+<h1 id="⭐️91-Decode-Ways">⭐️<a href="https://leetcode-cn.com/problems/decode-ways/" target="_blank" rel="noopener">91. Decode Ways</a></h1>
+<p><a href="DP-Medium/image-20200229234943330.png" title="image-20200229234943330" class="gallery-item"><img src="image-20200229234943330.png" alt="image-20200229234943330"></a></p>
+<h2 id="解法一：DP-v2">解法一：DP</h2>
+<p>比较要求细心的一道题，必须关注以下几种<strong>特殊情况</strong>：</p>
+<ol>
+<li>当出现“26”以上时，解码失败，直接return 0</li>
+<li>“10” 和 “20” 只能记一种，因为“0”无法解码</li>
+<li>其余1-26之间的数，和前一次结果叠加，相当于 “xxxab” + “xxxxb” 的结果</li>
+</ol>
+<pre><code class="language-java">class Solution {
+    public int numDecodings(String s) {
+        if( s.charAt(0)=='0') return 0;
+        int pre=1,curr=1;
+        for(int i=1;i&lt;s.length();i++){
+            int tmp = curr;
+            if (s.charAt(i) == '0')
+                if (s.charAt(i-1) == '1' || s.charAt(i-1) == '2') curr = pre;
+            else return 0;
+            else if (s.charAt(i-1) == '1' || s.charAt(i-1) == '2' &amp;&amp; s.charAt(i) &gt;= '1' &amp;&amp; s.charAt(i) &lt;= '6')
+                curr = curr + pre;
+            pre = tmp;
+        }
+        return curr;
     }
 }
 </code></pre>
