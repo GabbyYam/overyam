@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    JDK 缓存清单
+  
+</title>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK 缓存清单">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/49f9370e/">
+<meta property="og:site_name" content="overyam">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-01T06:56:02.000Z">
+<meta property="article:modified_time" content="2020-03-01T09:45:54.196Z">
+<meta property="article:author" content="GabbyYam">
+<meta property="article:tag" content="cache">
+<meta name="twitter:card" content="summary">
+
+
+  <link rel="alternative" href="/atom.xml" title="overyam" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png">
+
+
+
+<link rel="stylesheet" href="/overyam/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/overyam/styles/main.css">
+
+
+
+
+
+
+  
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- snowfall -->
+  <script src="//cdn.bootcss.com/JQuery-Snowfall/1.7.4/snowfall.jquery.min.js"></script>
+  <script>
+    $(document).snowfall({deviceorientation : true, image: "/img/flake.png", minSize: 10, maxSize: 32, flakeCount: 60});
+  </script>
+
+  <!-- click-heart -->
+  <script type="text/javascript">!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 500%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+  </script>
+
+  <!-- 标题变换 -->
+  <script type="text/javascript">
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+       if (document.hidden) {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '**遁入幻想**';
+           clearTimeout(titleTime);
+       }
+       else {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '即将抵达月面..';
+           titleTime = setTimeout(function () {
+               document.title = '欢迎回来！';
+           }, 3000);
+           titleTime = setTimeout(function () {
+               document.title = OriginTitle;
+           }, 4500);
+       }
+    });
+  </script>
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/kimbie.dark.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
+  </script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/overyam/">overyam</a>
+</div>
+
+  <div class="main-container">
+
+    
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/overyam/">overyam</a></h1>
+    
+      <p class="subtitle">
+        欢迎来到月球移民勘探基地..才怪啦
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">GabbyYam</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/overyam/about"><img src="https://raw.githubusercontent.com/GabbyYam/img_repo/master/img/profile.jpg"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">2</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">8</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">12</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/overyam/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/log" title="Log" external="false">Log</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/about" title="About" external="false">About</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://weibo.com/5651098077/profile?topnav=1&wvr=6&is_all=1" title="WeiBo" target="_blank" rel="noopener">WeiBo</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/GabbyYam" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://twitter.com/GabbyYam" title="Twitter" target="_blank" rel="noopener">Twitter</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+
+      <div class="trans-box">
+        <div class="music"> 
+          <iframe frameborder="0" marginwidth="0" marginheight="0" src="https://music.163.com/outchain/player?type=0&id=689290264&auto=1"></iframe>
+        </div>
+      
+        <div style="max-width: 1200px">
+      
+          
+
+<article id="post-缓存清单" class="article article-type-post">
+
+  
+    <h1 class="article-header">
+      JDK 缓存清单
+    </h1>
+  
+  
+  
+
+    
+  <div class="article-info">
+    <span class="article-date">
+  2020-03-01
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/overyam/categories/Java/">Java</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：简单整理<code>Java</code>中出现的各种缓存<p></p>
+<a id="more"></a>
+<h2 id="什么东西需要缓存？">什么东西需要缓存？</h2>
+<p>缓存的一般都是对象，即在<strong>堆</strong>上存储的数据，它们具备以下特点：</p>
+<ul>
+<li>数据量小</li>
+<li>需要频繁访问读取</li>
+</ul>
+<h2 id="缓存的时机">缓存的时机</h2>
+<p>根据不同类型的缓存分类讨论</p>
+<h1 id="初始化缓存：基本数据类型缓存池">初始化缓存：基本数据类型缓存池</h1>
+<p>Java中的基本数据类型的包装类，诸如<code>Integer</code>、<code>Long</code>、<code>Short</code>，均设有对应的缓存池</p>
+<p>缓存的时机是包装类被加载进内存时，缓存代码写在对应包装类的<code>static</code>块中，以<code>Integer</code>为例</p>
+<pre><code class="language-java">static final int low = -128;
+static final int high;
+static final Integer cache[];
+
+//缓存了-128 ~ 127 之间的数
+static {
+    // high value may be configured by property
+    int h = 127;
+    String integerCacheHighPropValue =
+        sun.misc.VM.getSavedProperty(&quot;java.lang.Integer.IntegerCache.high&quot;);
+    if (integerCacheHighPropValue != null) {
+        try {
+            int i = parseInt(integerCacheHighPropValue);
+            i = Math.max(i, 127);
+            // Maximum array size is Integer.MAX_VALUE ： 如果缓存池大小指定比127大，就会扩大缓存池
+            h = Math.min(i, Integer.MAX_VALUE - (-low) -1);
+        } catch( NumberFormatException nfe) {
+            // If the property cannot be parsed into an int, ignore it.
+        }
+    }
+    high = h;
+
+    cache = new Integer[(high - low) + 1]; //new 出缓存
+    int j = low;
+    for(int k = 0; k &lt; cache.length; k++)
+        cache[k] = new Integer(j++);
+
+    // range [-128, 127] must be interned (JLS7 5.1.7)
+    assert IntegerCache.high &gt;= 127;
+}
+
+</code></pre>
+<h2 id="其他包装类的默认缓存范围：">其他包装类的默认缓存范围：</h2>
+<p>（<strong>但是注意一下：这个缓存范围并不是固定的，可以通过调整JVM参数 XX:AutoBoxCacheMax = &lt; size &gt; 来修改缓存池的大小</strong>）</p>
+<ul>
+<li>boolean values true and false</li>
+<li>all byte values</li>
+<li>short values between -128 and 127</li>
+<li>int values between -128 and 127</li>
+<li>char in the range \u0000 to \u007F</li>
+</ul>
+<p>​</p>
+<h1 id="懒缓存：String-Pool">懒缓存：String Pool</h1>
+<p>String Pool本质上是<strong>常量池</strong>，当然也可以认为它是缓存，（<strong>另外注意一下</strong>：jdk7及以前，String Pool都是在<strong>Perm</strong>即永久代，而不是堆上，这里不作讨论）</p>
+<p><strong>String的不变性支持了String Pool的实现（final修饰符）</strong>：</p>
+<ul>
+<li>由于hash值不变，如果缓存中存在“aba”字符串，那么我们可以通过hash直接引用到该对象，而不是重新<strong>new</strong></li>
+<li>另外不变性间接使String变为<strong>线程安全</strong>的类</li>
+</ul>
+<pre><code class="language-java">String s1 = new String(&quot;aaa&quot;);
+String s2 = new String(&quot;aaa&quot;);
+System.out.println(s1 == s2);           // false
+String s3 = s1.intern();
+String s4 = s1.intern();
+System.out.println(s3 == s4);           // true
+</code></pre>
+<h2 id="intern-是怎么回事？">intern()是怎么回事？<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h2>
+<ul>
+<li>
+<p>如果String Pool中已经存在该字符串，那么就直接返回，否则添加进常量池后返回（<strong>缓存初始化</strong>）</p>
+</li>
+<li>
+<p>根据openjdk，本质上最后是调用了c++中的<code>StringTable::intern</code>方法</p>
+<pre><code class="language-c++">oop StringTable::intern(Handle string_or_null, jchar* name,  
+                        int len, TRAPS) {  
+    unsigned int hashValue = java_lang_String::hash_string(name, len); //计算hash值 
+    int index = the_table()-&gt;hash_to_index(hashValue);                 //计算hash索引
+    oop string = the_table()-&gt;lookup(index, name, len, hashValue);     //查找常量池
+    // Found  
+    if (string != NULL) return string;  
+    // Otherwise, add to symbol to table  
+    return the_table()-&gt;basic_add(index, string_or_null, name, len,    //如果不存在，则先加入常量池
+                                  hashValue, CHECK_NULL);  
+}
+</code></pre>
+</li>
+<li>
+<p><code>intern()</code>的<mark>正确使用姿势</mark></p>
+<pre><code class="language-java">for (int i = 0; i &lt; MAX; i++) {
+    //arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length]));
+    arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();
+}
+</code></pre>
+<p><strong>当然，前提是缓存的目标大多都是不变的，如果缓存的String大量变动，就会对String Pool造成巨大的压力</strong></p>
+</li>
+</ul>
+<h1 id="未完待续…知道了新的再补充吧​！🕊">未完待续…知道了新的再补充吧​！🕊</h1>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html" target="_blank" rel="noopener">深入解析String#intern</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/overyam/images/cc/cc.png">
+      
+          <img src="/overyam/images/cc/by.png">
+        
+          <img src="/overyam/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 overyam - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+
+      
+        </div>
+      
+      </div>
+
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/overyam/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/overyam/scripts/main.js"></script>
+
+
+<script src="/overyam/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":0.8,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/overyam/live2dw/assets/hibiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.2},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

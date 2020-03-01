@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Java bytecode 里面都有啥？
+  
+</title>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java bytecode 里面都有啥？">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/b8b74511/">
+<meta property="og:site_name" content="overyam">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-01T10:24:18.000Z">
+<meta property="article:modified_time" content="2020-03-01T15:35:30.660Z">
+<meta property="article:author" content="GabbyYam">
+<meta name="twitter:card" content="summary">
+
+
+  <link rel="alternative" href="/atom.xml" title="overyam" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png">
+
+
+
+<link rel="stylesheet" href="/overyam/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/overyam/styles/main.css">
+
+
+
+
+
+
+  
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- snowfall -->
+  <script src="//cdn.bootcss.com/JQuery-Snowfall/1.7.4/snowfall.jquery.min.js"></script>
+  <script>
+    $(document).snowfall({deviceorientation : true, image: "/img/flake.png", minSize: 10, maxSize: 32, flakeCount: 60});
+  </script>
+
+  <!-- click-heart -->
+  <script type="text/javascript">!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 500%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+  </script>
+
+  <!-- 标题变换 -->
+  <script type="text/javascript">
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+       if (document.hidden) {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '**遁入幻想**';
+           clearTimeout(titleTime);
+       }
+       else {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '即将抵达月面..';
+           titleTime = setTimeout(function () {
+               document.title = '欢迎回来！';
+           }, 3000);
+           titleTime = setTimeout(function () {
+               document.title = OriginTitle;
+           }, 4500);
+       }
+    });
+  </script>
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/kimbie.dark.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
+  </script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/overyam/">overyam</a>
+</div>
+
+  <div class="main-container">
+
+    
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/overyam/">overyam</a></h1>
+    
+      <p class="subtitle">
+        欢迎来到月球移民勘探基地..才怪啦
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">GabbyYam</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/overyam/about"><img src="https://raw.githubusercontent.com/GabbyYam/img_repo/master/img/profile.jpg"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">2</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">8</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">12</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/overyam/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/log" title="Log" external="false">Log</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/about" title="About" external="false">About</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://weibo.com/5651098077/profile?topnav=1&wvr=6&is_all=1" title="WeiBo" target="_blank" rel="noopener">WeiBo</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/GabbyYam" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://twitter.com/GabbyYam" title="Twitter" target="_blank" rel="noopener">Twitter</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+
+      <div class="trans-box">
+        <div class="music"> 
+          <iframe frameborder="0" marginwidth="0" marginheight="0" src="https://music.163.com/outchain/player?type=0&id=689290264&auto=1"></iframe>
+        </div>
+      
+        <div style="max-width: 1200px">
+      
+          
+
+<article id="post-bytecode" class="article article-type-post">
+
+  
+    <h1 class="article-header">
+      Java bytecode 里面都有啥？
+    </h1>
+  
+  
+  
+
+    
+  <div class="article-info">
+    <span class="article-date">
+  2020-03-01
+</span>
+
+    
+
+    
+
+  </div>
+  <div class="article-entry">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：打开<code>.class</code>文件康康 <code>byte code</code>的组成<p></p>
+<a id="more"></a></div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/overyam/images/cc/cc.png">
+      
+          <img src="/overyam/images/cc/by.png">
+        
+          <img src="/overyam/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 overyam - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+
+      
+        </div>
+      
+      </div>
+
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/overyam/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/overyam/scripts/main.js"></script>
+
+
+<script src="/overyam/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":0.8,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/overyam/live2dw/assets/hibiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.2},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
