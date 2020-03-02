@@ -22,8 +22,10 @@
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200226145029241.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200226145151262.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200226145315266.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200302231613636.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200303001955825.png">
 <meta property="article:published_time" content="2020-02-26T05:48:50.000Z">
-<meta property="article:modified_time" content="2020-02-27T03:25:46.190Z">
+<meta property="article:modified_time" content="2020-03-02T16:20:57.247Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -430,6 +432,38 @@ class Solution {
             if(sum&lt;=0){sum=0;}     //小于0就可以滚蛋了，因为肯定没有后面的和大
         }
         return max;
+    }
+}
+</code></pre>
+<h1 id="88-Merge-Sorted-Array"><a href="https://leetcode-cn.com/problems/merge-sorted-array/" target="_blank" rel="noopener">88. Merge Sorted Array</a></h1>
+<p><a href="Array-Easy/image-20200302231613636.png" title="image-20200302231613636" class="gallery-item"><img src="image-20200302231613636.png" alt="image-20200302231613636"></a></p>
+<h2 id="解法一：排序">解法一：排序</h2>
+<p>复制数组，然后排序就行了，简单粗暴</p>
+<pre><code class="language-java">class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        System.arraycopy(nums2, 0, nums1, m, n);
+        Arrays.sort(nums1);
+    }
+}
+</code></pre>
+<h2 id="解法二：双指针">解法二：双指针</h2>
+<p>稍后补充</p>
+<h1 id="169-Majority-Element"><a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">169. Majority Element</a></h1>
+<p><a href="Array-Easy/image-20200303001955825.png" title="image-20200303001955825" class="gallery-item"><img src="image-20200303001955825.png" alt="image-20200303001955825"></a></p>
+<h2 id="解法一：排序-v2">解法一：排序</h2>
+<p>排序之后，相同的数将会连续排列，就能方便地进行统计了</p>
+<pre><code class="language-java">class Solution {
+    public int majorityElement(int[] nums) {
+        if(nums.length==1)return nums[0];
+        Arrays.sort(nums);
+        int num=1;
+        for(int i=1;i&lt;nums.length;i++){
+            if(nums[i]==nums[i-1]){
+                if(++num&gt;nums.length/2)return nums[i];
+            }
+            else num=1;
+        }
+        return -1;
     }
 }
 </code></pre>
