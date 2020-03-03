@@ -3,7 +3,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  font-family: font-sans;
+  font-family: font-sans !important;
   color: #333;
 }
 .trans-box {
@@ -12,7 +12,9 @@ body {
   padding: 20px 40px 0;
 }
 .music {
-  float: right;
+  position: fixed;
+  right: 10px;
+  top: 5px;
 }
 .main-container {
   position: absolute;
@@ -54,4 +56,48 @@ body {
     height: auto;
     padding: 10px 10px;
   }
+}
+.top {
+  position: fixed;
+  right: 20px;
+  top: 480px;
+  color: #000 !important;
+}
+.set-view-mode {
+  position: fixed;
+  right: 20px;
+  top: 430px;
+}
+.night-mode .trans-box {
+  background-color: #1b1b1b !important;
+  opacity: 0.9;
+  border: 10px;
+}
+.night-mode p,
+.night-mode ul,
+.night-mode li,
+.night-mode h2,
+.night-mode h3,
+.night-mode h4 {
+  color: #ccd1d1 !important;
+}
+.night-mode h1 {
+  color: #f4f6f6;
+}
+.night-mode .post-list {
+  color: #ccd1d1 !important;
+}
+.night-mode .main-content a {
+  color: #52be80 !important;
+  font-style: bold;
+}
+.night-mode .main-content a:hover {
+  color: #7ad350 !important;
+}
+.night-mode table tr:hover,
+.night-mode table tbody tr:nth-child(2n-1) {
+  background: #eed8d8;
+}
+.night-mode td {
+  font-style: bold;
 }
