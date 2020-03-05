@@ -1,3 +1,5 @@
+
+
 (function() {
   'use strict';
 
@@ -266,3 +268,4 @@
     initPhotoSwipeFromDOM(gallerySelector);
   }
 })();
+

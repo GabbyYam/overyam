@@ -8,26 +8,17 @@
 
 <title>
   
-    Greedy-Easy
+    Tag: log
   
 </title>
 
-<meta property="og:type" content="article">
-<meta property="og:title" content="Greedy-Easy">
-<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/4a26b7ee/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="overyam">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/tags/log/">
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/4a26b7ee/image-20200226233308396.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/4a26b7ee/image-20200226233611100.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/4a26b7ee/image-20200226233902644.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/4a26b7ee/image-20200226234019301.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/4a26b7ee/image-20200226234055973.png">
-<meta property="article:published_time" content="2020-02-26T15:16:39.000Z">
-<meta property="article:modified_time" content="2020-02-27T03:25:46.194Z">
 <meta property="article:author" content="GabbyYam">
-<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/4a26b7ee/image-20200226233308396.png">
 
 
   <link rel="alternative" href="/atom.xml" title="overyam" type="application/atom+xml">
@@ -397,240 +388,52 @@
       
         <div style="max-width: 1100px">
       
-          
+          <h1>log</h1>
 
-<article id="post-Greedy-Easy" class="article article-type-post">
 
   
-    <h1 class="article-header">
-      Greedy-Easy
-    </h1>
   
-  
+    <div class="post-list">
   
 
-    
-  <div class="article-info">
-    <span class="article-date">
-  2020-02-26
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/overyam/posts/5a717bf0/" >
+  更新日志
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/overyam/posts/5a717bf0/"><span class="article-date">
+  2020-03-05
 </span>
+</a>
+        
 
-    
-	<span class="article-category tagcloud">
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a></li></ul>
-	</span>
-
-
-    
+        
 	<span class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/log/" rel="tag">log</a></li></ul>
 	</span>
 
 
-  </div>
-  <div class="article-entry">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract：</strong> 更新部分<code>Easy</code>难度 <code>Greedy</code>相关题解<p></p>
-<a id="more"></a>
-<h1 id="122-Best-Time-to-Buy-and-Sell-Stock-II"><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">122. Best Time to Buy and Sell Stock II</a></h1>
-<p><a href="Greedy-Easy/image-20200226233308396.png" title="image-20200226233308396" class="gallery-item"><img src="image-20200226233308396.png" alt="image-20200226233308396"></a></p>
-<h2 id="解法一：贪心">解法一：贪心</h2>
-<p>显然，如果允许无限次交易的话，那么只要有差价就能赚，因此总利润就是升价之和</p>
-<pre><code class="language-java">class Solution {
-    public int maxProfit(int[] prices) {
-        if(prices.length&lt;=1){return 0;} //特殊情况
-        int profit=0;
-        for(int i=1;i&lt;prices.length;i++){
-            int check=prices[i]-prices[i-1];
-            profit+=check&gt;0?check:0; //只要本次交易有利可得就去赚，必定能使利益最大化
-        }
-        return profit;
-    }
-}
-</code></pre>
-<h1 id="455-Assign-Cookies"><a href="https://leetcode-cn.com/problems/assign-cookies/" target="_blank" rel="noopener">455. Assign Cookies</a></h1>
-<p><a href="Greedy-Easy/image-20200226233611100.png" title="image-20200226233611100" class="gallery-item"><img src="image-20200226233611100.png" alt="image-20200226233611100"></a></p>
-<h2 id="解法一：贪心-v2">解法一：贪心</h2>
-<ul>
-<li><strong>策略</strong>：先排序，用最小的饼干先喂胃口最小的小鬼</li>
-<li><strong>特殊情况</strong>：两者可能为空要注意，但是本题不会有不良影响就是了</li>
-</ul>
-<pre><code class="language-java">class Solution {
-    public int findContentChildren(int[] g, int[] s) {
-        Arrays.sort(g);
-        Arrays.sort(s);//先排序
-        int cookie=0,maxAssign=0;//记录饼干的位置和最大人数
-        for(int i=0;i&lt;g.length;i++){
-            while(cookie&lt;s.length){
-                if(s[cookie]&gt;=g[i]){//如果满足的话，人数++，饼干用掉了所以移动到下一块，cookie++
-                    maxAssign++;
-                    cookie++;
-                    break;//代码中注意不要出现break，影响美观，这里是反面教材了
-                }
-                cookie++;//不满足的话就换下一个饼干
-            }
-        }
-        return maxAssign;
-    }
-}
-</code></pre>
-<ul>
-<li><strong>简洁版</strong>：根本不需要专门记录最大人数，另外改掉<code>break</code>这样的不良习惯，出现<code>break</code>只会让代码丑且丢人</li>
-</ul>
-<pre><code class="language-java">class Solution {
-    public int findContentChildren(int[] g, int[] s) {
-        Arrays.sort(g);
-        Arrays.sort(s);//先排序
-        int cookie=0,greedy=0;//记录饼干的位置、小鬼位置
-        while(cookie&lt;s.length &amp;&amp; greedy&lt;g.length){
-            if(g[greedy]&lt;=s[cookie])greedy++;
-            cookie++;
-        }
-        return greedy;//根本不需要记录最大人数，greedy的最终值就是最大人数
-    }
-}
-</code></pre>
-<h1 id="1046-Last-Stone-Weight（TopK问题）"><a href="https://leetcode-cn.com/problems/last-stone-weight/" target="_blank" rel="noopener">1046. Last Stone Weight（<mark>TopK问题</mark>）</a></h1>
-<p><a href="Greedy-Easy/image-20200226233902644.png" title="image-20200226233902644" class="gallery-item"><img src="image-20200226233902644.png" alt="image-20200226233902644"></a></p>
-<h2 id="解法一：排序">解法一：排序</h2>
-<p>依题意，每次都用最重的两块石头，那么就每轮排一次序就行了</p>
-<p>虽然简洁易懂，但是<mark>缺点是快排空间消耗比较大</mark>，另外数据规模大时额外消耗的时间也比较大</p>
-<pre><code class="language-java">class Solution {
-    public int lastStoneWeight(int[] stones) {
-        if(stones==null || stones.length==0){return 0;} //特殊情况 null或为空
-        int stoneNum=stones.length,len=stones.length;
-        while(stoneNum&gt;1){//每轮都排一次序，直到石头小于一颗
-            Arrays.sort(stones); 
-            stones[len-1]=stones[len-1]-stones[len-2];
-            stones[len-2]=0;
-            stoneNum--;
-        }
-        return stones[len-1];//返回最后一颗石子的重量即为答案
-    }
-}
-</code></pre>
-<h2 id="解法二：优先队列">解法二：优先队列</h2>
-<p>由于问题本质是TopK问题，因此用优先队列是相当王道的做法</p>
-<p>小数据下比简单排序略逊，但是数据量增大时优于排序</p>
-<pre><code class="language-java">class Solution {
-    public int lastStoneWeight(int[] stones) {
-        if(stones==null || stones.length==0){return 0;}
-        Queue&lt;Integer&gt; stoneQ=
-            new PriorityQueue&lt;Integer&gt;(Collections.reverseOrder());//优先队列
-        for(int stone:stones){stoneQ.add(stone);}//初始化
-        while(stoneQ.size()&gt;2){//边界处理，如果&gt;1的话可能会让空队列poll
-            int stoneSmashed=stoneQ.poll()-stoneQ.poll();
-            if(stoneSmashed&gt;0)stoneQ.add(stoneSmashed);//如果没彻底smashed，就放回队列中
-        }
-        return stoneQ.size()&gt;1?stoneQ.poll()-stoneQ.poll():stoneQ.peek();
-        //依据情况返回对应结果
-    }
-}
-</code></pre>
-<h1 id="860-Lemonade-Change"><a href="https://leetcode-cn.com/problems/lemonade-change/" target="_blank" rel="noopener">860. Lemonade Change</a></h1>
-<p><a href="Greedy-Easy/image-20200226234019301.png" title="image-20200226234019301" class="gallery-item"><img src="image-20200226234019301.png" alt="image-20200226234019301"></a></p>
-<h2 id="解法一：贪心-v3">解法一：贪心</h2>
-<p>如果是5块和10块没什么可说的，<strong>重点是20块</strong></p>
-<p><strong>如果是20块</strong>，要优先找10块和5块组合，实在不行才用三张5块</p>
-<pre><code class="language-java">class Solution {
-    public boolean lemonadeChange(int[] bills) {
-        int five=0,ten=0;//分别记录5块和10块
-        for(int i=0;i&lt;bills.length;i++){
-            if(bills[i]==5)five++; //5块时直接++
-            
-            else if(bills[i]==10){ //10块时直接找5块，没有就gg
-                if(five&gt;0){ten++;five--;}
-                else return false;
-            }
-            else if(bills[i]==20){ //优先找10块
-                if(ten&gt;0 &amp;&amp; five&gt;0){ten--;five--;}
-                else if(five&gt;=3){five-=3;}
-                else return false;
-            }
-        }
-        return true;
-    }
-}
-</code></pre>
-<h1 id="874-Walking-Robot-Simulation"><a href="https://leetcode-cn.com/problems/walking-robot-simulation/" target="_blank" rel="noopener">874. Walking Robot Simulation</a></h1>
-<p><a href="Greedy-Easy/image-20200226234055973.png" title="image-20200226234055973" class="gallery-item"><img src="image-20200226234055973.png" alt="image-20200226234055973"></a></p>
-<h2 id="解法一：HashSet-模拟">解法一：HashSet+模拟</h2>
-<p><mark>麻烦在写逻辑</mark></p>
-<pre><code class="language-java">class Solution {
-    public int robotSim(int[] commands, int[][] obstacles) {
-        int x=0,y=0,turn=0,maxDistance=0;
-        int[] moves = new int[2];
-
-        //借用官方的编码模式
-        Set&lt;Long&gt; obstacleSet = new HashSet();
-        for (int[] obstacle: obstacles) {
-            long ox = (long) obstacle[0] + 30000;
-            long oy = (long) obstacle[1] + 30000;
-            obstacleSet.add((ox &lt;&lt; 16) + oy);
-        }
-
-        for(int i=0;i&lt;commands.length;i++){
-            if(commands[i] == -1){turn=(turn+1)%4;} //右转90度
-            else if(commands[i] == -2){turn=(turn+3)%4;} //左转90度，注意不要--，因为负数不能%
-            else{ //否则应该是移动
-                for(int k=0;k&lt;commands[i];k++){ //一格一格地走
-                    moves = move(turn,moves); //根据方向和command计算移动的(x,y)
-                    int nx=x+moves[0];
-                    int ny=y+moves[1];
-                    long code = (((long) nx + 30000) &lt;&lt; 16) + ((long) ny + 30000);
-                    if (!obstacleSet.contains(code)) {
-                        x = nx;
-                        y = ny;
-                        maxDistance = Math.max(maxDistance, x*x + y*y);
-                    }
-                }
-            }
-        }
-        return maxDistance;
-    }
-
-    public int[] move(int turn,int[] moves){ //判断移动的x,y
-        if(turn%4 == 0){moves[0]=0;moves[1]=1;return moves;}
-        else if(turn%4 == 1){moves[0]=1;moves[1]=0;return moves;}
-        else if(turn%4 == 2){moves[0]=0;moves[1]=-1;return moves;}
-        else if(turn%4 == 3){moves[0]=-1;moves[1]=0;return moves;}
-        return moves;
-        //throw new IllegalArgumentException;
-    }
-}
-</code></pre>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+      </div>
+      <div class="article-entry">
+        
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" < div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
         };
         lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>
-  </div>
-  <footer class="article-footer">
-    
-  <div class="cc">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
-      <img src="/overyam/images/cc/cc.png">
-      
-          <img src="/overyam/images/cc/by.png">
+        }</script></div>
         
-          <img src="/overyam/images/cc/sa.png">
-      
-      <span>
-        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-      </span>
-    </a>
-  </div>
+      </div>
+    </div>
 
-
-    
-
-  </footer>
-
-</article>
-
-
-
-
+  
+    </div>
+  
 
 
 
