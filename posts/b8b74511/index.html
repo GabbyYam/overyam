@@ -8,19 +8,25 @@
 
 <title>
   
-    Java bytecode 里面都有啥？
+    Java bytecode 玩法指北
   
 </title>
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java bytecode 里面都有啥？">
+<meta property="og:title" content="Java bytecode 玩法指北">
 <meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/b8b74511/">
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-01T10:24:18.000Z">
-<meta property="article:modified_time" content="2020-03-04T20:50:23.042Z">
+<meta property="og:image" content="https://static.javatpoint.com/blog/images/java-bytecode.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200305181623284.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200305183423582.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200305191859359.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200305183857544.png">
+<meta property="article:published_time" content="2020-03-05T04:24:18.000Z">
+<meta property="article:modified_time" content="2020-03-05T11:40:08.130Z">
 <meta property="article:author" content="GabbyYam">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.javatpoint.com/blog/images/java-bytecode.png">
 
 
   <link rel="alternative" href="/atom.xml" title="overyam" type="application/atom+xml">
@@ -395,7 +401,7 @@
 
   
     <h1 class="article-header">
-      Java bytecode 里面都有啥？
+      Java bytecode 玩法指北
     </h1>
   
   
@@ -404,7 +410,7 @@
     
   <div class="article-info">
     <span class="article-date">
-  2020-03-01
+  2020-03-05
 </span>
 
     
@@ -417,8 +423,165 @@
 
   </div>
   <div class="article-entry">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：打开<code>.class</code>文件康康 <code>byte code</code>的组成<p></p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：打开<code>.class</code>文件康康 <code>byte code</code>的组成 &amp; 字节码增强是什么<p></p>
 <a id="more"></a>
+<h1 id="What-？">What ？</h1>
+<ul>
+<li>
+<p>bytecode是一套Java虚拟机的指令集，或者说是以.class文件为形式的机器码，再通过<strong>Java interpreter</strong>对接各种不同的操作系统，以此帮助Java实现了平台独立性，也就是<strong>compile once,run every where</strong></p>
+</li>
+<li>
+<p>另外，由于只要满足字节码的形式，JVM甚至可以兼容其他语言（Kotlin、Scala），大大提高了扩展性，当然本篇还是以Java为例</p>
+</li>
+</ul>
+<h1 id="How">How ?</h1>
+<p><a href="https://static.javatpoint.com/blog/images/java-bytecode.png" target="_blank" rel="noopener" title="Java Bytecode" class="gallery-item"><img src="https://static.javatpoint.com/blog/images/java-bytecode.png" alt="Java Bytecode"></a></p>
+<ul>
+<li>.java 通过 <strong>javac</strong> 编译生成 .class文件</li>
+<li>.class文件通过 <strong>Java interpreter</strong>对接操作系统和硬件</li>
+</ul>
+<h1 id="Structure">Structure</h1>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Format</th>
+<th>Usage</th>
+<th>Size/byte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Magic Number（魔数）</td>
+<td>0xCAFEBABE</td>
+<td>标记class文件</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>Minor Version + Major Version</td>
+<td>标记Java版本号</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Constant_Pool</td>
+<td>count+[tag,length,bytes]*(count-1)</td>
+<td>常量池</td>
+<td>2+n</td>
+</tr>
+<tr>
+<td>Access_Flag</td>
+<td>0x00??</td>
+<td>标记关键字：权限控制符+static+final等</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Class_Name</td>
+<td>xx.xx.xx如java.lang.String</td>
+<td>全限定类名</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Parent_Name</td>
+<td>同上</td>
+<td>父类全限定类名</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Interface_info</td>
+<td>count+[]*count</td>
+<td>接口信息</td>
+<td>2+n</td>
+</tr>
+<tr>
+<td>field</td>
+<td>count+[class_info]*count</td>
+<td>字段属性</td>
+<td>2+n</td>
+</tr>
+<tr>
+<td>method</td>
+<td>count+[method_info]*count</td>
+<td>方法表,其中方法名和方法的描述符都是常量池中的索引值，可以通过索引值在常量池中找到</td>
+<td>2+n</td>
+</tr>
+<tr>
+<td>method_property</td>
+<td><strong>code</strong>+<strong>LineNumberTable</strong>+<strong>LocalVariableTable</strong></td>
+<td>详细属性：字节码操作集合+行信息+本地变量</td>
+<td>n</td>
+</tr>
+<tr>
+<td>附加属性表</td>
+<td></td>
+<td>该项存放了在该文件中类或接口所定义属性的基本信息</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>下面以这样一个自定义类为例：</li>
+</ul>
+<pre><code class="language-java">/**
+ * @author GabbyYam
+ * @date 2020/3/5
+ */
+public class YamCode {
+    public String yam_name;
+    private int yam_total;
+
+    public String getYam_name() {
+        return yam_name;
+    }
+
+    public void setYam_name(String yam_name) {
+        this.yam_name = yam_name;
+    }
+
+    public int getYam_total() {
+        return yam_total;
+    }
+
+    public void setYam_total(int yam_total) {
+        this.yam_total = yam_total;
+    }
+}
+
+</code></pre>
+<ul>
+<li>对其<code>javac</code> 编译：可见.class文件中存在magic_number标记</li>
+</ul>
+<p><a href="bytecode/image-20200305181623284.png" title="image-20200305181623284" class="gallery-item"><img src="image-20200305181623284.png" alt="image-20200305181623284"></a></p>
+<ul>
+<li>为了方便理解（字节码也没法理解），我们<code>javap -verbose</code>反编译，将其转换为可理解的代码</li>
+</ul>
+<p><a href="bytecode/image-20200305183423582.png" title="image-20200305183423582" class="gallery-item"><img src="image-20200305183423582.png" alt="image-20200305183423582"></a></p>
+<ul>
+<li>全限定类名、版本号以及权限控制相关的标记符</li>
+</ul>
+<h2 id="1、常量池">1、常量池</h2>
+<p><a href="bytecode/image-20200305191859359.png" title="image-20200305191859359" class="gallery-item"><img src="image-20200305191859359.png" alt="image-20200305191859359"></a></p>
+<h2 id="2、方法属性method-property">2、方法属性method_property</h2>
+<p><a href="bytecode/image-20200305183857544.png" title="image-20200305183857544" class="gallery-item"><img src="image-20200305183857544.png" alt="image-20200305183857544"></a></p>
+<p>其中有三段重要信息</p>
+<h3 id="Code：即方法内包含的操作码集合">Code：即方法内包含的操作码集合</h3>
+<ul>
+<li>对应JVM指令操作码，比如图中的aload_0表示将局部变量压入操作数栈，详细操作码解释参见<a href="https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings" target="_blank" rel="noopener">Java bytecode instruction listings</a></li>
+</ul>
+<h3 id="LineNumberTable">LineNumberTable</h3>
+<ul>
+<li>
+<p>Code中操作码对应源码的行数，也即下面这句话对应的位置</p>
+<pre><code class="language-java">return yam_name;
+</code></pre>
+</li>
+</ul>
+<h3 id="LocalVariableTable">LocalVariableTable</h3>
+<ul>
+<li>本地变量，一般的类不会出现</li>
+</ul>
+<h1 id="字节码增强">字节码增强</h1>
+<p>下次接着写.jpg</p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
