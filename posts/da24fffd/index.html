@@ -8,26 +8,23 @@
 
 <title>
   
-    Linkedlist-Easy
+    Sliding Window
   
 </title>
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linkedlist-Easy">
-<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/e7896cce/">
+<meta property="og:title" content="Sliding Window">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/da24fffd/">
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/e7896cce/image-20200226234344400.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/e7896cce/image-20200226234447241.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/e7896cce/image-20200226234530100.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/e7896cce/image-20200226234623461.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/e7896cce/image-20200226234948582.png">
-<meta property="article:published_time" content="2020-02-26T15:16:23.000Z">
-<meta property="article:modified_time" content="2020-02-27T03:25:46.196Z">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/da24fffd/image-20200306211403971.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/da24fffd/image-20200306213641525.png">
+<meta property="article:published_time" content="2020-03-06T13:12:24.000Z">
+<meta property="article:modified_time" content="2020-03-06T14:44:05.948Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/e7896cce/image-20200226234344400.png">
+<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/da24fffd/image-20200306211403971.png">
 
 
   <link rel="alternative" href="/atom.xml" title="overyam" type="application/atom+xml">
@@ -398,11 +395,11 @@
       
           
 
-<article id="post-Linkedlist-Easy" class="article article-type-post">
+<article id="post-Slide-Window" class="article article-type-post">
 
   
     <h1 class="article-header">
-      Linkedlist-Easy
+      Sliding Window
     </h1>
   
   
@@ -411,7 +408,7 @@
     
   <div class="article-info">
     <span class="article-date">
-  2020-02-26
+  2020-03-06
 </span>
 
     
@@ -428,151 +425,57 @@
 
   </div>
   <div class="article-entry">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract：</strong> 更新部分<code>Easy</code>难度 <code>Linkedlist</code>相关题解<p></p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：leetcode sliding window专题<p></p>
 <a id="more"></a>
-<h1 id="21-Merge-Two-Sorted-Lists"><a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/" target="_blank" rel="noopener">21. Merge Two Sorted Lists</a></h1>
-<p><a href="Linkedlist-Easy/image-20200226234344400.png" title="image-20200226234344400" class="gallery-item"><img src="image-20200226234344400.png" alt="image-20200226234344400"></a></p>
-<h2 id="解法一：递归法">解法一：递归法</h2>
-<pre><code class="language-java">class Solution {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if(l1==null)return l2;
-        else if(l2==null)return l1;
-        else if(l1.val&lt;l2.val){
-            l1.next=mergeTwoLists(l1.next,l2);
-            return l1;
-            }
-        else {
-            l2.next=mergeTwoLists(l2.next,l1);
-            return l2;
-        }
-    }
-}
-</code></pre>
-<h2 id="解法二：迭代法">解法二：迭代法</h2>
-<pre><code class="language-java">class Solution {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode pre_head=new ListNode(-1);  //合并结果的头结点，pre_head.next开始为答案
-        ListNode curr=pre_head;              //指向当前访问节点
-        while(l1!=null &amp;&amp; l2!=null){
-            if(l1.val&lt;l2.val){               //根据大小判断先放谁
-                curr.next=l1;
-                l1=l1.next;
-            }
-            else {
-                curr.next=l2;
-                l2=l2.next;
-            }
-            curr=curr.next;
-        }
-        curr.next=l1==null?l2:l1;           //当一方为null时，另一方的剩余部分放入解的尾部
-        return pre_head.next;
-    }
-}
-</code></pre>
-<h1 id="83-Remove-Duplicates-from-Sorted-List"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="noopener">83. Remove Duplicates from Sorted List</a></h1>
-<p><a href="Linkedlist-Easy/image-20200226234447241.png" title="image-20200226234447241" class="gallery-item"><img src="image-20200226234447241.png" alt="image-20200226234447241"></a></p>
-<h2 id="解法一：迭代法">解法一：迭代法</h2>
-<pre><code class="language-java">class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
-       if(head==null)return null;
-       ListNode curr=head;
-       while(curr!=null &amp;&amp; curr.next!=null){
-           if(curr.val==curr.next.val)
-               curr.next=curr.next.next;
-           else
-               curr=curr.next;
-       }
-       return head;
-    }
-}
-</code></pre>
-<h1 id="206-Reverse-Linked-List"><a href="https://leetcode-cn.com/problems/reverse-linked-list/" target="_blank" rel="noopener">206. Reverse Linked List</a></h1>
-<p><a href="Linkedlist-Easy/image-20200226234530100.png" title="image-20200226234530100" class="gallery-item"><img src="image-20200226234530100.png" alt="image-20200226234530100"></a></p>
-<h2 id="解法一：递归法-v2">解法一：递归法</h2>
-<pre><code class="language-java">class Solution {
-    public ListNode reverseList(ListNode head) {
-        if(head==null || head.next==null)return head; //递归结束条件
-        
-        ListNode n_head=reverseList(head.next); //next为翻转后部分的头部,即原先的尾部
-        head.next.next=head;                    //翻转后部分的尾部，本来为null，先将它指向head
-        head.next=null;						    //将原先的head.next设为null，防止出现循环链表
-        return n_head;                          //返回新的头部
-    }
-}
-</code></pre>
-<h2 id="解法二：迭代法-v2">解法二：迭代法</h2>
-<pre><code class="language-java">class Solution {
-    public ListNode reverseList(ListNode head) {
-        ListNode prev=null;          //prev初始为null,所以不必担心出现循环链表
-        ListNode curr=head;
-        while(curr!=null){
-            ListNode next=curr.next; //保存curr.next
-            curr.next=prev;          //翻转
-            prev=curr;
-            curr=next;               //prev,curr向前移动一格
-        }
-        return prev;
-    }
-}
-</code></pre>
-<h1 id="160-Intersection-of-Two-Linked-Lists"><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/" target="_blank" rel="noopener">160. Intersection of Two Linked Lists</a></h1>
-<p><a href="Linkedlist-Easy/image-20200226234623461.png" title="image-20200226234623461" class="gallery-item"><img src="image-20200226234623461.png" alt="image-20200226234623461"></a></p>
-<h2 id="解法一：HashSet">解法一：HashSet</h2>
-<pre><code class="language-java">public class Solution {
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        Set&lt;ListNode&gt; set=new HashSet&lt;ListNode&gt;();
-        ListNode curr_a=headA;
-        ListNode curr_b=headB;
-        while(curr_a!=null){ //遍历链表A，将所有节点加入HashSet
-            set.add(curr_a);
-            curr_a=curr_a.next;
-        }
-        while(curr_b!=null){ //遍历链表B，看是否有节点在HashSet存在
-            if(set.contains(curr_b))return curr_b;
-            curr_b=curr_b.next;
-        }
-        return null;
-    }
-}
-</code></pre>
-<h2 id="解法二：双指针">解法二：双指针</h2>
-<p><a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/xiang-jiao-lian-biao-by-leetcode/" target="_blank" rel="noopener">参考官方题解3：十分巧妙</a></p>
-<pre><code class="language-java">public class Solution {
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode curr_a=headA;
-        ListNode curr_b=headB;
-        while(curr_a!=null &amp;&amp; curr_b!=null){
-            if(curr_a==curr_b)return curr_a; //交点
-            curr_a=curr_a.next;
-            curr_b=curr_b.next;
-            if(curr_a==null &amp;&amp; curr_b==null)return null;//到达终点，证明不存在
-            if(curr_a==null)curr_a=headB; //a接入b链
-            if(curr_b==null)curr_b=headA; //b接入a链
-        }
-        return null;
-    }
-}
-</code></pre>
-<h1 id="234-Palindrome-Linked-List"><a href="https://leetcode-cn.com/problems/palindrome-linked-list/" target="_blank" rel="noopener">234. Palindrome Linked List</a></h1>
-<p><a href="Linkedlist-Easy/image-20200226234948582.png" title="image-20200226234948582" class="gallery-item"><img src="image-20200226234948582.png" alt="image-20200226234948582"></a></p>
-<h2 id="解法一：栈">解法一：栈</h2>
+<h1 id="面试题57-II-和为s的连续正数序列-Easy"><a href="https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/" target="_blank" rel="noopener">面试题57 - II. 和为s的连续正数序列[Easy]</a></h1>
+<p><a href="Slide-Window/image-20200306211403971.png" title="image-20200306211403971" class="gallery-item"><img src="image-20200306211403971.png" alt="image-20200306211403971"></a></p>
+<h2 id="解法一：滑动窗口">解法一：滑动窗口</h2>
+<p><input type="checkbox" id="checkbox0"><label for="checkbox0">[ ]</label></p>
 <ul>
-<li>简明，和数组的做法没有区别，但是空间复杂度O(n)</li>
+<li>标准的滑动窗口题：如果大了左边界++，如果小了右边界++，如果正好则记录答案</li>
+<li>直接贴解法，很直观了</li>
 </ul>
 <pre><code class="language-java">class Solution {
-    public boolean isPalindrome(ListNode head) {
-        Stack&lt;Integer&gt; stack=new Stack&lt;Integer&gt;(); //空间复杂度O(n)
-        ListNode curr=head;
-        while(curr!=null){ //第一次遍历，将所有值压入栈内
-            stack.push(curr.val);
-            curr=curr.next;
+    public int[][] findContinuousSequence(int target) {
+        List&lt;int[]&gt; list=new ArrayList&lt;int[]&gt;();
+        int lo=1,hi=1,sum=0;
+        while(lo&lt;=target/2 ){ //lo最多等于target/2
+            if(sum&lt;target){   
+                sum+=hi++;    //右边界++
+            }
+            else if(sum&gt;target){
+                sum-=lo++;    //左边界++，sum回溯
+            }
+            else{               //有解
+                int[] ans=new int[hi-lo];
+                for(int i=0;i&lt;hi-lo;i++)ans[i]=i+lo;
+                list.add(ans);
+                sum-=lo++;      //记录解之后左边界++，sum回溯
+            }
         }
-        while(head!=null){ //第二次遍历，逐一比对
-            if(stack.pop()!=head.val)return false;
-            head=head.next;
+        return list.toArray(new int[list.size()][]); //转回二维数组
+    }
+}
+</code></pre>
+<h1 id="3-Longest-Substring-Without-Repeating-Characters-Medium"><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">3. Longest Substring Without Repeating Characters[Medium]</a></h1>
+<p><a href="Slide-Window/image-20200306213641525.png" title="image-20200306213641525" class="gallery-item"><img src="image-20200306213641525.png" alt="image-20200306213641525"></a></p>
+<h1 id="解法二：HashSet滑动窗口">解法二：HashSet滑动窗口</h1>
+<p>不需要回溯，当遇到重复时，只需要remove左边就行了，这样就是一次遍历</p>
+<pre><code class="language-java">public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        Set&lt;Character&gt; set = new HashSet&lt;&gt;();
+        int i=0, j=0,len=0;
+        while (i&lt;n &amp;&amp; j&lt;n) {
+            if (!set.contains(s.charAt(j))){
+                set.add(s.charAt(j++));
+                len = Math.max(len, j - i);    
+            }
+            else {
+                set.remove(s.charAt(i++));     //只需左边remove
+            }
         }
-        
-        return true;
+        return len;
     }
 }
 </code></pre>

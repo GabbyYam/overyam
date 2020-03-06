@@ -8,22 +8,25 @@
 
 <title>
   
-    Java bytecode 玩法指北
+    Java bytecode 玩法不完全指北
   
 </title>
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java bytecode 玩法指北">
+<meta property="og:title" content="Java bytecode 玩法不完全指北">
 <meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/b8b74511/">
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://static.javatpoint.com/blog/images/java-bytecode.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200306180808028.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200305181623284.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200305183423582.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200306181105461.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200306181807754.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200305191859359.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b8b74511/image-20200305183857544.png">
 <meta property="article:published_time" content="2020-03-05T04:24:18.000Z">
-<meta property="article:modified_time" content="2020-03-05T11:40:08.130Z">
+<meta property="article:modified_time" content="2020-03-06T14:44:49.360Z">
 <meta property="article:author" content="GabbyYam">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://static.javatpoint.com/blog/images/java-bytecode.png">
@@ -250,21 +253,21 @@
             
               <li class="category-list-container">
                 <a href="javascript:;">Category</a>
-                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">4</span></li></ul>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">4</span></li></ul>
               </li>
             
           
             
               <li class="tag-list-container">
                 <a href="javascript:;">Tag</a>
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">9</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">10</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">13</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">14</span></li></ul>
               </li>
             
           
@@ -401,7 +404,7 @@
 
   
     <h1 class="article-header">
-      Java bytecode 玩法指北
+      Java bytecode 玩法不完全指北
     </h1>
   
   
@@ -423,12 +426,13 @@
 
   </div>
   <div class="article-entry">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：打开<code>.class</code>文件康康 <code>byte code</code>的组成 &amp; 字节码增强是什么<p></p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：打开<code>.class</code>文件康康 <code>byte code</code>的组成 &amp; 字节码增强是什么(以Jvms8为例)<p></p>
 <a id="more"></a>
+<p>要玩bytecode，还是先简单看一眼bytecode的设计定位和内部结构</p>
 <h1 id="What-？">What ？</h1>
 <ul>
 <li>
-<p>bytecode是一套Java虚拟机的指令集，或者说是以.class文件为形式的机器码，再通过<strong>Java interpreter</strong>对接各种不同的操作系统，以此帮助Java实现了平台独立性，也就是<strong>compile once,run every where</strong></p>
+<p>bytecode是一套Java虚拟机的指令集，或者说是以.class文件为形式的机器码，再通过<strong>Java interpreter</strong>对接各种不同的操作系统，以此帮助Java实现了<strong>平台独立性</strong>，也就是<strong>compile once,run every where</strong></p>
 </li>
 <li>
 <p>另外，由于只要满足字节码的形式，JVM甚至可以兼容其他语言（Kotlin、Scala），大大提高了扩展性，当然本篇还是以Java为例</p>
@@ -438,88 +442,12 @@
 <p><a href="https://static.javatpoint.com/blog/images/java-bytecode.png" target="_blank" rel="noopener" title="Java Bytecode" class="gallery-item"><img src="https://static.javatpoint.com/blog/images/java-bytecode.png" alt="Java Bytecode"></a></p>
 <ul>
 <li>.java 通过 <strong>javac</strong> 编译生成 .class文件</li>
-<li>.class文件通过 <strong>Java interpreter</strong>对接操作系统和硬件</li>
+<li>.class文件通过 <strong>Java interpreter</strong>对接操作系统和硬件（当然不包括native method）</li>
 </ul>
 <h1 id="Structure">Structure</h1>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Format</th>
-<th>Usage</th>
-<th>Size/byte</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Magic Number（魔数）</td>
-<td>0xCAFEBABE</td>
-<td>标记class文件</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Version</td>
-<td>Minor Version + Major Version</td>
-<td>标记Java版本号</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Constant_Pool</td>
-<td>count+[tag,length,bytes]*(count-1)</td>
-<td>常量池</td>
-<td>2+n</td>
-</tr>
-<tr>
-<td>Access_Flag</td>
-<td>0x00??</td>
-<td>标记关键字：权限控制符+static+final等</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Class_Name</td>
-<td>xx.xx.xx如java.lang.String</td>
-<td>全限定类名</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Parent_Name</td>
-<td>同上</td>
-<td>父类全限定类名</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Interface_info</td>
-<td>count+[]*count</td>
-<td>接口信息</td>
-<td>2+n</td>
-</tr>
-<tr>
-<td>field</td>
-<td>count+[class_info]*count</td>
-<td>字段属性</td>
-<td>2+n</td>
-</tr>
-<tr>
-<td>method</td>
-<td>count+[method_info]*count</td>
-<td>方法表,其中方法名和方法的描述符都是常量池中的索引值，可以通过索引值在常量池中找到</td>
-<td>2+n</td>
-</tr>
-<tr>
-<td>method_property</td>
-<td><strong>code</strong>+<strong>LineNumberTable</strong>+<strong>LocalVariableTable</strong></td>
-<td>详细属性：字节码操作集合+行信息+本地变量</td>
-<td>n</td>
-</tr>
-<tr>
-<td>附加属性表</td>
-<td></td>
-<td>该项存放了在该文件中类或接口所定义属性的基本信息</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p><a href="bytecode/image-20200306180808028.png" title="image-20200306180808028" class="gallery-item"><img src="image-20200306180808028.png" alt="image-20200306180808028"></a></p>
 <ul>
+<li>上表中的结构不局限于HotSpot虚拟机，而是JVM Specification中的规定</li>
 <li>下面以这样一个自定义类为例：</li>
 </ul>
 <pre><code class="language-java">/**
@@ -548,8 +476,9 @@ public class YamCode {
 }
 
 </code></pre>
+<h2 id="magic">magic</h2>
 <ul>
-<li>对其<code>javac</code> 编译：可见.class文件中存在magic_number标记</li>
+<li>对其<code>javac</code> 编译：可见.class文件中存在magic标记：cafebabe，代表初代开发团队成员喜欢的一种咖啡，是class文件的标记符</li>
 </ul>
 <p><a href="bytecode/image-20200305181623284.png" title="image-20200305181623284" class="gallery-item"><img src="image-20200305181623284.png" alt="image-20200305181623284"></a></p>
 <ul>
@@ -559,11 +488,26 @@ public class YamCode {
 <ul>
 <li>全限定类名、版本号以及权限控制相关的标记符</li>
 </ul>
-<h2 id="1、常量池">1、常量池</h2>
+<h2 id="版本号">版本号</h2>
+<ul>
+<li>主次版本号从45起记，各版本号范围依次为</li>
+<li>新版本可以兼容低版本，反之则不行</li>
+</ul>
+<p><a href="bytecode/image-20200306181105461.png" title="image-20200306181105461" class="gallery-item"><img src="image-20200306181105461.png" alt="image-20200306181105461"></a></p>
+<h2 id="访问控制符">访问控制符</h2>
+<ul>
+<li>其中MODULE为Java9新增的部分</li>
+</ul>
+<p><a href="bytecode/image-20200306181807754.png" title="image-20200306181807754" class="gallery-item"><img src="image-20200306181807754.png" alt="image-20200306181807754"></a></p>
+<h2 id="常量池-Constant-pool">常量池 Constant pool</h2>
 <p><a href="bytecode/image-20200305191859359.png" title="image-20200305191859359" class="gallery-item"><img src="image-20200305191859359.png" alt="image-20200305191859359"></a></p>
-<h2 id="2、方法属性method-property">2、方法属性method_property</h2>
+<ul>
+<li>需要注意的是常量池中的常量<strong>具备动态性</strong>，也就是说，不一定在编译期产生，比如常见的String.intern(String.valueOf(“xx”))</li>
+<li>也是基于动态性，常量池需要向<code>Method Area</code>申请方法区内存，所以有OutOfMemoryError的可能</li>
+</ul>
+<h2 id="方法属性method-info">方法属性method_info</h2>
 <p><a href="bytecode/image-20200305183857544.png" title="image-20200305183857544" class="gallery-item"><img src="image-20200305183857544.png" alt="image-20200305183857544"></a></p>
-<p>其中有三段重要信息</p>
+<p><strong>其中有三段重要信息</strong></p>
 <h3 id="Code：即方法内包含的操作码集合">Code：即方法内包含的操作码集合</h3>
 <ul>
 <li>对应JVM指令操作码，比如图中的aload_0表示将局部变量压入操作数栈，详细操作码解释参见<a href="https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings" target="_blank" rel="noopener">Java bytecode instruction listings</a></li>
@@ -578,10 +522,9 @@ public class YamCode {
 </ul>
 <h3 id="LocalVariableTable">LocalVariableTable</h3>
 <ul>
-<li>本地变量，一般的类不会出现</li>
+<li>方法内局部变量表</li>
 </ul>
 <h1 id="字节码增强">字节码增强</h1>
-<p>下次接着写.jpg</p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
