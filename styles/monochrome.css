@@ -1,6 +1,5 @@
 @media mq-normal {
-  body.monochrome .main-container .article,
-  body.monochrome .main-container .sidebar img {
+  body.monochrome .main-container .article {
     -webkit-filter: grayscale(60%);
     -moz-filter: grayscale(60%);
     -ms-filter: grayscale(60%);
@@ -9,7 +8,22 @@
     transition-duration: 0.4s;
     transition-property: filter, -webkit-filter, -moz-filter, -ms-filter, -o-filter;
   }
-  body.monochrome .main-container .article:hover,
+  body.monochrome .main-container .article:hover {
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    -ms-filter: grayscale(0%);
+    -o-filter: grayscale(0%);
+    filter: grayscale(0%);
+  }
+  body.monochrome .main-container .sidebar img {
+    -webkit-filter: grayscale(35%);
+    -moz-filter: grayscale(35%);
+    -ms-filter: grayscale(35%);
+    -o-filter: grayscale(35%);
+    filter: grayscale(35%);
+    transition-duration: 0.4s;
+    transition-property: filter, -webkit-filter, -moz-filter, -ms-filter, -o-filter;
+  }
   body.monochrome .main-container .sidebar img:hover {
     -webkit-filter: grayscale(0%);
     -moz-filter: grayscale(0%);
