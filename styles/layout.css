@@ -337,9 +337,9 @@ div.list {
   background: #dedede;
   border-radius: 50%;
   position: fixed;
-  left: 17%;
+  left: 96%;
   margin-left: -38px;
-  bottom: 15%;
+  bottom: 50%;
   box-shadow: -4px -1px 0 rgba(0,0,0,0.2);
 }
 .cup:after {
