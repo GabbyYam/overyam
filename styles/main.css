@@ -521,9 +521,9 @@ div.list {
   background: #dedede;
   border-radius: 50%;
   position: fixed;
-  left: 17%;
+  left: 96%;
   margin-left: -38px;
-  bottom: 15%;
+  bottom: 50%;
   box-shadow: -4px -1px 0 rgba(0,0,0,0.2);
 }
 .cup:after {
@@ -684,7 +684,6 @@ background
   background-color: #333;
   color: #fff;
   text-align: right;
-  background-image: url("https://i.ibb.co/HK4jNK4/dark-wood.jpg");
 }
 .sidebar .header {
   padding-right: 30px;
