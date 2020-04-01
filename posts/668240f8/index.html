@@ -8,19 +8,19 @@
 
 <title>
   
-    PTA 1001-1005
+    PTA 001-010
   
 </title>
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="PTA 1001-1005">
+<meta property="og:title" content="PTA 001-010">
 <meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/668240f8/">
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/668240f8/image-20200401154141730.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/668240f8/image-20200401163415171.png">
 <meta property="article:published_time" content="2020-04-01T07:33:25.000Z">
-<meta property="article:modified_time" content="2020-04-01T11:33:36.595Z">
+<meta property="article:modified_time" content="2020-04-01T11:45:38.289Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="PTA">
 <meta name="twitter:card" content="summary">
@@ -402,7 +402,7 @@
 
   
     <h1 class="article-header">
-      PTA 1001-1005
+      PTA 001-010
     </h1>
   
   
@@ -428,11 +428,13 @@
 
   </div>
   <div class="article-entry">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <h1 id="1001-A-B-Format-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805528788582400" target="_blank" rel="noopener">1001 A+B Format (20分)</a>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：PTA乙级<p></p>
+<a id="more"></a>
+<h1 id="1001-A-B-Format-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805528788582400" target="_blank" rel="noopener">1001 A+B Format (20分)</a></h1>
 <p><a href="PTA-01-05/image-20200401154141730.png" title="image-20200401154141730" class="gallery-item"><img src="image-20200401154141730.png" alt="image-20200401154141730"></a></p>
 <h2 id="解法一">解法一</h2>
 <ul>
-<li>每三个数加入一个’,’</li>
+<li>每三个数加入一个逗号</li>
 <li>记得处理零，负号以及头部的逗号</li>
 </ul>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
@@ -509,9 +511,9 @@ void ParseInput() {
 	std::cin &gt;&gt; num;
 	for (int i = 0; i &lt; num; i++) {
 		std::cin &gt;&gt; exp &gt;&gt; coef;
-		auto key = map.find(exp);
-		if (key != map.end()) key-&gt;second += coef;
-		else map.insert(std::make_pair(exp, coef));
+		auto key = map.find(exp);                   // find exp
+		if (key != map.end()) key-&gt;second += coef;  // Update value
+		else map.insert(std::make_pair(exp, coef)); // If not exist , insert a new node
 	}
 }
 
@@ -531,7 +533,6 @@ int main() {
 <p>比上面更消耗空间，如果有更多的exp的话是没法这样做的，但这里只有1000个而且这种办法可以逆序遍历</p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
 #include &lt;iomanip&gt;
-
 
 float map[1005] = { 0 };
 int size = 0;
@@ -563,14 +564,14 @@ int main() {
     return 0;
 }
 </code></pre>
-<h1 id="Trick-of-coding">Trick of coding</h1>
+<h1 id="New-Trick-in-coding">New Trick in coding</h1>
 <ul>
 <li>
 <p>C++下的精度控制</p>
-<pre><code class="language-cpp">#include &lt;iomanip&gt;
+<pre><code class="language-cpp">// include others
+#include &lt;iomanip&gt;
 
-// main
-// ...
+// main ...
 std::cout &lt;&lt; std::setiosflags(std::ios::fixed) &lt;&lt; std::setprecision(1) &lt;&lt; floatNumber;
 </code></pre>
 </li>

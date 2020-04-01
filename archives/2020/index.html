@@ -408,7 +408,7 @@
     <div class="post-list-item article">
       <h3 class="article-header">
         <a href="/overyam/posts/668240f8/" >
-  PTA 1001-1005
+  PTA 001-010
 </a>
 
       </h3>
@@ -434,159 +434,12 @@
       </div>
       <div class="article-entry">
         
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <h1 id="1001-A-B-Format-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805528788582400" target="_blank" rel="noopener">1001 A+B Format (20分)</a>
-<p><a href="PTA-01-05/image-20200401154141730.png" title="image-20200401154141730" class="gallery-item"><img src="image-20200401154141730.png" alt="image-20200401154141730"></a></p>
-<h2 id="解法一">解法一</h2>
-<ul>
-<li>每三个数加入一个’,’</li>
-<li>记得处理零，负号以及头部的逗号</li>
-</ul>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-
-// Parse number to string
-std::string toString(int x) {
-	std::string ans = &quot;&quot;;
-	int count = 0;
-	while (x != 0) {
-		char n = x % 10;
-		ans += n+48;
-		count++;
-		if (count % 3 == 0)ans += ',';
-		x /= 10;
-	}
-	return ans;
-}
-
-int main(){
-	int a, b;
-	std::cin &gt;&gt; a &gt;&gt; b;
-	std::string str;
-	int number = a + b;
-	// Zero
-	if (number == 0) {
-		std::cout &lt;&lt; 0;
-		return 0;
-	}
-	// Negative
-	else if (number &lt; 0) {
-		str = toString(-(number));
-		std::cout &lt;&lt; '-';
-	}
-	// Positive
-	else str = toString(number);
-
-	// Linear scan
-	int len = str.length();
-	for (int i = len-1 ; i &gt; -1;i--) {
-		if (i == len - 1 &amp;&amp; str.at(i) == ',')continue;
-		else std::cout &lt;&lt; str.at(i);
-	}
-}
-</code></pre>
-<h2 id="解法二：to-string（）">解法二：to_string（）</h2>
-<p>to_string很方便，但是要动态输出逗号</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-int main() {
-    int a, b;
-    std::cin &gt;&gt; a &gt;&gt; b;
-    std::string s = std::to_string(a + b);
-    int len = s.length();
-    for (int i = 0; i &lt; len; i++) {
-        std::cout &lt;&lt; s.at(i);
-        if (s.at(i) == '-') continue;
-        if ((i + 1) % 3 == len % 3 ) std::cout &lt;&lt; &quot;,&quot;;
-    }
-    return 0;
-}
-</code></pre>
-<h1 id="1002-A-B-for-Polynomials-25分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805526272000000" target="_blank" rel="noopener">1002 A+B for Polynomials (25分)</a></h1>
-<p><a href="PTA-01-05/image-20200401163415171.png" title="image-20200401163415171" class="gallery-item"><img src="image-20200401163415171.png" alt="image-20200401163415171"></a></p>
-<h2 id="解法一：unordered-map">解法一：unordered_map</h2>
-<p>也就是哈希表，剩下的就是将输入解析到map中再遍历输出，但是由于输出顺序原因没法通过的样子…</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;unordered_map&gt;
-
-std::unordered_map&lt;float, float&gt; map;
-
-// Parse input
-void ParseInput() {
-	int num;
-	float coef, exp;
-	std::cin &gt;&gt; num;
-	for (int i = 0; i &lt; num; i++) {
-		std::cin &gt;&gt; exp &gt;&gt; coef;
-		auto key = map.find(exp);
-		if (key != map.end()) key-&gt;second += coef;
-		else map.insert(std::make_pair(exp, coef));
-	}
-}
-
-int main() {
-	ParseInput(); // First line
-	ParseInput(); // Second line
-
-	// Output
-	std::cout &lt;&lt; map.size(); 
-	for (const auto &amp;it : map) {
-		std::cout &lt;&lt; &quot; &quot; &lt;&lt; it.first &lt;&lt; &quot; &quot; &lt;&lt; it.second;
-	}
-	return 0;
-}
-</code></pre>
-<h2 id="解法二：数组模拟哈希表">解法二：数组模拟哈希表</h2>
-<p>比上面更消耗空间，如果有更多的exp的话是没法这样做的，但这里只有1000个而且这种办法可以逆序遍历</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;iomanip&gt;
-
-
-float map[1005] = { 0 };
-int size = 0;
-
-// Parse input
-void ParseInput() {
-    int num, exp;
-    float coef;
-    std::cin &gt;&gt; num;
-    for (int i = 0; i &lt; num; i++) {
-        std::cin &gt;&gt; exp &gt;&gt; coef;
-        if (map[exp] == 0)size++;       // Count size
-        map[exp] += coef;               // Update value
-        if (map[exp] == 0)size--;       // If coef back to zero , delete it , or you have to transverse the map again
-    }
-}
-
-int main() {
-    ParseInput(); // First line
-    ParseInput(); // Second line
-
-    std::cout &lt;&lt; size;
-
-    for (int i = 1000; i &gt;= 0; i--) {
-        if (map[i] != 0.0)
-            std::cout &lt;&lt; &quot; &quot; &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; std::setiosflags(std::ios::fixed) &lt;&lt; std::setprecision(1) &lt;&lt; map[i]; 
-        // fix the format of float
-    }
-    return 0;
-}
-</code></pre>
-<h1 id="Trick-of-coding">Trick of coding</h1>
-<ul>
-<li>
-<p>C++下的精度控制</p>
-<pre><code class="language-cpp">#include &lt;iomanip&gt;
-
-// main
-// ...
-std::cout &lt;&lt; std::setiosflags(std::ios::fixed) &lt;&lt; std::setprecision(1) &lt;&lt; floatNumber;
-</code></pre>
-</li>
-</ul>
-</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script>
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：PTA乙级<p></p></div>
+          <p>
+            <a href="/overyam/posts/668240f8/">
+              Read More
+            </a>
+          </p>
         
       </div>
     </div>
