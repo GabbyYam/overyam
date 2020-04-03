@@ -8,26 +8,23 @@
 
 <title>
   
-    DP-Easy
+    PAT-Advanced Vector
   
 </title>
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="DP-Easy">
-<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/">
+<meta property="og:title" content="PAT-Advanced Vector">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/a1faa482/">
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232711629.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232749188.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232821593.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226233021616.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232924335.png">
-<meta property="article:published_time" content="2020-02-26T15:15:30.000Z">
-<meta property="article:modified_time" content="2020-02-27T03:25:46.192Z">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a1faa482/image-20200402200838359.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a1faa482/image-20200401163415171.png">
+<meta property="article:published_time" content="2020-04-02T12:05:54.000Z">
+<meta property="article:modified_time" content="2020-04-03T12:45:48.248Z">
 <meta property="article:author" content="GabbyYam">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="PAT-Advanced">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232711629.png">
+<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/a1faa482/image-20200402200838359.png">
 
 
   <link rel="alternative" href="/atom.xml" title="overyam" type="application/atom+xml">
@@ -401,11 +398,11 @@
       
           
 
-<article id="post-DP-Easy" class="article article-type-post">
+<article id="post-PAT-Advanced-HashTable" class="article article-type-post">
 
   
     <h1 class="article-header">
-      DP-Easy
+      PAT-Advanced Vector
     </h1>
   
   
@@ -414,7 +411,7 @@
     
   <div class="article-info">
     <span class="article-date">
-  2020-02-26
+  2020-04-02
 </span>
 
     
@@ -425,146 +422,192 @@
 
     
 	<span class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a></li></ul>
 	</span>
 
 
   </div>
   <div class="article-entry">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract：</strong> 更新部分<code>Easy</code>难度 <code>DP</code>相关题解<p></p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：不定长Vector &amp; STL<p></p>
 <a id="more"></a>
-<h1 id="70-Climbing-Stairs"><a href="https://leetcode-cn.com/problems/climbing-stairs/" target="_blank" rel="noopener">70. Climbing Stairs</a></h1>
-<p><a href="DP-Easy/image-20200226232711629.png" title="image-20200226232711629" class="gallery-item"><img src="image-20200226232711629.png" alt="image-20200226232711629"></a></p>
-<h2 id="解法一：DP">解法一：DP</h2>
-<ul>
-<li><strong>基本情况</strong>：一层楼梯有一种方法，两层楼梯两种方法，因此dp[0]=1,dp[1]=2</li>
-<li><strong>转移方程</strong>：对于大于等于2的层数，dp[n-1]=dp[n-2]+dp[n-3]，即为一般解</li>
-</ul>
-<pre><code class="language-java">class Solution {
-    public int climbStairs(int n) {
-        if(n&lt;=1){return 1;}
-        if(n==2){return 2;}
-        int[] dp=new int[n];
-        dp[0]=1;
-        dp[1]=2;
-        for(int i=2;i&lt;n;i++){dp[i]=dp[i-1]+dp[i-2];}
-        return dp[n-1];
-    }
-}
-</code></pre>
-<h1 id="121-Best-Time-to-Buy-and-Sell-Stock"><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121. Best Time to Buy and Sell Stock</a></h1>
-<p><a href="DP-Easy/image-20200226232749188.png" title="image-20200226232749188" class="gallery-item"><img src="image-20200226232749188.png" alt="image-20200226232749188"></a></p>
-<h2 id="解法一：线性扫描">解法一：线性扫描</h2>
-<p>线性扫描，考虑到不能只求最大值和最小值，但是记录Index也是无用功</p>
-<p>不妨只更新最小值，那么计算利润的值就必定是在最小值之后，那就只需无脑更新最大利润就行了</p>
-<p>时间复杂度：$ O(N) $</p>
-<pre><code class="language-java">class Solution {
-    public int maxProfit(int[] prices) {
-        int maxProfit=0,minPrice=Integer.MAX_VALUE; //只需要最大利润和最小值
-        for(int i=0;i&lt;prices.length;i++){
-            minPrice=Math.min(prices[i],minPrice); 
-            maxProfit=Math.max(maxProfit,prices[i]-minPrice);
-        }
-        return maxProfit;
-    }
-}
-</code></pre>
-<h2 id="解法二：DP">解法二：DP</h2>
-<pre><code class="language-java">//下次写(?)
-</code></pre>
-<h1 id="198-House-Robber"><a href="https://leetcode-cn.com/problems/house-robber/" target="_blank" rel="noopener">198. House Robber</a></h1>
-<p><a href="DP-Easy/image-20200226232821593.png" title="image-20200226232821593" class="gallery-item"><img src="image-20200226232821593.png" alt="image-20200226232821593"></a></p>
-<h2 id="解法一：DP-v2">解法一：DP</h2>
-<ul>
-<li>
-<p><strong>特殊情况</strong>：可抢劫的房子不到三家，即0,1,2</p>
-</li>
-<li>
-<p><strong>基本情况</strong>：第一家的价值是其自身，第二家的价值是第一家和第二家价值的最大值，即</p>
-<pre><code class="language-java">dp[0]=nums[0];
-dp[1]=Math.max(nums[0],nums[1]);
-</code></pre>
-</li>
-<li>
-<p><strong>转移方程</strong>：由基本情况可以推出，第n家的价值</p>
-<pre><code class="language-java">dp[n]=Math.max(
-    dp[n-2]+nums[n],
-	dp[n-1]
-);
-</code></pre>
-</li>
-<li>
-<p><strong>结果</strong>：不是最后一家就是倒数第二家，取最大值即可</p>
-</li>
-</ul>
-<pre><code class="language-java">class Solution {
-    public int rob(int[] nums) {
-        //三种特殊情况,不考虑会越界
-        if(nums.length==0 || nums==null){return 0;}
-        if(nums.length==1){return nums[0];}
-        if(nums.length==2){return Math.max(nums[0],nums[1]);}
-        int[] dp=new int[nums.length];
-        //两种基本情况
-        dp[0]=nums[0];
-        dp[1]=Math.max(dp[0],nums[1]);
-        //状态转移
-        for(int i=2;i&lt;nums.length;i++){dp[i]=Math.max((dp[i-2]+nums[i]),dp[i-1]);}
-        //最后两家的价值取最大值即可
-        return Math.max(dp[nums.length-1],dp[nums.length-2]);
-    }
-}
-</code></pre>
-<h1 id="303-Range-Sum-Query-Immutable"><a href="https://leetcode-cn.com/problems/range-sum-query-immutable/" target="_blank" rel="noopener">303. Range Sum Query - Immutable</a></h1>
-<p><a href="DP-Easy/image-20200226233021616.png" title="image-20200226233021616" class="gallery-item"><img src="image-20200226233021616.png" alt="image-20200226233021616"></a></p>
-<h2 id="解法一：缓存">解法一：缓存</h2>
-<p>由于会大量调用，所以如果每次都遍历一次来计算会很慢，所以这里需要加入缓存</p>
-<p>nums传入初始化时，就把到n为止的sum计算出来，结果返回两个边界的差值就行了</p>
-<pre><code class="language-java">class NumArray {
+<h1 id="1039-Course-List-for-Student-25分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805447855292416" target="_blank" rel="noopener">1039 Course List for Student (25分)</a></h1>
+<p><a href="PAT-Advanced-HashTable/image-20200402200838359.png" title="image-20200402200838359" class="gallery-item"><img src="image-20200402200838359.png" alt="image-20200402200838359"></a></p>
+<h2 id="解法一：unordered-map【超时】">解法一：unordered_map【超时】</h2>
+<p>第一反应hashmap，提交发现居然超时，看了<a href="https://www.liuchuo.net/archives/2145" target="_blank" rel="noopener">柳婼のblog</a>才知道是string cin cout这几个东西速度不行</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
 
-    private int[] sum;
+int c_num, s_num;
+int curr_idx, curr_num;
+std::string curr_name;
+std::unordered_map&lt;std::string, std::string&gt; map;
 
-    public NumArray(int[] nums) {
-        sum=new int[nums.length+1];
-        for(int i=0;i&lt;nums.length;i++){
-            sum[i+1]=nums[i]+sum[i];
-        }
-    }
-    
-    public int sumRange(int i, int j) {
-        return sum[j+1]-sum[i];
-        //注意这里是j+1 和 i ，因为如果是i+1的话，会把nums[i]也算进去，那得到的和就没有nums[i]了
-    }
+void ParseInput() {
+	std::cin &gt;&gt; s_num &gt;&gt; c_num;
+	for (int i = 0; i &lt; c_num; i++) {
+		std::cin &gt;&gt; curr_idx &gt;&gt; curr_num;
+		for (int j = 0; j &lt; curr_num; j++) {
+			std::cin &gt;&gt; curr_name;
+			auto key = map.find(curr_name);
+			if (key != map.end()) key-&gt;second += &quot; &quot; + std::to_string(curr_idx);
+			else map.insert(std::make_pair(curr_name,&quot; &quot; + std::to_string(curr_idx)));
+		}
+	}
+}
+
+int main() {
+	ParseInput();
+	for (int i = 0; i &lt; s_num; i++) {
+		std::cin &gt;&gt; curr_name;
+		std::cout &lt;&lt; curr_name;
+		auto key = map.find(curr_name);
+		if (key != map.end())std::cout &lt;&lt; key-&gt;second &lt;&lt; std::endl;
+		else std::cout &lt;&lt; &quot; 0&quot; &lt;&lt; std::endl;
+	}	
 }
 </code></pre>
-<h1 id="62-Unique-Paths（Medium？Easy？）"><a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">62. Unique Paths（<mark>Medium？Easy？</mark>）</a></h1>
-<p><a href="DP-Easy/image-20200226232924335.png" title="image-20200226232924335" class="gallery-item"><img src="image-20200226232924335.png" alt="image-20200226232924335"></a></p>
-<h2 id="解法一：DP-v3">解法一：DP</h2>
+<h2 id="解法二：手动hash-cstdio">解法二：手动hash + cstdio</h2>
+<p>手动hash对我来说还是比较少见的操作，唯一一次是在Jdk1.8的String源码里看到过类似的东西</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+int s_num, c_num, curr_idx, curr_num, id = 0;
+char curr_name[5];
+
+const int maxn = 26 * 26 * 26 * 10 + 10;
+std::vector&lt;int&gt; map[maxn];
+
+int hash(char* name) {
+    int id = 0;
+    for (int i = 0; i &lt; 3; i++)
+        id = 26 * id + (name[i] - 'A');
+    id = id * 10 + (name[3] - '0');
+    return id;
+}
+
+void ParseInput() {
+    scanf(&quot;%d %d&quot;, &amp;s_num, &amp;c_num);
+
+    for (int i = 0; i &lt; c_num; i++) {
+        scanf(&quot;%d %d&quot;, &amp;curr_idx, &amp;curr_num);
+
+        for (int j = 0; j &lt; curr_num; j++) {
+            scanf(&quot;%s&quot;, curr_name);
+            id = hash(curr_name);
+            map[id].push_back(curr_idx);
+        }
+    }
+}
+
+int main() {
+    ParseInput();
+
+    for (int i = 0; i &lt; s_num; i++) {
+        scanf(&quot;%s&quot;, curr_name);
+
+        id = hash(curr_name);
+        std::sort(map[id].begin(), map[id].end());
+
+        printf(&quot;%s %lu&quot;, curr_name, map[id].size());
+
+        for (int j = 0; j &lt; map[id].size(); j++)
+            printf(&quot; %d&quot;, map[id][j]);
+
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="1002-A-B-for-Polynomials-25分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805526272000000" target="_blank" rel="noopener">1002 A+B for Polynomials (25分)</a></h1>
+<p><a href="PAT-Advanced-HashTable/image-20200401163415171.png" title="image-20200401163415171" class="gallery-item"><img src="image-20200401163415171.png" alt="image-20200401163415171"></a></p>
+<h2 id="解法一：unordered-map">解法一：unordered_map</h2>
+<p>也就是哈希表，剩下的就是将输入解析到map中再遍历输出，但是由于输出顺序原因没法通过的样子…</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+
+std::unordered_map&lt;float, float&gt; map;
+
+// Parse input
+void ParseInput() {
+	int num;
+	float coef, exp;
+	std::cin &gt;&gt; num;
+	for (int i = 0; i &lt; num; i++) {
+		std::cin &gt;&gt; exp &gt;&gt; coef;
+		auto key = map.find(exp);                   // find exp
+		if (key != map.end()) key-&gt;second += coef;  // Update value
+		else map.insert(std::make_pair(exp, coef)); // If not exist , insert a new node
+	}
+}
+
+int main() {
+	ParseInput(); // First line
+	ParseInput(); // Second line
+
+	// Output
+	std::cout &lt;&lt; map.size(); 
+	for (const auto &amp;it : map) {
+		std::cout &lt;&lt; &quot; &quot; &lt;&lt; it.first &lt;&lt; &quot; &quot; &lt;&lt; it.second;
+	}
+	return 0;
+}
+</code></pre>
+<h2 id="解法二：数组模拟哈希表">解法二：数组模拟哈希表</h2>
+<p>比上面更消耗空间，如果有更多的exp的话是没法这样做的，但这里只有1000个而且这种办法可以逆序遍历</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+float map[1005] = { 0 };
+int size = 0;
+
+// Parse input
+void ParseInput() {
+    int num, exp;
+    float coef;
+    std::cin &gt;&gt; num;
+    for (int i = 0; i &lt; num; i++) {
+        std::cin &gt;&gt; exp &gt;&gt; coef;
+        if (map[exp] == 0)size++;       // Count size
+        map[exp] += coef;               // Update value
+        if (map[exp] == 0)size--;       // If coef back to zero , delete it , or you have to transverse the map again
+    }
+}
+
+int main() {
+    ParseInput(); // First line
+    ParseInput(); // Second line
+
+    std::cout &lt;&lt; size;
+
+    for (int i = 1000; i &gt;= 0; i--) {
+        if (map[i] != 0.0)
+            std::cout &lt;&lt; &quot; &quot; &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; std::setiosflags(std::ios::fixed) &lt;&lt; std::setprecision(1) &lt;&lt; map[i]; 
+        // fix the format of float
+    }
+    return 0;
+}
+</code></pre>
+<h1 id="New-Trick-in-coding">New Trick in coding</h1>
 <ul>
 <li>
-<p><strong>基本情况</strong>：每个格子对应的解数应为</p>
-</li>
-<li>
-<p><strong>转移方程</strong>：每个格子对应的解数应为 左方格子的解数+上方格子的解数，因此</p>
-<pre><code class="language-java">dp[i][j]=dp[i-1][j]+dp[i][j-1];
+<p>C++下的精度控制</p>
+<pre><code class="language-cpp">// include others
+#include &lt;iomanip&gt;
+
+// main ...
+std::cout &lt;&lt; std::setiosflags(std::ios::fixed) &lt;&lt; std::setprecision(1) &lt;&lt; floatNumber;
 </code></pre>
 </li>
 <li>
-<p><strong>边界问题</strong>：由于边界上的格子上方或左方没有格子，直接计算会导致越界，因此长宽各扩展一格<mark>val=0</mark>的格子来作辅助</p>
-</li>
-</ul>
-<pre><code class="language-java">class Solution {
-    public int uniquePaths(int m, int n) {
-        int[][] dp = new int[m+1][n+1]; //长宽都+1，自动初始化为0作为辅助
-        for(int i=1;i&lt;=m;i++){
-            for(int j=1;j&lt;=n;j++){
-                dp[i][j]=(i==1&amp;&amp;j==1)?1:dp[i-1][j]+dp[i][j-1];
-                //dp[1][1]为1，其他则由其按转移方程推得
-            }
-        }
-        return dp[m][n];//右下角即为结果
-    }
+<p>Lambda遍历unordered_map</p>
+<pre><code class="language-cpp">for(const auto&amp; it : map){
+    std::cout &lt;&lt; it-&gt;first &lt;&lt; &quot; &quot; &lt;&lt; it-&gt;second &lt;&lt; std::endl;
 }
 </code></pre>
+</li>
+</ul>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'

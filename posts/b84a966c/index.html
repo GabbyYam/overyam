@@ -8,26 +8,26 @@
 
 <title>
   
-    DP-Easy
+    PAT-Advanced 热身题
   
 </title>
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="DP-Easy">
-<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/">
+<meta property="og:title" content="PAT-Advanced 热身题">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/b84a966c/">
 <meta property="og:site_name" content="overyam">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232711629.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232749188.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232821593.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226233021616.png">
-<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232924335.png">
-<meta property="article:published_time" content="2020-02-26T15:15:30.000Z">
-<meta property="article:modified_time" content="2020-02-27T03:25:46.192Z">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b84a966c/image-20200402180429421.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b84a966c/image-20200403171941141.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b84a966c/image-20200403174240234.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b84a966c/image-20200403181910338.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b84a966c/image-20200403204100393.png">
+<meta property="article:published_time" content="2020-04-02T09:59:10.000Z">
+<meta property="article:modified_time" content="2020-04-03T12:42:24.755Z">
 <meta property="article:author" content="GabbyYam">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="PAT-Advanced">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/d0e387e3/image-20200226232711629.png">
+<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/b84a966c/image-20200402180429421.png">
 
 
   <link rel="alternative" href="/atom.xml" title="overyam" type="application/atom+xml">
@@ -401,11 +401,11 @@
       
           
 
-<article id="post-DP-Easy" class="article article-type-post">
+<article id="post-PAT-Advanced-热身题" class="article article-type-post">
 
   
     <h1 class="article-header">
-      DP-Easy
+      PAT-Advanced 热身题
     </h1>
   
   
@@ -414,7 +414,7 @@
     
   <div class="article-info">
     <span class="article-date">
-  2020-02-26
+  2020-04-02
 </span>
 
     
@@ -425,144 +425,207 @@
 
     
 	<span class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a></li></ul>
 	</span>
 
 
   </div>
   <div class="article-entry">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract：</strong> 更新部分<code>Easy</code>难度 <code>DP</code>相关题解<p></p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：基本上就是送分题，尽量写快一点吧<p></p>
 <a id="more"></a>
-<h1 id="70-Climbing-Stairs"><a href="https://leetcode-cn.com/problems/climbing-stairs/" target="_blank" rel="noopener">70. Climbing Stairs</a></h1>
-<p><a href="DP-Easy/image-20200226232711629.png" title="image-20200226232711629" class="gallery-item"><img src="image-20200226232711629.png" alt="image-20200226232711629"></a></p>
-<h2 id="解法一：DP">解法一：DP</h2>
-<ul>
-<li><strong>基本情况</strong>：一层楼梯有一种方法，两层楼梯两种方法，因此dp[0]=1,dp[1]=2</li>
-<li><strong>转移方程</strong>：对于大于等于2的层数，dp[n-1]=dp[n-2]+dp[n-3]，即为一般解</li>
-</ul>
-<pre><code class="language-java">class Solution {
-    public int climbStairs(int n) {
-        if(n&lt;=1){return 1;}
-        if(n==2){return 2;}
-        int[] dp=new int[n];
-        dp[0]=1;
-        dp[1]=2;
-        for(int i=2;i&lt;n;i++){dp[i]=dp[i-1]+dp[i-2];}
-        return dp[n-1];
-    }
-}
-</code></pre>
-<h1 id="121-Best-Time-to-Buy-and-Sell-Stock"><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121. Best Time to Buy and Sell Stock</a></h1>
-<p><a href="DP-Easy/image-20200226232749188.png" title="image-20200226232749188" class="gallery-item"><img src="image-20200226232749188.png" alt="image-20200226232749188"></a></p>
-<h2 id="解法一：线性扫描">解法一：线性扫描</h2>
-<p>线性扫描，考虑到不能只求最大值和最小值，但是记录Index也是无用功</p>
-<p>不妨只更新最小值，那么计算利润的值就必定是在最小值之后，那就只需无脑更新最大利润就行了</p>
-<p>时间复杂度：$ O(N) $</p>
-<pre><code class="language-java">class Solution {
-    public int maxProfit(int[] prices) {
-        int maxProfit=0,minPrice=Integer.MAX_VALUE; //只需要最大利润和最小值
-        for(int i=0;i&lt;prices.length;i++){
-            minPrice=Math.min(prices[i],minPrice); 
-            maxProfit=Math.max(maxProfit,prices[i]-minPrice);
-        }
-        return maxProfit;
-    }
-}
-</code></pre>
-<h2 id="解法二：DP">解法二：DP</h2>
-<pre><code class="language-java">//下次写(?)
-</code></pre>
-<h1 id="198-House-Robber"><a href="https://leetcode-cn.com/problems/house-robber/" target="_blank" rel="noopener">198. House Robber</a></h1>
-<p><a href="DP-Easy/image-20200226232821593.png" title="image-20200226232821593" class="gallery-item"><img src="image-20200226232821593.png" alt="image-20200226232821593"></a></p>
-<h2 id="解法一：DP-v2">解法一：DP</h2>
-<ul>
-<li>
-<p><strong>特殊情况</strong>：可抢劫的房子不到三家，即0,1,2</p>
-</li>
-<li>
-<p><strong>基本情况</strong>：第一家的价值是其自身，第二家的价值是第一家和第二家价值的最大值，即</p>
-<pre><code class="language-java">dp[0]=nums[0];
-dp[1]=Math.max(nums[0],nums[1]);
-</code></pre>
-</li>
-<li>
-<p><strong>转移方程</strong>：由基本情况可以推出，第n家的价值</p>
-<pre><code class="language-java">dp[n]=Math.max(
-    dp[n-2]+nums[n],
-	dp[n-1]
-);
-</code></pre>
-</li>
-<li>
-<p><strong>结果</strong>：不是最后一家就是倒数第二家，取最大值即可</p>
-</li>
-</ul>
-<pre><code class="language-java">class Solution {
-    public int rob(int[] nums) {
-        //三种特殊情况,不考虑会越界
-        if(nums.length==0 || nums==null){return 0;}
-        if(nums.length==1){return nums[0];}
-        if(nums.length==2){return Math.max(nums[0],nums[1]);}
-        int[] dp=new int[nums.length];
-        //两种基本情况
-        dp[0]=nums[0];
-        dp[1]=Math.max(dp[0],nums[1]);
-        //状态转移
-        for(int i=2;i&lt;nums.length;i++){dp[i]=Math.max((dp[i-2]+nums[i]),dp[i-1]);}
-        //最后两家的价值取最大值即可
-        return Math.max(dp[nums.length-1],dp[nums.length-2]);
-    }
-}
-</code></pre>
-<h1 id="303-Range-Sum-Query-Immutable"><a href="https://leetcode-cn.com/problems/range-sum-query-immutable/" target="_blank" rel="noopener">303. Range Sum Query - Immutable</a></h1>
-<p><a href="DP-Easy/image-20200226233021616.png" title="image-20200226233021616" class="gallery-item"><img src="image-20200226233021616.png" alt="image-20200226233021616"></a></p>
-<h2 id="解法一：缓存">解法一：缓存</h2>
-<p>由于会大量调用，所以如果每次都遍历一次来计算会很慢，所以这里需要加入缓存</p>
-<p>nums传入初始化时，就把到n为止的sum计算出来，结果返回两个边界的差值就行了</p>
-<pre><code class="language-java">class NumArray {
+<h1 id="1036-Boys-vs-Girls-25分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805453203030016" target="_blank" rel="noopener">1036 Boys vs Girls (25分)</a></h1>
+<p><a href="PAT%E7%94%B2%E7%BA%A7-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200402180429421.png" title="image-20200402180429421" class="gallery-item"><img src="image-20200402180429421.png" alt="image-20200402180429421"></a></p>
+<h2 id="完整解法">完整解法</h2>
+<p>模拟题意就行了，没有算法</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
 
-    private int[] sum;
+struct Student {      // Input student structure
+	std::string name;
+	char gender;
+	std::string ID;
+	int grade;
+};
 
-    public NumArray(int[] nums) {
-        sum=new int[nums.length+1];
-        for(int i=0;i&lt;nums.length;i++){
-            sum[i+1]=nums[i]+sum[i];
-        }
-    }
-    
-    public int sumRange(int i, int j) {
-        return sum[j+1]-sum[i];
-        //注意这里是j+1 和 i ，因为如果是i+1的话，会把nums[i]也算进去，那得到的和就没有nums[i]了
-    }
+/* Global */
+int num;                    // Input number
+Student student, Girl, Boy; // maxGirl &amp; minBoy
+
+void ParseInput() {
+	Girl.grade = -1;
+	Boy.grade = 101;
+	std::cin &gt;&gt; num;
+	for (int i = 0; i &lt; num; i++) {  // Update max and min if it's exist
+		std::cin &gt;&gt; student.name &gt;&gt; student.gender &gt;&gt; student.ID &gt;&gt; student.grade;
+		if (student.gender == 'F' &amp;&amp; student.grade &gt; Girl.grade) Girl = student;
+		if (student.gender == 'M' &amp;&amp; student.grade &lt; Boy.grade) Boy = student;
+	}
+}
+
+void OutPutStudent(const Student s) { // give an output of student
+	std::cout &lt;&lt; s.name &lt;&lt; &quot; &quot; &lt;&lt; s.ID &lt;&lt; std::endl;
+}
+
+int main() {
+	ParseInput();
+
+	if (Girl.grade != -1) OutPutStudent(Girl);
+	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
+	
+	if (Boy.grade != 101) OutPutStudent(Boy);
+	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
+
+	if (Boy.grade == 101 || Girl.grade == -1) std::cout &lt;&lt; &quot;NA&quot; &lt;&lt; std::endl;
+	else std::cout &lt;&lt; Girl.grade - Boy.grade;
 }
 </code></pre>
-<h1 id="62-Unique-Paths（Medium？Easy？）"><a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">62. Unique Paths（<mark>Medium？Easy？</mark>）</a></h1>
-<p><a href="DP-Easy/image-20200226232924335.png" title="image-20200226232924335" class="gallery-item"><img src="image-20200226232924335.png" alt="image-20200226232924335"></a></p>
-<h2 id="解法一：DP-v3">解法一：DP</h2>
-<ul>
-<li>
-<p><strong>基本情况</strong>：每个格子对应的解数应为</p>
-</li>
-<li>
-<p><strong>转移方程</strong>：每个格子对应的解数应为 左方格子的解数+上方格子的解数，因此</p>
-<pre><code class="language-java">dp[i][j]=dp[i-1][j]+dp[i][j-1];
+<h2 id="压缩版">压缩版</h2>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+struct Student {
+	std::string name;
+	char gender;
+	std::string ID;
+	int grade;
+};
+int main() {
+	int num;
+    std::cin &gt;&gt; num;
+	Student s, Girl, Boy;
+	Girl.grade = -1,Boy.grade = 101;
+	for (int i = 0; i &lt; num; i++) {
+		std::cin &gt;&gt; s.name &gt;&gt; s.gender &gt;&gt; s.ID &gt;&gt; s.grade;
+		if (s.gender == 'F' &amp;&amp; s.grade &gt; Girl.grade) Girl = s;
+		if (s.gender == 'M' &amp;&amp; s.grade &lt; Boy.grade) Boy = s;
+	}
+	if (Girl.grade != -1) std::cout &lt;&lt; Girl.name &lt;&lt; &quot; &quot; &lt;&lt; Girl.ID &lt;&lt; std::endl;
+	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
+	if (Boy.grade != 101) std::cout &lt;&lt; Boy.name &lt;&lt; &quot; &quot; &lt;&lt; Boy.ID &lt;&lt; std::endl;
+	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
+	if (Boy.grade == 101 || Girl.grade == -1) std::cout &lt;&lt; &quot;NA&quot; &lt;&lt; std::endl;
+	else std::cout &lt;&lt; Girl.grade - Boy.grade;
+}
 </code></pre>
-</li>
-<li>
-<p><strong>边界问题</strong>：由于边界上的格子上方或左方没有格子，直接计算会导致越界，因此长宽各扩展一格<mark>val=0</mark>的格子来作辅助</p>
-</li>
-</ul>
-<pre><code class="language-java">class Solution {
-    public int uniquePaths(int m, int n) {
-        int[][] dp = new int[m+1][n+1]; //长宽都+1，自动初始化为0作为辅助
-        for(int i=1;i&lt;=m;i++){
-            for(int j=1;j&lt;=n;j++){
-                dp[i][j]=(i==1&amp;&amp;j==1)?1:dp[i-1][j]+dp[i][j-1];
-                //dp[1][1]为1，其他则由其按转移方程推得
-            }
-        }
-        return dp[m][n];//右下角即为结果
-    }
+<h1 id="1005-Spell-It-Right-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805519074574336" target="_blank" rel="noopener">1005 Spell It Right (20分)</a></h1>
+<p><a href="PAT-Advanced-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200403171941141.png" title="image-20200403171941141" class="gallery-item"><img src="image-20200403171941141.png" alt="image-20200403171941141"></a></p>
+<h2 id="完整解法-v2">完整解法</h2>
+<p>100次方显然是提示我们用字符串读入，所幸只需要逐个相加，那么这个问题就变成了将100个以内的个位数相加再逐个输出对应字符串的幼儿园问题了</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+int sum = 0;
+
+void ParseInput() {
+	std::string s;
+	std::getline(std::cin, s);
+	for (int i = 0; i &lt; s.length(); i++) {
+		if (s[i] != 0) sum += s[i] - 48;
+	}
+}
+
+void OutPutN(int num) {
+	std::string s = std::to_string(num);
+	for (int i = 0; i &lt; s.length();i++) {
+		if (s[i] == '0')std::cout &lt;&lt; &quot;zero&quot;;
+		if (s[i] == '1')std::cout &lt;&lt; &quot;one&quot;;
+		if (s[i] == '2')std::cout &lt;&lt; &quot;two&quot;;
+		if (s[i] == '3')std::cout &lt;&lt; &quot;three&quot;;
+		if (s[i] == '4')std::cout &lt;&lt; &quot;four&quot;;
+		if (s[i] == '5')std::cout &lt;&lt; &quot;five&quot;;
+		if (s[i] == '6')std::cout &lt;&lt; &quot;six&quot;;
+		if (s[i] == '7')std::cout &lt;&lt; &quot;seven&quot;;
+		if (s[i] == '8')std::cout &lt;&lt; &quot;eight&quot;;
+		if (s[i] == '9')std::cout &lt;&lt; &quot;nine&quot;;
+		if (i != s.length() - 1)std::cout &lt;&lt; &quot; &quot;;
+	}
+}
+
+int main() {
+	ParseInput();
+	OutPutN(sum);
+}
+</code></pre>
+<h1 id="1008-Elevator-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805511923286016" target="_blank" rel="noopener">1008 Elevator (20分)</a></h1>
+<p><a href="PAT-Advanced-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200403174240234.png" title="image-20200403174240234" class="gallery-item"><img src="image-20200403174240234.png" alt="image-20200403174240234"></a></p>
+<h2 id="完整解法-v3">完整解法</h2>
+<p>模拟题意，造一个变量维护上一次的层数，幼儿园题目</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+	int sum = 0, num, curr, prev = 0;
+	std::cin &gt;&gt; num;
+	for (int i = 0; i &lt; num; i++) {
+		std::cin &gt;&gt; curr;
+		int diff = curr - prev;
+		if (diff &gt; 0)sum += 6 * diff;
+		else sum += -4 * diff;
+		sum += 5;
+		prev = curr;
+	}
+	std::cout &lt;&lt; sum;
+}
+</code></pre>
+<h1 id="1011-World-Cup-Betting-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805504927186944" target="_blank" rel="noopener">1011 World Cup Betting (20分)</a></h1>
+<p><a href="PAT-Advanced-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200403181910338.png" title="image-20200403181910338" class="gallery-item"><img src="image-20200403181910338.png" alt="image-20200403181910338"></a></p>
+<h2 id="完整解法-v4">完整解法</h2>
+<p>题目看着挺长，其实就是求三组最大值这种幼儿园操作</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+	float curr,max[3];
+	for (int i = 0; i &lt; 3; i++) {
+		char idx;
+		for (int j = 0; j &lt; 3; j++) {
+			std::cin &gt;&gt; curr;
+			if (curr &gt; max[i]) {
+				max[i] = curr;
+				if (j == 0)idx = 'W';
+				if (j == 1)idx = 'T';
+				if (j == 2)idx = 'L';
+			}
+		}
+		std::cout &lt;&lt; idx &lt;&lt; &quot; &quot;;
+	}
+	printf(&quot;%.2f&quot;, (max[0] * max[1] * max[2] * 0.65 - 1) * 2);
+}
+</code></pre>
+<h1 id="1015-Reversible-Primes-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805495863296000" target="_blank" rel="noopener">1015 Reversible Primes (20分)</a></h1>
+<p><a href="PAT-Advanced-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200403204100393.png" title="image-20200403204100393" class="gallery-item"><img src="image-20200403204100393.png" alt="image-20200403204100393"></a></p>
+<h1 id="完整解法-v5">完整解法</h1>
+<p>要知道怎么转进制</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+bool isPrime(int num) {
+	if (num &lt;= 1) return false;
+	for (int i = 2; i &lt;= std::sqrt(num); i++) {
+		if (num % i == 0) return false;
+	}
+	return true;
+}
+
+int main() {
+	int num, radix;
+	while (std::cin &gt;&gt; num) {
+		std::cin &gt;&gt; radix;
+
+		// First check
+		if (!isPrime(num)) {
+			std::cout &lt;&lt; &quot;No&quot; &lt;&lt; std::endl;
+			continue;
+		}
+
+		// Transform to radix base system
+		int len = 0, arr[100];
+		do {
+			arr[len++] = num % radix;
+			num = num / radix;
+		} while (num != 0);
+		for (int i = 0; i &lt; len; i++)
+			num = num * radix + arr[i];
+
+		// Second check
+		if (!isPrime(num))std::cout &lt;&lt; &quot;No&quot; &lt;&lt; std::endl;
+		else std::cout &lt;&lt; &quot;Yes&quot; &lt;&lt; std::endl;
+	}
 }
 </code></pre>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
