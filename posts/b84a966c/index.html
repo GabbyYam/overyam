@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b84a966c/image-20200403204100393.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/b84a966c/image-20200401154141730.png">
 <meta property="article:published_time" content="2020-04-02T09:59:10.000Z">
-<meta property="article:modified_time" content="2020-04-04T19:20:49.231Z">
+<meta property="article:modified_time" content="2020-04-06T13:19:01.804Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="PAT-Advanced">
 <meta name="twitter:card" content="summary">
@@ -248,21 +248,21 @@
             
               <li class="category-list-container">
                 <a href="javascript:;">分类</a>
-                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">5</span></li></ul>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Reading-report/">Reading report</a><span class="category-list-count">1</span></li></ul>
               </li>
             
           
             
               <li class="tag-list-container">
                 <a href="javascript:;">标签</a>
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">11</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Astronomy/" rel="tag">Astronomy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-A/" rel="tag">PAT-A</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">11</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">归档</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">20</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">21</span></li></ul>
               </li>
             
           
@@ -375,7 +375,7 @@
       
           
 
-<article id="post-PAT-Advanced-水题集锦" class="article article-type-post">
+<article id="post-PAT-Advanced-热身题" class="article article-type-post">
 
   
     <h1 class="article-header">
@@ -408,7 +408,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：基本上就是送分题，尽量写快一点吧<p></p>
 <a id="more"></a>
 <h1 id="1036-Boys-vs-Girls-25分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805453203030016" target="_blank" rel="noopener">1036 Boys vs Girls (25分)</a></h1>
-<p><a href="PAT%E7%94%B2%E7%BA%A7-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200402180429421.png" title="image-20200402180429421" class="gallery-item"><img src="image-20200402180429421.png" alt="image-20200402180429421"></a></p>
+<p><a href="PAT-Advanced-%E7%83%AD%E8%BA%AB%E9%A2%98/image-20200402180429421.png" title="image-20200402180429421" class="gallery-item"><img src="image-20200402180429421.png" alt="image-20200402180429421"></a></p>
 <h2 id="完整解法">完整解法</h2>
 <p>模拟题意就行了，没有算法</p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
@@ -422,34 +422,34 @@ struct Student {      // Input student structure
 
 /* Global */
 int num;                    // Input number
-Student student, Girl, Boy; // maxGirl &amp; minBoy
+Student student, girl, boy; // maxGirl &amp; minBoy
 
 void ParseInput() {
-	Girl.grade = -1;
-	Boy.grade = 101;
+	girl.grade = -1;
+	boy.grade = 101;
 	std::cin &gt;&gt; num;
 	for (int i = 0; i &lt; num; i++) {  // Update max and min if it's exist
 		std::cin &gt;&gt; student.name &gt;&gt; student.gender &gt;&gt; student.ID &gt;&gt; student.grade;
-		if (student.gender == 'F' &amp;&amp; student.grade &gt; Girl.grade) Girl = student;
-		if (student.gender == 'M' &amp;&amp; student.grade &lt; Boy.grade) Boy = student;
+		if (student.gender == 'F' &amp;&amp; student.grade &gt; girl.grade) girl = student;
+		if (student.gender == 'M' &amp;&amp; student.grade &lt; boy.grade) boy = student;
 	}
 }
 
-void OutPutStudent(const Student s) { // give an output of student
+void OutPutStudent(const Student&amp; s) { // give an output of student
 	std::cout &lt;&lt; s.name &lt;&lt; &quot; &quot; &lt;&lt; s.ID &lt;&lt; std::endl;
 }
 
 int main() {
 	ParseInput();
 
-	if (Girl.grade != -1) OutPutStudent(Girl);
-	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
-	
-	if (Boy.grade != 101) OutPutStudent(Boy);
+	if (girl.grade != -1) OutPutStudent(girl);
 	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
 
-	if (Boy.grade == 101 || Girl.grade == -1) std::cout &lt;&lt; &quot;NA&quot; &lt;&lt; std::endl;
-	else std::cout &lt;&lt; Girl.grade - Boy.grade;
+	if (boy.grade != 101) OutPutStudent(boy);
+	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
+
+	if (boy.grade == 101 || girl.grade == -1) std::cout &lt;&lt; &quot;NA&quot; &lt;&lt; std::endl;
+	else std::cout &lt;&lt; girl.grade - boy.grade;
 }
 </code></pre>
 <h2 id="压缩版">压缩版</h2>
@@ -462,20 +462,20 @@ struct Student {
 };
 int main() {
 	int num;
-    std::cin &gt;&gt; num;
-	Student s, Girl, Boy;
-	Girl.grade = -1,Boy.grade = 101;
+	std::cin &gt;&gt; num;
+	Student s, girl, boy;
+	girl.grade = -1, boy.grade = 101;
 	for (int i = 0; i &lt; num; i++) {
 		std::cin &gt;&gt; s.name &gt;&gt; s.gender &gt;&gt; s.ID &gt;&gt; s.grade;
-		if (s.gender == 'F' &amp;&amp; s.grade &gt; Girl.grade) Girl = s;
-		if (s.gender == 'M' &amp;&amp; s.grade &lt; Boy.grade) Boy = s;
+		if (s.gender == 'F' &amp;&amp; s.grade &gt; girl.grade) girl = s;
+		if (s.gender == 'M' &amp;&amp; s.grade &lt; boy.grade) boy = s;
 	}
-	if (Girl.grade != -1) std::cout &lt;&lt; Girl.name &lt;&lt; &quot; &quot; &lt;&lt; Girl.ID &lt;&lt; std::endl;
+	if (girl.grade != -1) std::cout &lt;&lt; girl.name &lt;&lt; &quot; &quot; &lt;&lt; girl.ID &lt;&lt; std::endl;
 	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
-	if (Boy.grade != 101) std::cout &lt;&lt; Boy.name &lt;&lt; &quot; &quot; &lt;&lt; Boy.ID &lt;&lt; std::endl;
+	if (boy.grade != 101) std::cout &lt;&lt; boy.name &lt;&lt; &quot; &quot; &lt;&lt; boy.ID &lt;&lt; std::endl;
 	else std::cout &lt;&lt; &quot;Absent&quot; &lt;&lt; std::endl;
-	if (Boy.grade == 101 || Girl.grade == -1) std::cout &lt;&lt; &quot;NA&quot; &lt;&lt; std::endl;
-	else std::cout &lt;&lt; Girl.grade - Boy.grade;
+	if (boy.grade == 101 || girl.grade == -1) std::cout &lt;&lt; &quot;NA&quot; &lt;&lt; std::endl;
+	else std::cout &lt;&lt; girl.grade - boy.grade;
 }
 </code></pre>
 <h1 id="1005-Spell-It-Right-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805519074574336" target="_blank" rel="noopener">1005 Spell It Right (20分)</a></h1>
@@ -518,7 +518,7 @@ int main() {
 }
 </code></pre>
 <h1 id="1008-Elevator-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805511923286016" target="_blank" rel="noopener">1008 Elevator (20分)</a></h1>
-<p><a href="PAT-Advanced-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200403174240234.png" title="image-20200403174240234" class="gallery-item"><img src="image-20200403174240234.png" alt="image-20200403174240234"></a></p>
+<p><a href="PAT-Advanced-%E7%83%AD%E8%BA%AB%E9%A2%98/image-20200403174240234.png" title="image-20200403174240234" class="gallery-item"><img src="image-20200403174240234.png" alt="image-20200403174240234"></a></p>
 <h2 id="完整解法-v3">完整解法</h2>
 <p>模拟题意，造一个变量维护上一次的层数，幼儿园题目</p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
@@ -538,7 +538,7 @@ int main() {
 }
 </code></pre>
 <h1 id="1011-World-Cup-Betting-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805504927186944" target="_blank" rel="noopener">1011 World Cup Betting (20分)</a></h1>
-<p><a href="PAT-Advanced-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200403181910338.png" title="image-20200403181910338" class="gallery-item"><img src="image-20200403181910338.png" alt="image-20200403181910338"></a></p>
+<p><a href="PAT-Advanced-%E7%83%AD%E8%BA%AB%E9%A2%98/image-20200403181910338.png" title="image-20200403181910338" class="gallery-item"><img src="image-20200403181910338.png" alt="image-20200403181910338"></a></p>
 <h2 id="完整解法-v4">完整解法</h2>
 <p>题目看着挺长，其实就是求三组最大值这种幼儿园操作</p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
@@ -562,7 +562,7 @@ int main() {
 }
 </code></pre>
 <h1 id="1015-Reversible-Primes-20分"><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805495863296000" target="_blank" rel="noopener">1015 Reversible Primes (20分)</a></h1>
-<p><a href="PAT-Advanced-%E6%B0%B4%E9%A2%98%E9%9B%86%E9%94%A6/image-20200403204100393.png" title="image-20200403204100393" class="gallery-item"><img src="image-20200403204100393.png" alt="image-20200403204100393"></a></p>
+<p><a href="PAT-Advanced-%E7%83%AD%E8%BA%AB%E9%A2%98/image-20200403204100393.png" title="image-20200403204100393" class="gallery-item"><img src="image-20200403204100393.png" alt="image-20200403204100393"></a></p>
 <h1 id="完整解法-v5">完整解法</h1>
 <p>要知道怎么转进制</p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
