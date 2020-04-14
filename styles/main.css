@@ -268,13 +268,16 @@ body {
   opacity: 0.9;
   border: 10px;
 }
-.night-mode p,
+.article .article-entry p,
 .night-mode ul,
 .night-mode li,
+.article .article-entry div {
+  color: #fef9e7;
+}
 .night-mode h2,
 .night-mode h3,
 .night-mode h4 {
-  color: #ccd1d1 !important;
+  color: #82e0aa;
 }
 .night-mode h1 {
   color: #58d68d;
