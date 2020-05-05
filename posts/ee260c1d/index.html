@@ -22,8 +22,9 @@
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200229205630824.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200229234943330.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200301221358648.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200505150432163.png">
 <meta property="article:published_time" content="2020-02-28T13:15:28.000Z">
-<meta property="article:modified_time" content="2020-03-01T15:23:12.865Z">
+<meta property="article:modified_time" content="2020-05-05T08:07:21.664Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -247,21 +248,21 @@
             
               <li class="category-list-container">
                 <a href="javascript:;">分类</a>
-                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Reading-report/">Reading report</a><span class="category-list-count">1</span></li></ul>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Reading-report/">Reading report</a><span class="category-list-count">1</span></li></ul>
               </li>
             
           
             
               <li class="tag-list-container">
                 <a href="javascript:;">标签</a>
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Astronomy/" rel="tag">Astronomy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-A/" rel="tag">PAT-A</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Reading-report/" rel="tag">Reading report</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">11</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Astronomy/" rel="tag">Astronomy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/CSP/" rel="tag">CSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Leetcode/" rel="tag">Leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-A/" rel="tag">PAT-A</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Reading-report/" rel="tag">Reading report</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">11</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">归档</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">26</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">39</span></li></ul>
               </li>
             
           
@@ -578,6 +579,78 @@ if( dp[j] &amp;&amp; set.contains(s.substring(j,i))){dp[i]=true;}
     }
 }
 </code></pre>
+<h1 id="120-Triangle"><a href="https://leetcode-cn.com/problems/triangle/" target="_blank" rel="noopener">120. Triangle</a></h1>
+<p><a href="DP-Medium/image-20200505150432163.png" title="image-20200505150432163" class="gallery-item"><img src="image-20200505150432163.png" alt="image-20200505150432163"></a></p>
+<h2 id="解法一：直接递归dfs">解法一：直接递归dfs</h2>
+<p>应该可以，但是超时了</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int minimumTotal(vector&lt;vector&lt;int&gt;&gt;&amp; triangle) {
+        if(triangle.empty()) return 0;
+        return getMin(triangle, 0, 0, 0);
+    }
+
+    int getMin(vector&lt;vector&lt;int&gt;&gt;&amp; triangle, int level, int idx, int sum) {
+        if(level &gt; triangle.size() - 1) return sum;
+        if(idx &gt; triangle[level].size() - 1) return INT32_MAX;
+        return std::min(getMin(triangle, level + 1, idx + 1, sum), getMin(triangle, level + 1, idx, sum)) + triangle[level][idx];
+    }
+};
+</code></pre>
+<h2 id="解法二：记忆化递归">解法二：记忆化递归</h2>
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; memo;
+    int minimumTotal(vector&lt;vector&lt;int&gt;&gt;&amp; triangle) {
+        if(triangle.empty()) return 0;
+        memo = vector&lt;vector&lt;int&gt;&gt;(triangle.size(), vector&lt;int&gt;(triangle.size(), -1));
+        return getMin(triangle, 0, 0, 0);
+    }
+
+    int getMin(vector&lt;vector&lt;int&gt;&gt;&amp; triangle, int level, int idx, int sum) {
+        if(level &gt; triangle.size() - 1) return sum;
+        if(idx &gt; triangle[level].size() - 1) return INT32_MAX;
+        if(memo[level][idx] != -1) return memo[level][idx];
+        int min = std::min(getMin(triangle, level + 1, idx + 1, sum), getMin(triangle, level + 1, idx, sum)) + triangle[level][idx];
+        return memo[level][idx] = min;
+    }
+};
+</code></pre>
+<h2 id="解法三：自顶向下DP">解法三：自顶向下DP</h2>
+<p><strong>转移方程：</strong></p>
+<pre><code class="language-cpp">if(j == 0) 
+	memo[i][j] = memo[i-1][j] + triangle[i][j];
+else if(j == triangle[i].size() - 1) 
+	memo[i][j] = memo[i-1][j-1] + triangle[i][j];
+else 
+	memo[i][j] = triangle[i][j] + std::min(memo[i-1][j], memo[i-1][j-1]);
+</code></pre>
+<p><strong>完整代码：</strong></p>
+<p>结果是最底层中最小的那个</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int minimumTotal(vector&lt;vector&lt;int&gt;&gt;&amp; triangle) {
+        if(triangle.empty()) return 0;
+        vector&lt;vector&lt;int&gt;&gt; memo = vector&lt;vector&lt;int&gt;&gt;(triangle.size(), vector&lt;int&gt;(triangle.size(), -1));
+        memo[0][0] = triangle[0][0];
+        for(int i = 1; i &lt; triangle.size(); i++){
+            for(int j = 0; j &lt; triangle[i].size(); j++){
+                if(j == 0) 
+                    memo[i][j] = memo[i-1][j] + triangle[i][j];
+                else if(j == triangle[i].size() - 1) 
+                    memo[i][j] = memo[i-1][j-1] + triangle[i][j];
+                else 
+                    memo[i][j] = triangle[i][j] + std::min(memo[i-1][j], memo[i-1][j-1]);
+            }
+        }
+        int res = INT32_MAX, len = memo[memo.size() - 1].size();
+        for(int i = 0; i &lt; len; i++) res = std::min(res, memo[memo.size() - 1][i]);
+        return res;
+    }
+};
+</code></pre>
+<h2 id="解法四：自底向上DP">解法四：自底向上DP</h2>
+<p>下次再写</p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'

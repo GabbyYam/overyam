@@ -24,8 +24,9 @@
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200226145315266.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200302231613636.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200303001955825.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/527b630e/image-20200505193321501.png">
 <meta property="article:published_time" content="2020-02-26T05:48:50.000Z">
-<meta property="article:modified_time" content="2020-03-02T16:20:57.247Z">
+<meta property="article:modified_time" content="2020-05-05T11:48:43.858Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -249,21 +250,21 @@
             
               <li class="category-list-container">
                 <a href="javascript:;">分类</a>
-                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Reading-report/">Reading report</a><span class="category-list-count">1</span></li></ul>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Reading-report/">Reading report</a><span class="category-list-count">1</span></li></ul>
               </li>
             
           
             
               <li class="tag-list-container">
                 <a href="javascript:;">标签</a>
-                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Astronomy/" rel="tag">Astronomy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-A/" rel="tag">PAT-A</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Reading-report/" rel="tag">Reading report</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">11</span></li></ul>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Astronomy/" rel="tag">Astronomy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/CSP/" rel="tag">CSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Leetcode/" rel="tag">Leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-A/" rel="tag">PAT-A</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Reading-report/" rel="tag">Reading report</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">11</span></li></ul>
               </li>
             
           
             
               <li class="archive-list-container">
                 <a href="javascript:;">归档</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">26</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">39</span></li></ul>
               </li>
             
           
@@ -620,6 +621,56 @@ class Solution {
         return -1;
     }
 }
+</code></pre>
+<h2 id="解法二：投票法">解法二：投票法</h2>
+<pre><code class="language-cpp">class Solution {
+public:
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        int curr = -1, curr_val = 0;
+        for(int i : nums){
+            if(curr_val &lt;= 0) curr = i;
+            if(i == curr) 
+                curr_val++;
+            else 
+                curr_val--;
+        }
+        return curr;
+    }
+};
+</code></pre>
+<h1 id="189-Rotate-Array"><a href="https://leetcode-cn.com/problems/rotate-array/" target="_blank" rel="noopener">189. Rotate Array</a></h1>
+<p><a href="Array-Easy/image-20200505193321501.png" title="image-20200505193321501" class="gallery-item"><img src="image-20200505193321501.png" alt="image-20200505193321501"></a></p>
+<h2 id="解法一：暴力模拟">解法一：暴力模拟</h2>
+<p>用类似冒泡法的方法每轮从末尾移动到第一个，一共n轮，由于数据规模达到20000，超时</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    void rotate(vector&lt;int&gt;&amp; nums, int k) {
+        k = k % nums.size();
+        for(int i = 0; i &lt; k; i++){
+            for(int j = nums.size() - 1; j &gt; 0; j--){
+                int tmp = nums[j];
+                nums[j] = nums[j - 1];
+                nums[j - 1] = tmp; 
+            }
+        }
+    }
+};
+</code></pre>
+<h2 id="解法二：辅助空间">解法二：辅助空间</h2>
+<p>后k个移到辅助数组的前k个，剩余移到后面，再把辅助数组移回原数组</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    void rotate(vector&lt;int&gt;&amp; nums, int k) {
+        k = k % nums.size();
+        vector&lt;int&gt; helper = vector&lt;int&gt;(nums.size());
+        for(int i = 0; i &lt; k; i++)
+            helper[i] = nums[nums.size() - k + i];
+        for(int i = k; i &lt; nums.size(); i++)
+            helper[i] = nums[i - k];
+        for(int i = 0; i &lt; nums.size(); i++)
+            nums[i] = helper[i];
+    }
+};
 </code></pre>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {

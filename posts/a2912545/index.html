@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Array-Medium
+  
+</title>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Array-Medium">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/a2912545/">
+<meta property="og:site_name" content="Overyam">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200427215132211.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200429140647649.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200429143922947.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200430144224282.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200430144236162.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200430171033116.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200430171047297.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200430171056746.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200430235816762.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200501001955053.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200501003723728.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200501120709959.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200501120721893.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200501120732859.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200501140513629.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200504020253182.png">
+<meta property="article:published_time" content="2020-04-27T13:50:02.000Z">
+<meta property="article:modified_time" content="2020-05-04T08:22:00.717Z">
+<meta property="article:author" content="GabbyYam">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200427215132211.png">
+
+
+  <link rel="alternative" href="/atom.xml" title="Overyam" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png">
+
+
+//
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+
+<link rel="stylesheet" href="/overyam/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/overyam/styles/main.css">
+
+
+
+
+
+
+
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.4/jquery.jplayer/jquery.jplayer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.4/add-on/jplayer.playlist.min.js"></script>
+  <script type="text/javascript">
+        $(document).ready(function(){
+
+
+      var playlist = [{
+          title:"every day is night",
+          artist:"",
+          mp3:"http://music.163.com/song/media/outer/url?id=441491887.mp3",
+          oga:"",
+          poster: "https://i.ytimg.com/vi/LSIafJnomgU/hqdefault.jpg"
+        },{
+          title:"Cro Magnon Man",
+          artist:"",
+          mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
+          poster: "https://i.imgur.com/lXvsuBu.png"
+        },{
+          title:"Bubble",
+          m4a: "http://www.jplayer.org/audio/m4a/Miaow-07-Bubble.m4a",
+          oga: "http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg",
+          poster: "https://i.imgur.com/klJKSVZ.jpg"
+      }];
+      
+      var cssSelector = {
+        jPlayer: "#jquery_jplayer",
+        cssSelectorAncestor: ".music-player"
+      };
+      
+      var options = {
+        swfPath: "https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.4/jquery.jplayer/Jplayer.swf",
+        supplied: "ogv, m4v, mp3",
+        volumechange: function(event) {
+          $( ".volume-level" ).slider("value", event.jPlayer.options.volume);
+        },
+        timeupdate: function(event) {
+          $( ".progress" ).slider("value", event.jPlayer.status.currentPercentAbsolute);
+        }
+      };
+      
+      var myPlaylist = new jPlayerPlaylist(cssSelector, playlist,options);
+      var PlayerData = $(cssSelector.jPlayer).data("jPlayer");
+      
+      
+      // Create the volume slider control
+      $( ".volume-level" ).slider({
+         animate: "fast",
+        max: 1,
+        range: "min",
+        step: 0.01,
+        value : $.jPlayer.prototype.options.volume,
+        slide: function(event, ui) {
+          $(cssSelector.jPlayer).jPlayer("option", "muted", false);
+          $(cssSelector.jPlayer).jPlayer("option", "volume", ui.value);
+        }
+      });
+      
+      // Create the progress slider control
+      $(".progress").slider({
+        animate: "fast",
+        max: 100,
+        range: "min",
+        step: 0.1,
+        value : 0,
+        slide: function(event, ui) {
+          var sp = PlayerData.status.seekPercent;
+          if(sp > 0) {
+            // Move the play-head to the value and factor in the seek percent.
+            $(cssSelector.jPlayer).jPlayer("playHead", ui.value * (100 / sp));
+          } else {
+            // Create a timeout to reset this slider to zero.
+            setTimeout(function() {
+               $( ".progress" ).slider("value", 0);
+            }, 0);
+          }
+        }
+      });
+
+      
+    });
+  </script>
+  <!-- click-heart -->
+  <!-- <script type="text/javascript">!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 500%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+  </script> -->
+
+  <!-- 标题变换 -->
+  <script type="text/javascript">
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+       if (document.hidden) {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '**遁入幻想**';
+           clearTimeout(titleTime);
+       }
+       else {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '即将抵达月面..';
+           titleTime = setTimeout(function () {
+               document.title = '欢迎回来！';
+           }, 1000);
+           titleTime = setTimeout(function () {
+               document.title = OriginTitle;
+           }, 2000);
+       }
+    });
+  </script>
+
+  <!-- night mode -->
+  <script type="text/javascript">
+    $(function(){
+      btn = $('.set-view-mode');
+      if(sessionStorage.mode=="night"){
+          $('body').addClass('night-mode');
+          btn.find('i').attr('class','icon moon outline');
+      }
+      $('.set-view-mode').click(function(){
+          var next_mode = $('body').hasClass('night-mode') ? 'day':'night';
+          if(next_mode!='day'){
+              $('body').addClass('night-mode');
+              btn.find('i').attr('class','icon moon');
+              sessionStorage.mode="night";   
+          }else{
+              $('body').removeClass('night-mode');
+              btn.find('i').attr('class','icon moon outline');
+              sessionStorage.mode="day";
+          }
+      });     
+  });
+  </script>
+
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/kimbie.dark.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
+  </script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body 
+  
+    class="monochrome night-mode"
+  
+  >
+  <div id="topAnchor"></div>
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/overyam/">Overyam</a>
+</div>
+
+  <div class="main-container">
+
+    
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/overyam/">Overyam</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+      </div>
+      
+        <div class="avatar" data-tooltip="月の世界へようこそ～" data-position="left center">
+            
+              <img src="https://avatars3.githubusercontent.com/u/33481136?v=4">
+                <a href="/overyam/about"></a>
+              </img>
+            
+            
+
+        </div>
+
+      
+
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">分类</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Reading-report/">Reading report</a><span class="category-list-count">1</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">标签</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Astronomy/" rel="tag">Astronomy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/CSP/" rel="tag">CSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Leetcode/" rel="tag">Leetcode</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-A/" rel="tag">PAT-A</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Reading-report/" rel="tag">Reading report</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">11</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">归档</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">39</span></li></ul>
+              </li>
+            
+          
+        </ul>
+
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/overyam/" title="文章列表" external="false">文章列表</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/logs" title="主页" external="false">主页</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/about" title="关于我" external="false">关于我</a>
+              </li>
+            
+          
+        </ul>
+
+      
+    
+    
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+<ul class="content__container__text text_header">
+      Thinking
+</ul>
+<div class="content">
+
+  <div class="content__container"> 
+    <ul class="content__container__text">
+      In
+    </ul>
+    
+    <ul class="content__container__list">
+      <li class="content__container__list__item">Java</li>
+      <li class="content__container__list__item">Spring</li>
+      <li class="content__container__list__item">Algorithm</li>
+      <li class="content__container__list__item">Design</li>
+    </ul>
+  </div>
+</div>
+<textarea tabindex="-1"></textarea>
+<div class="mask"></div>
+<div class="note" contenteditable>
+  Just relaxed,and drink a cup of coffee !
+</div>
+
+  </div>
+</div>
+
+    <div class="main-content">
+
+      <div class="trans-box">
+          <div class="music-player">
+                  <div style="background-image: url(https://i.imgur.com/yqB0erk.jpg);" class="album"></div>
+                  
+                  <div class="info">
+                    
+                    <div class="left">
+                      <a href="javascript:;" class="icon-shuffle" data-tooltip="just a decoration^_^" data-position="bottom left"></a>
+                      <a href="javascript:;" class="icon-heart" data-tooltip="just a decoration^_^" data-position="bottom left"></a>
+                    </div>
+                    
+                    <div class="center">
+                      <div class="jp-playlist">
+                        <ul>
+                          <li></li>
+                        </ul>
+                      </div> 
+                    </div>
+                    
+                    <div class="right">
+                      <a href="javascript:;" class="icon-repeat" data-tooltip="just a decoration^_^" data-position="bottom right"></a>
+                      <a href="javascript:;" class="icon-share" data-tooltip="just a decoration^_^" data-position="bottom right"></a>
+                    </div>
+                    
+                    <div class="progress"></div>
+                    
+                  </div>
+                      
+                  <div class="controls">
+                    <div class="current jp-current-time">00:00</div>
+                    <div class="play-controls">
+                      <i href="javascript:;" class="backward icon jp-previous" title="previous"></i>
+                      <i href="javascript:;" class="play icon jp-play" title="play"></i>
+                      <i href="javascript:;" class="pause icon jp-pause" title="pause"></i>
+                      <i href="javascript:;" class="forward icon jp-next" title="next"></i>
+                    </div>
+                    <div class="volume-level">
+                      <i href="javascript:;" class="icon volume down" title="max volume"></i>
+                      <i href="javascript:;" class="icon volume off" title="mute"></i>
+                    </div>
+                  </div>
+                  
+                  <div id="jquery_jplayer" class="jp-jplayer"></div>
+                </div>
+
+      
+        <div style="max-width: 1000px">
+      
+          
+
+<article id="post-Array-Medium" class="article article-type-post">
+
+  
+    <h1 class="article-header">
+      Array-Medium
+    </h1>
+  
+  
+  
+
+    
+  <div class="article-info">
+    <span class="article-date">
+  2020-04-27
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p><strong>Abstract</strong>：leetcode 线性表相关 Medium 难度 题解合集<p></p>
+<a id="more"></a>
+<h1 id="16-3Sum-Closest"><a href="https://leetcode-cn.com/problems/3sum-closest/" target="_blank" rel="noopener">16. 3Sum Closest</a></h1>
+<p><a href="Array-Medium/image-20200427215132211.png" title="image-20200427215132211" class="gallery-item"><img src="image-20200427215132211.png" alt="image-20200427215132211"></a></p>
+<h2 id="解法一：暴力法">解法一：暴力法</h2>
+<p>遍历所有可能的3组数，求最接近的sum</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int threeSumClosest(vector&lt;int&gt;&amp; nums, int target) {
+        int min = INT32_MAX, res = min;
+        for(int i = 0; i&lt;nums.size(); i++){
+            for(int j = i + 1; j&lt;nums.size(); j++){
+                for(int k = j + 1; k&lt;nums.size(); k++){
+                    int sum = nums[i] + nums[j] + nums[k];
+                    int val = std::abs(sum - target);
+                    if(val == 0) return sum;
+                    if(val &lt; min){
+                        min = val;
+                        res = sum;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+};
+</code></pre>
+<h2 id="解法二：排序-双指针">解法二：排序+双指针</h2>
+<p>还记得两数之和那题是靠双指针做的，这题也可以，但是要固定一个数，而且这个数必须从小到大变化，所以先排序，然后就转换成两数之和了</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int threeSumClosest(vector&lt;int&gt;&amp; nums, int target) {
+        int min = INT32_MAX, res = min;
+        std::sort(nums.begin(), nums.end());
+        for(int i = 0; i&lt;nums.size(); i++){
+            int lo = i + 1, hi = nums.size() - 1;
+            while(lo &lt; hi){
+                int sum = nums[i] + nums[lo] + nums[hi];
+                int val = std::abs(sum - target);
+                if (val &lt; min) {
+                    res = sum;
+                    min = val;
+                }
+                if(sum &lt; target) lo++;
+                else if(sum &gt; target) hi--;
+                else return res;
+            }
+        }
+        return res;
+    }
+};
+</code></pre>
+<h1 id="15-3Sum"><a href="https://leetcode-cn.com/problems/3sum/" target="_blank" rel="noopener">15. 3Sum</a></h1>
+<p><a href="Array-Medium/image-20200429140647649.png" title="image-20200429140647649" class="gallery-item"><img src="image-20200429140647649.png" alt="image-20200429140647649"></a></p>
+<h2 id="解法一：排序-双指针">解法一：排序 + 双指针</h2>
+<p>同上题，暴力解就不写了，这题的坑点在去重，因为要求<strong>unique triplets</strong></p>
+<pre><code class="language-cpp">class Solution {
+public:
+	vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) {
+		std::vector&lt;vector&lt;int&gt;&gt; res;
+		if (nums.size() &lt; 3) return res;
+		std::sort(nums.begin(), nums.end());
+
+		for (int i = 0; i &lt; nums.size() - 2; i++) {
+			if (nums[i] &gt; 0) return res;
+			if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) continue;
+			int lo = i + 1, hi = nums.size() - 1;
+			while (lo &lt; hi) {
+				int sum = nums[i] + nums[lo] + nums[hi];
+				if (sum == 0) {
+					res.push_back({ nums[i], nums[lo], nums[hi] });
+					while (lo &lt; hi &amp;&amp; nums[lo] == nums[lo + 1]) lo++;
+					while (lo &lt; hi &amp;&amp; nums[hi] == nums[hi - 1]) hi--;
+					lo++;
+					hi--;
+				}
+				else if (sum &gt; 0)
+					hi--;
+				else
+					lo++;
+			}
+		}
+		return res;
+	}
+};
+</code></pre>
+<h1 id="18-4Sum"><a href="https://leetcode-cn.com/problems/4sum/" target="_blank" rel="noopener">18. 4Sum</a></h1>
+<p><a href="Array-Medium/image-20200429143922947.png" title="image-20200429143922947" class="gallery-item"><img src="image-20200429143922947.png" alt="image-20200429143922947"></a></p>
+<h2 id="解法一：同上">解法一：同上</h2>
+<p>同上，好像只能套一层双指针的样子，复杂度依然有n^3</p>
+<p>另外由于target可以为负数，所以nums[i] &gt; target  &amp; nums[i] + nums[j] &gt; target 就 return 的好性质就没了</p>
+<pre><code class="language-cpp">class Solution {
+public:
+	vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;&amp; nums, int target) {
+		vector&lt;vector&lt;int&gt;&gt; res;
+		if (nums.size() &lt; 4) return res;
+		std::sort(nums.begin(), nums.end());
+
+		for (int i = 0; i &lt; nums.size() - 3; i++) {
+			if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) continue;
+			for (int j = i + 1; j &lt; nums.size() - 2; j++) {
+				if (j &gt; i + 1 &amp;&amp; nums[j] == nums[j - 1]) continue;
+				int lo = j + 1, hi = nums.size() - 1;
+				while (lo &lt; hi) {
+					int sum = nums[i] + nums[j] + nums[lo] + nums[hi];
+					if (sum == target) {
+						res.push_back({ nums[i],nums[j],nums[lo],nums[hi] });
+						while (lo &lt; hi &amp;&amp; nums[lo] == nums[lo + 1]) lo++;
+						while (lo &lt; hi &amp;&amp; nums[hi] == nums[hi - 1]) hi--;
+						lo++;
+						hi--;
+					}
+					else if (sum &gt; target) hi--;
+					else if (sum &lt; target) lo++;
+				}
+			}
+		}
+		return res;
+	}
+};
+</code></pre>
+<h1 id="48-Rotate-Image"><a href="https://leetcode-cn.com/problems/rotate-image/" target="_blank" rel="noopener">48. Rotate Image</a></h1>
+<p><a href="Array-Medium/image-20200430144224282.png" title="image-20200430144224282" class="gallery-item"><img src="image-20200430144224282.png" alt="image-20200430144224282"></a></p>
+<p><a href="Array-Medium/image-20200430144236162.png" title="image-20200430144236162" class="gallery-item"><img src="image-20200430144236162.png" alt="image-20200430144236162"></a></p>
+<h2 id="解法一：先转置再求反">解法一：先转置再求反</h2>
+<p>一开始以为是转置，结果发现刚好反过来，那就再求一次reverse就好了，但是直觉上就知道这样有点先降温再烧水的意味</p>
+<ul>
+<li>注意交换的时候只交换上三角</li>
+</ul>
+<pre><code class="language-cpp">class Solution {
+public:
+    void rotate(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        int row = matrix.size(), col = matrix[0].size();
+        for (int i = 0; i &lt; row; i++) {
+            for (int j = i + 1; j &lt; col; j++) {
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = tmp;
+            }
+        }
+        for (vector&lt;int&gt;&amp; v : matrix) {
+            std::reverse(v.begin(), v.end());
+        }
+    }
+};
+</code></pre>
+<h2 id="解法二：旋转变换">解法二：旋转变换</h2>
+<p>反正我是没想出来，抄答案的</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    void rotate(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        int n = matrix.size();
+        for (int i = 0; i &lt; (n + 1) / 2; i++) {
+            for (int j = 0; j &lt; n / 2; j++) {
+                int temp = matrix[n - 1 - j][i];
+                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1];
+                matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 - i];
+                matrix[j][n - 1 - i] = matrix[i][j];
+                matrix[i][j] = temp;
+            }
+        }
+    }
+};
+</code></pre>
+<h1 id="36-Valid-Sudoku"><a href="https://leetcode-cn.com/problems/valid-sudoku/" target="_blank" rel="noopener">36. Valid Sudoku</a></h1>
+<p><a href="Array-Medium/image-20200430171033116.png" title="image-20200430171033116" class="gallery-item"><img src="image-20200430171033116.png" alt="image-20200430171033116"></a></p>
+<p><a href="Array-Medium/image-20200430171047297.png" title="image-20200430171047297" class="gallery-item"><img src="image-20200430171047297.png" alt="image-20200430171047297"></a></p>
+<p><a href="Array-Medium/image-20200430171056746.png" title="image-20200430171056746" class="gallery-item"><img src="image-20200430171056746.png" alt="image-20200430171056746"></a></p>
+<h2 id="解法一：暴力法（三次遍历）">解法一：暴力法（三次遍历）</h2>
+<p>依次按行遍历，按列遍历，按九宫格遍历，用unordered_map记录出现的数字的次数，每轮超过一次算错</p>
+<pre><code class="language-cpp">class Solution {
+public:
+	bool isValidSudoku(vector&lt;vector&lt;char&gt;&gt;&amp; board) {
+		unordered_map&lt;char, int&gt; map;
+		for (int i = 0; i &lt; board.size(); i++) {
+			map.clear();
+			for (int j = 0; j &lt; board[0].size(); j++) {
+				int count = map[board[i][j]]++;
+				if (isdigit(board[i][j]) &amp;&amp; count &gt; 0)
+					return false;
+			}
+		}
+
+		for (int i = 0; i &lt; board.size(); i++) {
+			map.clear();
+			for (int j = 0; j &lt; board[0].size(); j++) {
+				int count = map[board[j][i]]++;
+				if (isdigit(board[j][i]) &amp;&amp; count &gt; 0)
+					return false;
+			}
+		}
+
+		for (int i = 0; i &lt; 3; i++) {
+			for (int j = 0; j &lt; 3; j++) {
+				map.clear();
+				for (int m = i * 3; m &lt; i * 3 + 3; m++) {
+					for (int n = j * 3; n &lt; j * 3 + 3; n++) {
+						int count = map[board[m][n]]++;
+						if (isdigit(board[m][n]) &amp;&amp; count &gt; 0)
+							return false;
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+};
+</code></pre>
+<h2 id="解法二：一次遍历">解法二：一次遍历</h2>
+<p>其实可以一次遍历，前提是要知道在哪行哪列哪个box</p>
+<p>因为只有9个数，哈希容器也可以换成bool数组</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    bool isValidSudoku(vector&lt;vector&lt;char&gt;&gt;&amp; board) {
+        bool row[9][9] = { false }, col[9][9] = { false }, box[9][9] = { false };
+        for (int i = 0; i &lt; 9; i++) {
+            for (int j = 0; j &lt; 9; j++) {
+                if (board[i][j] == '.') continue;
+                int box_idx = (i / 3) * 3 + j / 3;
+                int val = board[i][j] - '1';
+                if (row[i][val] || col[j][val] || box[box_idx][val])
+                    return false;
+                row[i][val] = col[j][val] = box[box_idx][val] = true;
+            }
+        }
+        return true;
+    }
+};
+</code></pre>
+<h1 id="54-Spiral-Matrix"><a href="https://leetcode-cn.com/problems/spiral-matrix/" target="_blank" rel="noopener">54. Spiral Matrix</a></h1>
+<p><a href="Array-Medium/image-20200430235816762.png" title="image-20200430235816762" class="gallery-item"><img src="image-20200430235816762.png" alt="image-20200430235816762"></a></p>
+<h2 id="解法一：标记访问点">解法一：标记访问点</h2>
+<p>按顺序向右，向下，向左，向上，直到”撞墙“，需要“预判”，当下一个被访问过或要越界的时候就转向</p>
+<p>这里有点投机取巧，用INT32_MAX作标记，而且直接修改了原数组脏了数据</p>
+<p>替代方案是开另一个等大的数组来记录是否被访问过，但我懒得改了（ 就这样吧（</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;int&gt; spiralOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        if (matrix.empty()) return {};
+        int row = matrix.size(), col = matrix[0].size();
+        vector&lt;int&gt; sp = vector&lt;int&gt;(row * col);
+        int num = 0, tot = row * col, x, y;
+        sp[0] = matrix[y = 0][x = 0];
+        matrix[0][0] = INT32_MAX;
+        while (num &lt; tot - 1) {
+            while (x &lt; col - 1 &amp;&amp; INT32_MAX != matrix[y][x + 1]) { sp[++num] = matrix[y][++x]; matrix[y][x] = INT32_MAX; }
+            while (y &lt; row - 1 &amp;&amp; INT32_MAX != matrix[y + 1][x]) { sp[++num] = matrix[++y][x]; matrix[y][x] = INT32_MAX; }
+            while (x &gt; 0 &amp;&amp; INT32_MAX != matrix[y][x - 1]) { sp[++num] = matrix[y][--x]; matrix[y][x] = INT32_MAX; }
+            while (y &gt; 0 &amp;&amp; INT32_MAX != matrix[y - 1][x]) { sp[++num] = matrix[--y][x]; matrix[y][x] = INT32_MAX; }
+        }
+        return sp;
+    }
+};
+</code></pre>
+<h1 id="59-Spiral-Matrix-II"><a href="https://leetcode-cn.com/problems/spiral-matrix-ii/" target="_blank" rel="noopener">59. Spiral Matrix II</a></h1>
+<p><a href="Array-Medium/image-20200501001955053.png" title="image-20200501001955053" class="gallery-item"><img src="image-20200501001955053.png" alt="image-20200501001955053"></a></p>
+<h2 id="解法一：紫书原题好吧">解法一：紫书原题好吧</h2>
+<p>做法同54题 <code>Spiral Matrix</code>，比起Ⅰ甚至不需要标记访问点了，更简单了</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {
+        if(n == 0) return {};
+        int size = n * n, tot = 1, x, y;
+        vector&lt;vector&lt;int&gt;&gt; map = vector&lt;vector&lt;int&gt;&gt;(n);
+        for(vector&lt;int&gt;&amp; v : map) v = vector&lt;int&gt;(n);
+        map[x = 0][y = 0] = 1;
+        while(tot &lt; size){
+            while(x + 1 &lt; n &amp;&amp; !map[y][x+1]) map[y][++x] = ++tot;
+            while(y + 1 &lt; n &amp;&amp; !map[y+1][x]) map[++y][x] = ++tot;
+            while(x &gt; 0 &amp;&amp; !map[y][x-1]) map[y][--x] = ++tot;
+            while(y &gt; 0 &amp;&amp; !map[y-1][x]) map[--y][x] = ++tot;
+        }
+        return map;
+    }
+};
+</code></pre>
+<h1 id="73-Set-Matrix-Zeroes"><a href="https://leetcode-cn.com/problems/set-matrix-zeroes/" target="_blank" rel="noopener">73. Set Matrix Zeroes</a></h1>
+<p><a href="Array-Medium/image-20200501003723728.png" title="image-20200501003723728" class="gallery-item"><img src="image-20200501003723728.png" alt="image-20200501003723728"></a></p>
+<h2 id="解法一：暴力法-v2">解法一：暴力法</h2>
+<p>先遍历一次记下所有0元素的行数和列数，然后重新遍历一次把对应的行和列置零，空间复杂度O(m + n)</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    void setZeroes(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        unordered_set&lt;int&gt; row, col;
+        for(int i = 0;i&lt;matrix.size();i++){
+            for(int j = 0;j&lt;matrix[0].size();j++){
+                if(matrix[i][j] == 0){
+                    row.emplace(i);
+                    col.emplace(j);
+                }
+            }
+        }
+
+        for(int i = 0;i&lt;matrix.size();i++){
+            for(int j = 0;j&lt;matrix[0].size();j++){
+                if(row.find(i) != row.end() || col.find(j) != col.end())
+                    matrix[i][j] = 0;
+            }
+        }
+    }
+};
+</code></pre>
+<h2 id="解法二：">解法二：</h2>
+<h1 id="1424-Diagonal-Traverse-II"><a href="https://leetcode-cn.com/problems/diagonal-traverse-ii/" target="_blank" rel="noopener">1424. Diagonal Traverse II</a></h1>
+<p><a href="Array-Medium/image-20200501120709959.png" title="image-20200501120709959" class="gallery-item"><img src="image-20200501120709959.png" alt="image-20200501120709959"></a></p>
+<p><a href="Array-Medium/image-20200501120721893.png" title="image-20200501120721893" class="gallery-item"><img src="image-20200501120721893.png" alt="image-20200501120721893"></a></p>
+<p><a href="Array-Medium/image-20200501120732859.png" title="image-20200501120732859" class="gallery-item"><img src="image-20200501120732859.png" alt="image-20200501120732859"></a></p>
+<h2 id="解法一：顺序遍历">解法一：顺序遍历</h2>
+<p>学过初中数学都知道，直线上 x + y = c (c为常数)，依照这个性质就可以用正常的遍历顺序取到每一层反向的结果，最后再反向存入一个新的res数组就行了</p>
+<ul>
+<li>顺带一提，由于i,j的规模达到10^9，暴力法是不可行的，会超时，即使是顺序遍历也要500ms上下</li>
+</ul>
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;int&gt; findDiagonalOrder(vector&lt;vector&lt;int&gt;&gt;&amp; nums) {
+        vector&lt;vector&lt;int&gt;&gt; map;
+        for(int i = 0;i &lt; nums.size(); i++){
+            for(int j = 0; j &lt; nums[i].size(); j++){
+                int idx = i + j;
+                if(idx &gt;= map.size()) map.push_back({});
+                map[idx].push_back(nums[i][j]);
+            }
+        }
+        vector&lt;int&gt; res;
+        for(int i = 0;i&lt;map.size();i++){
+            for(int j = map[i].size() - 1; j&gt;-1;j--){
+                res.push_back(map[i][j]);
+            }
+        }
+        return res;
+    }
+};
+</code></pre>
+<h1 id="56-Merge-Intervals"><a href="https://leetcode-cn.com/problems/merge-intervals/" target="_blank" rel="noopener">56. Merge Intervals</a></h1>
+<p><a href="Array-Medium/image-20200501140513629.png" title="image-20200501140513629" class="gallery-item"><img src="image-20200501140513629.png" alt="image-20200501140513629"></a></p>
+<h2 id="解法一：先排序">解法一：先排序</h2>
+<p>按左端点排序，那么判断重合就好办了</p>
+<ul>
+<li>只要下一个区间的左端点小于等于这个区间的右端点，就修改这个区间的左右端点</li>
+<li>如果不重合，就直接push下一个区间，同时指向下一个区间</li>
+</ul>
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; merge(vector&lt;vector&lt;int&gt;&gt;&amp; intervals) {
+        if(intervals.size() &lt;= 1) return intervals;
+        std::sort(intervals.begin(),intervals.end(),[](vector&lt;int&gt; a, vector&lt;int&gt; b){
+            return a[0] &lt; b[0];
+        });
+        vector&lt;vector&lt;int&gt;&gt; res;
+        int i = 0, j = 1;
+        res.push_back(intervals[0]);
+        while(j &lt; intervals.size()) {
+            if(intervals[j][0] &lt;= res[i][1]){
+                res[i][0] = std::min(res[i][0], intervals[j][0]);
+                res[i][1] = std::max(res[i][1], intervals[j][1]);
+                j++;
+            }
+            else{
+                res.push_back(intervals[j]);
+                i++;
+            }   
+        }
+        return res;
+    }
+};
+</code></pre>
+<p>原来vector可以默认按第一位排序。。删掉lambda比较函数后，快了不少。。</p>
+<pre><code class="language-cpp">std::sort(intervals.begin(),intervals.end());
+</code></pre>
+<h1 id="137-Single-Number-II"><a href="https://leetcode-cn.com/problems/single-number-ii/" target="_blank" rel="noopener">137. Single Number II</a></h1>
+<p><a href="Array-Medium/image-20200504020253182.png" title="image-20200504020253182" class="gallery-item"><img src="image-20200504020253182.png" alt="image-20200504020253182"></a></p>
+<h2 id="解法一：unordered-map">解法一：unordered_map</h2>
+<p>最简单的办法显然是用map统计出现的次数，再找到出现次数不等于3的那个</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+        unordered_map&lt;int, int&gt; map;
+        for(int i : nums) map[i]++;
+        for(auto i : map)
+            if(i.second != 3) 
+                return i.first;
+        return -1;
+    }
+};
+</code></pre>
+<h2 id="解法二：位操作">解法二：位操作</h2>
+<ul>
+<li>基本思路是一个数 异或（^） 自己 奇数次时不为零，反之为零</li>
+<li>统计一次和三次，都是奇数怎么办，维护两个掩码来做</li>
+<li></li>
+</ul>
+<pre><code class="language-cpp">class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+        int once = 0, twice = 0;
+        for(int i : nums){
+            once  = ~twice &amp; (once  ^ i);
+            twice = ~once  &amp; (twice ^ i);
+        }
+        return once;
+    }
+};
+</code></pre>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
+      <img src="/overyam/images/cc/cc.png">
+      
+          <img src="/overyam/images/cc/by.png">
+        
+          <img src="/overyam/images/cc/sa.png">
+      
+      <span>
+        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Overyam - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+
+      
+      <!-- night mode -->
+        </div>
+        <button class="set-view-mode circular ui medium icon button" href="javascript:void(0)" data-tooltip="Click here to switch night mode" data-position="left center">
+          <i class="icon moon outline"></i>
+        </button>
+
+        <button class="top ui circular icon button" href="javascript:void(0)" data-tooltip="return to top" data-position="left center">
+          
+          <i class="icon arrow up"></i>
+        </button>
+
+        <div class="cup" >
+          <div class="coffee"></div>
+        </div>
+        <div class="smoke" ></div>
+        <a href="#topAnchor"></a>
+      
+      </div>
+
+    </div>
+
+  </div>
+  
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/overyam/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/overyam/scripts/main.js"></script>
+
+
+
+
+<script src="/overyam/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":0.8,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/overyam/live2dw/assets/hibiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.2},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
