@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Bit-Manipulation Medium
+  
+</title>
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bit-Manipulation Medium">
+<meta property="og:url" content="https://gabbyyam.github.io/overyam/posts/91a27529/">
+<meta property="og:site_name" content="Overyam">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/91a27529/image-20200513143056421.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/91a27529/image-20200517200551507.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/91a27529/image-20200504020253182.png">
+<meta property="article:published_time" content="2020-05-13T06:29:25.000Z">
+<meta property="article:modified_time" content="2020-05-22T06:29:44.214Z">
+<meta property="article:author" content="GabbyYam">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gabbyyam.github.io/overyam/posts/91a27529/image-20200513143056421.png">
+
+
+  <link rel="alternative" href="/atom.xml" title="Overyam" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png">
+
+
+//
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+
+<link rel="stylesheet" href="/overyam/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/overyam/styles/main.css">
+
+
+
+
+
+
+
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.4/jquery.jplayer/jquery.jplayer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.4/add-on/jplayer.playlist.min.js"></script>
+  <script type="text/javascript">
+        $(document).ready(function(){
+
+
+      var playlist = [{
+          title:"every day is night",
+          artist:"",
+          mp3:"http://music.163.com/song/media/outer/url?id=441491887.mp3",
+          oga:"",
+          poster: "https://i.ytimg.com/vi/LSIafJnomgU/hqdefault.jpg"
+        },{
+          title:"Cro Magnon Man",
+          artist:"",
+          mp3:"http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3",
+          poster: "https://i.imgur.com/lXvsuBu.png"
+        },{
+          title:"Bubble",
+          m4a: "http://www.jplayer.org/audio/m4a/Miaow-07-Bubble.m4a",
+          oga: "http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg",
+          poster: "https://i.imgur.com/klJKSVZ.jpg"
+      }];
+      
+      var cssSelector = {
+        jPlayer: "#jquery_jplayer",
+        cssSelectorAncestor: ".music-player"
+      };
+      
+      var options = {
+        swfPath: "https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.4/jquery.jplayer/Jplayer.swf",
+        supplied: "ogv, m4v, mp3",
+        volumechange: function(event) {
+          $( ".volume-level" ).slider("value", event.jPlayer.options.volume);
+        },
+        timeupdate: function(event) {
+          $( ".progress" ).slider("value", event.jPlayer.status.currentPercentAbsolute);
+        }
+      };
+      
+      var myPlaylist = new jPlayerPlaylist(cssSelector, playlist,options);
+      var PlayerData = $(cssSelector.jPlayer).data("jPlayer");
+      
+      
+      // Create the volume slider control
+      $( ".volume-level" ).slider({
+         animate: "fast",
+        max: 1,
+        range: "min",
+        step: 0.01,
+        value : $.jPlayer.prototype.options.volume,
+        slide: function(event, ui) {
+          $(cssSelector.jPlayer).jPlayer("option", "muted", false);
+          $(cssSelector.jPlayer).jPlayer("option", "volume", ui.value);
+        }
+      });
+      
+      // Create the progress slider control
+      $(".progress").slider({
+        animate: "fast",
+        max: 100,
+        range: "min",
+        step: 0.1,
+        value : 0,
+        slide: function(event, ui) {
+          var sp = PlayerData.status.seekPercent;
+          if(sp > 0) {
+            // Move the play-head to the value and factor in the seek percent.
+            $(cssSelector.jPlayer).jPlayer("playHead", ui.value * (100 / sp));
+          } else {
+            // Create a timeout to reset this slider to zero.
+            setTimeout(function() {
+               $( ".progress" ).slider("value", 0);
+            }, 0);
+          }
+        }
+      });
+
+      
+    });
+  </script>
+  <!-- click-heart -->
+  <!-- <script type="text/javascript">!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 500%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+  </script> -->
+
+  <!-- 标题变换 -->
+  <script type="text/javascript">
+    var OriginTitle = document.title;
+    var titleTime;
+    document.addEventListener('visibilitychange', function () {
+       if (document.hidden) {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '**遁入幻想**';
+           clearTimeout(titleTime);
+       }
+       else {
+           $('[rel="icon"]').attr('href', "https://github.com/GabbyYam/img_repo/raw/master/img/438428e9bcec7d7793a6a132b4476f55.png");
+           document.title = '即将抵达月面..';
+           titleTime = setTimeout(function () {
+               document.title = '欢迎回来！';
+           }, 1000);
+           titleTime = setTimeout(function () {
+               document.title = OriginTitle;
+           }, 2000);
+       }
+    });
+  </script>
+
+  <!-- night mode -->
+  <script type="text/javascript">
+    $(function(){
+      btn = $('.set-view-mode');
+      if(sessionStorage.mode=="night"){
+          $('body').addClass('night-mode');
+          btn.find('i').attr('class','icon moon outline');
+      }
+      $('.set-view-mode').click(function(){
+          var next_mode = $('body').hasClass('night-mode') ? 'day':'night';
+          if(next_mode!='day'){
+              $('body').addClass('night-mode');
+              btn.find('i').attr('class','icon moon');
+              sessionStorage.mode="night";   
+          }else{
+              $('body').removeClass('night-mode');
+              btn.find('i').attr('class','icon moon outline');
+              sessionStorage.mode="day";
+          }
+      });     
+  });
+  </script>
+
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/kimbie.dark.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js">
+  </script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body 
+  
+    class="monochrome night-mode"
+  
+  >
+  <div id="topAnchor"></div>
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/overyam/">Overyam</a>
+</div>
+
+  <div class="main-container">
+
+    
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/overyam/">Overyam</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+      </div>
+      
+        <div class="avatar" data-tooltip="月の世界へようこそ～" data-position="left center">
+            
+              <img src="https://avatars3.githubusercontent.com/u/33481136?v=4">
+                <a href="/overyam/about"></a>
+              </img>
+            
+            
+
+        </div>
+
+      
+
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">分类</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/overyam/categories/Reading-report/">Reading report</a><span class="category-list-count">1</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">标签</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Astronomy/" rel="tag">Astronomy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/CSP/" rel="tag">CSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Leetcode/" rel="tag">Leetcode</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-A/" rel="tag">PAT-A</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/PAT-Advanced/" rel="tag">PAT-Advanced</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/Reading-report/" rel="tag">Reading report</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/cache/" rel="tag">cache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/concurrency/" rel="tag">concurrency</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/overyam/tags/leetcode/" rel="tag">leetcode</a><span class="tag-list-count">11</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">归档</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/overyam/archives/2020/">2020</a><span class="archive-list-count">44</span></li></ul>
+              </li>
+            
+          
+        </ul>
+
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/overyam/" title="文章列表" external="false">文章列表</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/logs" title="主页" external="false">主页</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/overyam/about" title="关于我" external="false">关于我</a>
+              </li>
+            
+          
+        </ul>
+
+      
+    
+    
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+<ul class="content__container__text text_header">
+      Thinking
+</ul>
+<div class="content">
+
+  <div class="content__container"> 
+    <ul class="content__container__text">
+      In
+    </ul>
+    
+    <ul class="content__container__list">
+      <li class="content__container__list__item">Java</li>
+      <li class="content__container__list__item">Spring</li>
+      <li class="content__container__list__item">Algorithm</li>
+      <li class="content__container__list__item">Design</li>
+    </ul>
+  </div>
+</div>
+<textarea tabindex="-1"></textarea>
+<div class="mask"></div>
+<div class="note" contenteditable>
+  Just relaxed,and drink a cup of coffee !
+</div>
+
+  </div>
+</div>
+
+    <div class="main-content">
+
+      <div class="trans-box">
+          <div class="music-player">
+                  <div style="background-image: url(https://i.imgur.com/yqB0erk.jpg);" class="album"></div>
+                  
+                  <div class="info">
+                    
+                    <div class="left">
+                      <a href="javascript:;" class="icon-shuffle" data-tooltip="just a decoration^_^" data-position="bottom left"></a>
+                      <a href="javascript:;" class="icon-heart" data-tooltip="just a decoration^_^" data-position="bottom left"></a>
+                    </div>
+                    
+                    <div class="center">
+                      <div class="jp-playlist">
+                        <ul>
+                          <li></li>
+                        </ul>
+                      </div> 
+                    </div>
+                    
+                    <div class="right">
+                      <a href="javascript:;" class="icon-repeat" data-tooltip="just a decoration^_^" data-position="bottom right"></a>
+                      <a href="javascript:;" class="icon-share" data-tooltip="just a decoration^_^" data-position="bottom right"></a>
+                    </div>
+                    
+                    <div class="progress"></div>
+                    
+                  </div>
+                      
+                  <div class="controls">
+                    <div class="current jp-current-time">00:00</div>
+                    <div class="play-controls">
+                      <i href="javascript:;" class="backward icon jp-previous" title="previous"></i>
+                      <i href="javascript:;" class="play icon jp-play" title="play"></i>
+                      <i href="javascript:;" class="pause icon jp-pause" title="pause"></i>
+                      <i href="javascript:;" class="forward icon jp-next" title="next"></i>
+                    </div>
+                    <div class="volume-level">
+                      <i href="javascript:;" class="icon volume down" title="max volume"></i>
+                      <i href="javascript:;" class="icon volume off" title="mute"></i>
+                    </div>
+                  </div>
+                  
+                  <div id="jquery_jplayer" class="jp-jplayer"></div>
+                </div>
+
+      
+        <div style="max-width: 1000px">
+      
+          
+
+<article id="post-Bit-Manipulation-Medium" class="article article-type-post">
+
+  
+    <h1 class="article-header">
+      Bit-Manipulation Medium
+    </h1>
+  
+  
+  
+
+    
+  <div class="article-info">
+    <span class="article-date">
+  2020-05-13
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/overyam/categories/Algorithm/">Algorithm</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/overyam/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css"><div class=".article-gallery" <p>**Abstract：**位操作 中等难度合集<p></p>
+<a id="more"></a>
+<h1 id="29-Divide-Two-Integers"><a href="https://leetcode-cn.com/problems/divide-two-integers/" target="_blank" rel="noopener">29. Divide Two Integers</a></h1>
+<p><a href="Bit-Manipulation-Medium/image-20200513143056421.png" title="image-20200513143056421" class="gallery-item"><img src="image-20200513143056421.png" alt="image-20200513143056421"></a></p>
+<h2 id="解法一：递归">解法一：递归</h2>
+<p>不会处理溢出，先贴个投机取巧的方法，虽然也是和题解学的/瘫倒/</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(dividend == 0) return 0;
+        if(divisor ==  1) return dividend;
+        if(divisor == -1) {
+            return dividend == INT32_MIN ? INT32_MAX : -dividend;
+        }
+        long a = dividend, b = divisor;
+        bool isNeg = (dividend ^ divisor) &gt;&gt; 31;
+        long res = div(abs(a), abs(b));
+        if(res &gt; INT32_MAX) return INT32_MAX;
+        return isNeg ? -res : res;
+    }
+
+    int div(long a, long b) {
+        if (a &lt; b) return 0;
+        long cnt = 1, t = b;
+        while((t &lt;&lt; 1) &lt;= a) {
+            cnt &lt;&lt;= 1;
+            t &lt;&lt;= 1;
+        }
+        return cnt + div(a - t, b);
+    }
+};
+
+</code></pre>
+<h1 id="260-Single-Number-III"><a href="https://leetcode-cn.com/problems/single-number-iii/" target="_blank" rel="noopener">260. Single Number III</a></h1>
+<p><a href="Bit-Manipulation-Medium/image-20200517200551507.png" title="image-20200517200551507" class="gallery-item"><img src="image-20200517200551507.png" alt="image-20200517200551507"></a></p>
+<h2 id="解法一：掩码">解法一：掩码</h2>
+<ul>
+<li>
+<p>先用一个掩码异或所有数组元素，剩下的将会是出现奇数次的数</p>
+</li>
+<li>
+<p>mask &amp; -mask，取得x， y中最右边的1，这个1只能来自x，y其中之一，可以用来筛掉其中一个</p>
+</li>
+<li>
+<p>注意位运算的优先级很低，一定要加括号</p>
+</li>
+</ul>
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;int&gt; singleNumber(vector&lt;int&gt;&amp; nums) {
+        int mask = 0;
+        vector&lt;int&gt; res;
+        for(int i : nums) mask ^= i;
+
+        int t = mask &amp; -mask, tmask = 0;
+        for(int i : nums) if((i &amp; t) != 0) tmask ^= i;
+        return {tmask, tmask ^ mask};
+    }
+};
+</code></pre>
+<h1 id="137-Single-Number-II"><a href="https://leetcode-cn.com/problems/single-number-ii/" target="_blank" rel="noopener">137. Single Number II</a></h1>
+<p><a href="Bit-Manipulation-Medium/image-20200504020253182.png" title="image-20200504020253182" class="gallery-item"><img src="image-20200504020253182.png" alt="image-20200504020253182"></a></p>
+<h2 id="解法一：unordered-map">解法一：unordered_map</h2>
+<p>最简单的办法显然是用map统计出现的次数，再找到出现次数不等于3的那个</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+        unordered_map&lt;int, int&gt; map;
+        for(int i : nums) map[i]++;
+        for(auto i : map)
+            if(i.second != 3) 
+                return i.first;
+        return -1;
+    }
+};
+</code></pre>
+<h2 id="解法二：逐位计数">解法二：逐位计数</h2>
+<p>对每一位出现1的次数计数，时间复杂度 $O(32 * n) = O(n)$, 空间复杂度降到了$O(1)$</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+        int res = 0;
+        for(int i = 0; i &lt; 32; i++) {
+            int idx = 1 &lt;&lt; i, cnt = 0;
+            for(int v : nums) {
+                if((v &amp; idx) != 0)
+                    cnt++;
+            }
+            if(cnt % 3 == 1)
+                res |= idx;
+        }
+        return res;
+    }
+};
+</code></pre>
+<h2 id="解法三：有限状态自动机">解法三：有限状态自动机</h2>
+<p>用两个位来记录出现次数，一共有三种状态也就是</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>代表出现的次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>当出现次数超过2时，则重新变回1状态</p>
+</li>
+<li>
+<p>如果画出状态转移表</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>目标状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>00</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>01</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>01</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>10</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>00</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>可以得出转移表达式为</p>
+<pre><code class="language-cpp">b = !a &amp; (b ^ c);
+a = !b &amp; (a ^ c);
+</code></pre>
+</li>
+<li>
+<p>最后32位二进制数中剩下非0位即为出现次数为 $3n + 1$ 的位</p>
+</li>
+</ul>
+<pre><code class="language-cpp">class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+        int a = 0, b = 0;
+        for(int i : nums) {
+            b = ~a &amp; (i ^ b);
+            a = ~b &amp; (i ^ a);
+        }
+        return b;
+    }
+};
+</code></pre>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.z" target="_blank" title="署名-相同方式共享">
+      <img src="/overyam/images/cc/cc.png">
+      
+          <img src="/overyam/images/cc/by.png">
+        
+          <img src="/overyam/images/cc/sa.png">
+      
+      <span>
+        本作品采用知识共享 署名-相同方式共享 4.0 国际许可协议进行许可。
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2020 Overyam - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+
+      
+      <!-- night mode -->
+        </div>
+        <button class="set-view-mode circular ui medium icon button" href="javascript:void(0)" data-tooltip="Click here to switch night mode" data-position="left center">
+          <i class="icon moon outline"></i>
+        </button>
+
+        <button class="top ui circular icon button" href="javascript:void(0)" data-tooltip="return to top" data-position="left center">
+          
+          <i class="icon arrow up"></i>
+        </button>
+
+        <div class="cup" >
+          <div class="coffee"></div>
+        </div>
+        <div class="smoke" ></div>
+        <a href="#topAnchor"></a>
+      
+      </div>
+
+    </div>
+
+  </div>
+  
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/overyam/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/overyam/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/overyam/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/overyam/scripts/main.js"></script>
+
+
+
+
+<script src="/overyam/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":0.8,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/overyam/live2dw/assets/hibiki.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.2},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
