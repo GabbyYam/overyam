@@ -29,8 +29,9 @@
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200514160200566.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200514163832672.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200514180330408.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/ee260c1d/image-20200923161745469.png">
 <meta property="article:published_time" content="2020-02-28T13:15:28.000Z">
-<meta property="article:modified_time" content="2020-05-14T13:19:13.835Z">
+<meta property="article:modified_time" content="2020-09-23T08:28:17.075Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
@@ -232,7 +233,7 @@
         
       </div>
       
-        <div class="avatar" data-tooltip="月の世界へようこそ～" data-position="left center">
+        <div class="avatar" data-tooltip="Hey~" data-position="left center">
             
               <img src="https://avatars3.githubusercontent.com/u/33481136?v=4">
                 <a href="/overyam/about"></a>
@@ -323,7 +324,7 @@
 <textarea tabindex="-1"></textarea>
 <div class="mask"></div>
 <div class="note" contenteditable>
-  Just relaxed,and drink a cup of coffee !
+  Just relaxed, and drink a cup of coffee huh?
 </div>
 
   </div>
@@ -910,6 +911,51 @@ public:
         }
 
         return dp[N][i][j];
+    }
+};
+</code></pre>
+<h1 id="712-Minimum-ASCII-Delete-Sum-for-Two-Strings"><a href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/" target="_blank" rel="noopener">712. Minimum ASCII Delete Sum for Two Strings</a></h1>
+<p><a href="DP-Medium/image-20200923161745469.png" title="image-20200923161745469" class="gallery-item"><img src="image-20200923161745469.png" alt="image-20200923161745469"></a></p>
+<h2 id="解法一：-DP">解法一： DP</h2>
+<p>本质上是最长公共子序列的变形，可以用DP来解决</p>
+<ul>
+<li>
+<p>对于两者其中之一为空的情况</p>
+<pre><code class="language-cpp">dp[i][j] = dp[i + 1][j] + s2[j];
+dp[i][j] = dp[i][j + 1] + s1[i];
+</code></pre>
+</li>
+<li>
+<p>对于两者相等的情况</p>
+<pre><code class="language-cpp">dp[i][j] = dp[i + 1][j + 1];
+</code></pre>
+</li>
+<li>
+<p>不相等的情况</p>
+<pre><code class="language-cpp">dp[i][j] = min(dp[i + 1][j] + s1[i],
+               dp[i][j + 1] + s2[j]);
+</code></pre>
+</li>
+</ul>
+<h2 id="完整解法">完整解法</h2>
+<pre><code class="language-cpp">class Solution {
+public:
+    int minimumDeleteSum(string s1, string s2) {
+        int n1 = s1.size(), n2 = s2.size();
+        vector&lt;vector&lt;int&gt;&gt; dp(n1 + 1, vector&lt;int&gt;(n2 + 1));
+        for(int i = n1 - 1; i &gt; -1; --i)
+            dp[i][n2] = dp[i + 1][n2] + s1[i];
+        for(int j = n2 - 1; j &gt; -1; --j)
+            dp[n1][j] = dp[n1][j + 1] + s2[j];
+        for(int i = n1 - 1; i &gt; -1; --i) {
+            for(int j = n2 - 1; j &gt; -1; --j) {
+                if(s1[i] == s2[j])
+                    dp[i][j] = dp[i + 1][j + 1];
+                else
+                    dp[i][j] = min(dp[i + 1][j] + s1[i], dp[i][j + 1] + s2[j]);
+            }
+        }
+        return dp[0][0];
     }
 };
 </code></pre>

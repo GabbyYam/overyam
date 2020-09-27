@@ -50,8 +50,10 @@
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200517181325801.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200518011930210.png">
 <meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200523141928644.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200926224724214.png">
+<meta property="og:image" content="https://gabbyyam.github.io/overyam/posts/a2912545/image-20200926224734229.png">
 <meta property="article:published_time" content="2020-04-27T13:50:02.000Z">
-<meta property="article:modified_time" content="2020-05-27T02:54:06.248Z">
+<meta property="article:modified_time" content="2020-09-26T16:42:51.292Z">
 <meta property="article:author" content="GabbyYam">
 <meta property="article:tag" content="Leetcode">
 <meta name="twitter:card" content="summary">
@@ -253,7 +255,7 @@
         
       </div>
       
-        <div class="avatar" data-tooltip="月の世界へようこそ～" data-position="left center">
+        <div class="avatar" data-tooltip="Hey~" data-position="left center">
             
               <img src="https://avatars3.githubusercontent.com/u/33481136?v=4">
                 <a href="/overyam/about"></a>
@@ -344,7 +346,7 @@
 <textarea tabindex="-1"></textarea>
 <div class="mask"></div>
 <div class="note" contenteditable>
-  Just relaxed,and drink a cup of coffee !
+  Just relaxed, and drink a cup of coffee huh?
 </div>
 
   </div>
@@ -1430,6 +1432,35 @@ public:
 </code></pre>
 <h2 id="解法三：置换法">解法三：置换法</h2>
 <p>把值为 i 的数放在 i 位置，第一个值和位置不匹配的点的即为重复数，空间复杂度O(1)</p>
+<h1 id="621-Task-Scheduler"><a href="https://leetcode-cn.com/problems/task-scheduler/" target="_blank" rel="noopener">621. Task Scheduler</a></h1>
+<p><a href="Array-Medium/image-20200926224724214.png" title="image-20200926224724214" class="gallery-item"><img src="image-20200926224724214.png" alt="image-20200926224724214"></a></p>
+<p><a href="Array-Medium/image-20200926224734229.png" title="image-20200926224734229" class="gallery-item"><img src="image-20200926224734229.png" alt="image-20200926224734229"></a></p>
+<h2 id="Solution">Solution</h2>
+<ul>
+<li>First count the number of occurrences of each element.</li>
+<li>Let the max frequency seen be M for element E</li>
+<li>We can schedule the first M-1 occurrences of E, each E will be followed by at least N CPU cycles in between successive schedules of E</li>
+<li>Total CPU cycles after scheduling M-1 occurrences of E = (M-1) * (N + 1) // 1 comes for the CPU cycle for E itself</li>
+<li>Now schedule the final round of tasks. We will need at least 1 CPU cycle of the last occurrence of E. If there are multiple tasks with frequency M, they will all need 1 more cycle.</li>
+<li>Run through the frequency dictionary and for every element which has frequency == M, add 1 cycle to result.</li>
+<li>If we have more number of tasks than the max slots we need as computed above we will return the length of the tasks array as we need at least those many CPU cycles.</li>
+</ul>
+<pre><code class="language-cpp">class Solution {
+public:
+    int leastInterval(vector&lt;char&gt;&amp; tasks, int n) {
+        unordered_map&lt;int, int&gt; mp;
+        int cnt = 0, res = 0, val;
+        for(const char&amp; c : tasks) {
+            val = ++mp[c];
+            cnt = std::max(cnt, val);
+        }
+        res = (cnt - 1) * (n + 1);
+        for(const auto&amp; i : mp)
+            if(i.second == cnt) ++res;
+        return std::max((int)tasks.size(), res);
+    }   
+};
+</code></pre>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
